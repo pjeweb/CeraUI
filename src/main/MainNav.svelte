@@ -22,12 +22,12 @@
 </script>
 
 <div class="mr-4 hidden md:flex">
-    <a href="/" class="mr-6 flex items-center space-x-2">
+    <button class="mr-6 flex items-center space-x-2" onclick={()=> navigationStore.set('general')}>
         <Icons.logo class="h-6 w-6"/>
         <span class="hidden font-bold xl:inline-block">
         {siteName}
         </span>
-    </a>
+    </button>
     <ScrollArea orientation="both" scrollbarXClasses="invisible">
         <div
                 class="m-4 flex items-center overflow-y-auto pb-3 md:pb-0">

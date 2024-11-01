@@ -1,26 +1,20 @@
 <script lang="ts">
-    import {toast} from 'svelte-sonner';
-    import {Toaster} from '$lib/components/ui/sonner';
-    import {NotificationsMessages} from '$lib/stores/websocket-store';
     import MainNav from "./MainNav.svelte";
     import ModeToggle from "$lib/components/ui/mode-toggle.svelte";
     import MobileNav from "./MobileNav.svelte";
-    import type {NotificationType} from "$lib/types/socket-messages";
+    import Navigation from "$lib/stores/navigation";
+    import {capitalizeFirstLetter} from "$lib/utils.js";
+    import General from "./tabs/General.svelte";
 
+    let CurrentTab: string = $state(undefined)
 
     $effect(() => {
-        NotificationsMessages.subscribe((notifications) => {
-            notifications.show.forEach((notification) => {
-
-                    toast[notification.type as NotificationType](notification.name.toUpperCase(), {
-                        description: notification.msg,
-                        duration: notification.duration * 1500,
-                    });
-            });
-        });
-    });
-
+        Navigation.subscribe(currentTab => {
+            CurrentTab = capitalizeFirstLetter(currentTab);
+        })
+    })
 </script>
+
 <header
         class="border-border/40 bg-background/95 supports-[backdrop-filter]:bg-background/60 sticky top-0 z-50 w-full border-b backdrop-blur"
 >
@@ -37,7 +31,7 @@
 
     </div>
 
-
 </header>
-
-<Toaster richColors></Toaster>
+<div>
+<General></General>
+</div>

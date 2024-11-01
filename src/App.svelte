@@ -1,7 +1,7 @@
 <script lang="ts">
     import './app.css';
     import {ModeWatcher} from "mode-watcher";
-    import Layout from "./Layout.svelte";
+    import Layout from "./main/Layout.svelte";
 
 
 </script>

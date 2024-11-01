@@ -11,6 +11,7 @@ import type {
   RevisionsMessage,
   SensorsStatusMessage,
 } from '../types/socket-messages';
+import { toast } from 'svelte-sonner';
 
 const AuthStore = writable<AuthMessage>();
 const AudioCodecsStore = writable<AudioCodecsMessage>();
@@ -25,20 +26,36 @@ const StatusStore = writable<StatusMessage>();
 const connectionUrl = `${ENV_VARIABLES.SOCKET_ENDPOINT}:${ENV_VARIABLES.SOCKET_PORT}`;
 const socket = new WebSocket(connectionUrl);
 
-function sendAuthMessage(password: string, isPersistent: boolean): void {
-  const auth_req = { auth: { password, persistent_token: isPersistent } };
-  sendMessage(JSON.stringify(auth_req));
-}
-
 // Connection opened
 socket.addEventListener('open', function () {
-  console.info('Connected...');
-  sendAuthMessage('12345678', true);
+  toast.info('Connection', { duration: 5000, description: 'The connection with the device has been stablished.' });
+  setInterval(function () {
+    if (socket) {
+      socket.send(JSON.stringify({ keepalive: null }));
+    }
+  }, 10000);
 });
+
+socket.addEventListener('error', function () {
+  toast.error('Connection', {
+    duration: 5000,
+    description: 'It has not been able to communicate with the devices, trying to reconnect as soon as possible',
+  });
+});
+
+function sendAuthMessage(password: string, isPersistent: boolean, onError: (() => unknown) | undefined = undefined) {
+  const auth_req = { auth: { password, persistent_token: isPersistent } };
+  sendMessage(JSON.stringify(auth_req), () => {
+    toast.error('Authentication failed', {
+      duration: 5000,
+      description: 'The connection with the server could not be stablished',
+    });
+    onError?.();
+  });
+}
 
 //   Listen for messages
 socket.addEventListener('message', function (event: MessageEvent<string>) {
-  console.log(JSON.parse(event.data));
   assignMessage(event.data);
 });
 
@@ -58,6 +75,7 @@ const assignMessage = (message: string) => {
       NetifStore.set(parseMessage.netif);
       break;
     case 'notification':
+      console.log(parseMessage.notification);
       NotificationsStore.set(parseMessage.notification);
       break;
     case 'pipelines':
@@ -75,11 +93,44 @@ const assignMessage = (message: string) => {
   }
 };
 
-const sendMessage = (message: string) => {
-  if (socket.readyState <= 1) {
-    socket.send(message);
-  }
+const sendMessage = (message: string, onTimeout: (() => unknown) | undefined = undefined) => {
+  waitForSocketConnection(
+    socket,
+    50,
+    () => {
+      socket.send(message);
+    },
+    10000,
+    onTimeout,
+  );
 };
+
+// Make the function wait until the connection is made...
+function waitForSocketConnection(
+  socket: WebSocket,
+  checkTime: number,
+  callback: () => unknown,
+  maxWaitingTime: number = 10000,
+  onTimeout: undefined | (() => unknown) = undefined,
+  executionTime = 0,
+) {
+  setTimeout(() => {
+    if (socket.readyState === 1) {
+      if (callback != null) {
+        callback();
+      }
+    } else {
+      executionTime += checkTime;
+      if (executionTime >= maxWaitingTime) {
+        console.warn('Timeout Reached awaiting for socket connection.');
+        onTimeout?.();
+      } else {
+        console.log('wait for connection...');
+        waitForSocketConnection(socket, checkTime, callback, maxWaitingTime, onTimeout, executionTime);
+      }
+    }
+  }, checkTime);
+}
 
 const AuthMessages = readonly(AuthStore);
 const AudioCodesMessage = readonly(AudioCodecsStore);
@@ -102,4 +153,5 @@ export {
   SensorsStatusMessages,
   StatusMessages,
   sendMessage,
+  sendAuthMessage,
 };
