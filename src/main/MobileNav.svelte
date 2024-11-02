@@ -2,22 +2,22 @@
     import {Icons} from "$lib/components/icons";
     import MobileLink from "$lib/components/ui/mobile-link.svelte";
     import * as Sheet from "$lib/components/ui/sheet";
-    import {navElements, siteName} from "$lib/config";
+    import {defaultNavElement, type NavElements, navElements, siteName} from "$lib/config";
     import {Button} from "$lib/components/ui/button";
     import {ScrollArea} from "$lib/components/ui/scroll-area";
-    import navigationStore from "$lib/stores/navigation";
+    import {navigationStore} from "$lib/stores/navigation";
 
-    let currentIdentifier: string = $state('general')
+    let currentNav: NavElements = $state(defaultNavElement)
     $effect(() => {
-        navigationStore.subscribe((identifier) => {
-            currentIdentifier = identifier;
+        navigationStore.subscribe((navigation) => {
+            currentNav = navigation;
         })
     })
 
     let open = $state(false);
 
-    const handleClick = (identifier: string) => {
-        navigationStore.set(identifier)
+    const handleClick = (nav: NavElements) => {
+        navigationStore.set(nav)
         open = false
     }
 
@@ -35,18 +35,18 @@
         </Button>
     </Sheet.Trigger>
     <Sheet.Content side="left" class="pr-0">
-        <MobileLink identifier="general" class="flex items-center" onclick="()=>handleClick('general')">
+        <MobileLink identifier="general" class="flex items-center" onclick="()=>handleClick(defaultNavElement)">
             <Icons.logo class="mr-2 h-4 w-4"/>
             <span class="font-bold">{siteName}</span>
         </MobileLink>
         <ScrollArea orientation="both" class="my-4 h-[calc(100vh-8rem)] pb-10">
             <div class="flex flex-col space-y-3 pr-6">
-                {#each navElements as navItem, index (navItem + index.toString())}
-                    {@const isActive = currentIdentifier === navItem.identifier}
-                    {#if navItem.identifier}
-                        <MobileLink identifier={navItem.identifier} {isActive}
-                                    onclick={()=>handleClick(navItem.identifier)}>
-                            {navItem.name}
+                {#each Object.entries(navElements) as [identifier, navigation]}
+                    {@const isActive = currentNav && Object.keys(currentNav)[0] === identifier}
+                    {#if identifier}
+                        <MobileLink identifier={identifier} {isActive}
+                                    onclick={()=>handleClick({[identifier]: navigation})}>
+                            {navigation.label}
                         </MobileLink>
                     {/if}
                 {/each}

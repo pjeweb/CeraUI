@@ -73,6 +73,7 @@ export type StatusMessage = {
   is_streaming: boolean;
   available_updates: {
     package_count: number;
+    download_size?: string;
   };
   updating: Nullable<boolean>;
   ssh: {

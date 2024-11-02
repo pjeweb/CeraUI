@@ -1,77 +1,196 @@
 <script lang="ts">
     import * as Card from "$lib/components/ui/card";
-    import Activity from "lucide-svelte/icons/activity";
-    import CreditCard from "lucide-svelte/icons/credit-card";
-    import DollarSign from "lucide-svelte/icons/dollar-sign";
-    import Users from "lucide-svelte/icons/users";
+    import Thermometer from "lucide-svelte/icons/thermometer";
+    import RadioTower from "lucide-svelte/icons/radio-tower";
     import Networking from "../shared/Networking.svelte";
+    import {ConfigMessages, NetifMessages, SensorsStatusMessages, StatusMessages} from "$lib/stores/websocket-store";
+    import type {ConfigMessage, NetifMessage, StatusMessage} from "$lib/types/socket-messages";
+    import SimpleAlertDialog from "$lib/components/ui/simple-alert-dialog.svelte";
+    import {Update} from "svelte-radix"
+    import {cn} from "$lib/utils";
+    import Server from "lucide-svelte/icons/server"
+    import {ServerOff} from "lucide-svelte";
+
+    let temperature: Array<[string, string]> = $state([])
+    let currentStatus: StatusMessage | undefined = $state(undefined)
+    let currentNetworks: NetifMessage | undefined = $state()
+    let currentConfig: ConfigMessage | undefined = $state()
+    $effect(() => {
+        NetifMessages.subscribe((networks: NetifMessage) => {
+            currentNetworks = networks
+        })
+    });
+
+    $effect(() => {
+        ConfigMessages.subscribe((config) => {
+            currentConfig = config
+        })
+    })
+
+    $effect(() => {
+        SensorsStatusMessages.subscribe((sensors) => {
+            if (sensors) {
+                temperature = Object.entries(sensors)
+
+            }
+        })
+    })
+
+    $effect(() => {
+        StatusMessages.subscribe((status) => {
+            currentStatus = status
+        })
+    })
+
 
 </script>
 
-<div class="hidden flex-col md:flex">
+<div class=" flex-col md:flex">
     <div class="flex-1 space-y-4 p-8 pt-6">
         <div class="grid gap-4 md:grid-cols-2 lg:grid-cols-4">
             <Card.Root>
                 <Card.Header
                         class="flex flex-row items-center justify-between space-y-0 pb-2"
                 >
-                    <Card.Title class="text-sm font-medium">Total Revenue</Card.Title>
-                    <DollarSign class="text-muted-foreground h-4 w-4" />
+                    <Card.Title class="text-sm font-medium">Status</Card.Title>
+                    <RadioTower class="text-muted-foreground h-4 w-4"/>
                 </Card.Header>
                 <Card.Content>
-                    <div class="text-2xl font-bold">$45,231.89</div>
-                    <p class="text-muted-foreground text-xs">+20.1% from last month</p>
+                    <div class={cn( ( currentStatus?.is_streaming ? 'text-green-500 ' : 'text-amber-500 ')  + "text-2xl font-bold")}>{currentStatus?.is_streaming ? 'Streaming' : 'Offline'}</div>
+                    {#if currentNetworks && currentStatus?.is_streaming}
+                        <p class="text-muted-foreground text-xs">Your transmision is
+                            using {Object.values(currentNetworks).filter((network) => !network.error).length}
+                            Networks using a delay of {currentConfig?.srt_latency} ms</p>
+                    {/if}
                 </Card.Content>
             </Card.Root>
             <Card.Root>
                 <Card.Header
                         class="flex flex-row items-center justify-between space-y-0 pb-2"
                 >
-                    <Card.Title class="text-sm font-medium">Subscriptions</Card.Title>
-                    <Users class="text-muted-foreground h-4 w-4" />
+                    <Card.Title class="text-sm font-medium">Temperature</Card.Title>
+                    <Thermometer class="text-muted-foreground h-4 w-4"/>
                 </Card.Header>
                 <Card.Content>
-                    <div class="text-2xl font-bold">+2350</div>
-                    <p class="text-muted-foreground text-xs">+180.1% from last month</p>
+                    <div class="text-2xl font-bold">{temperature?.[0]?.[1]}</div>
+                    <p class="text-muted-foreground text-xs">{temperature?.[0]?.[0]}</p>
                 </Card.Content>
             </Card.Root>
             <Card.Root>
                 <Card.Header
                         class="flex flex-row items-center justify-between space-y-0 pb-2"
                 >
-                    <Card.Title class="text-sm font-medium">Sales</Card.Title>
-                    <CreditCard class="text-muted-foreground h-4 w-4" />
+
+                    <Card.Title class="text-sm font-medium">Relay Server</Card.Title>
+                    {#if currentConfig?.srtla_addr}
+                        <Server class="text-muted-foreground h-4 w-4"/>
+                    {:else}
+                        <ServerOff class="text-muted-foreground h-4 w-4"/>
+                    {/if}
                 </Card.Header>
                 <Card.Content>
-                    <div class="text-2xl font-bold">+12,234</div>
-                    <p class="text-muted-foreground text-xs">+19% from last month</p>
+                    <div class="text-2xl font-bold">{currentConfig?.srtla_addr ?? 'None'}</div>
+                    <p class="text-muted-foreground text-xs"> {currentConfig?.srtla_addr ? `Port: ${currentConfig?.srtla_port}` : "You haven't configured any server"}</p>
                 </Card.Content>
             </Card.Root>
             <Card.Root>
                 <Card.Header
                         class="flex flex-row items-center justify-between space-y-0 pb-2"
                 >
-                    <Card.Title class="text-sm font-medium">Active Now</Card.Title>
-                    <Activity class="text-muted-foreground h-4 w-4" />
+                    <Card.Title class="text-sm font-medium">Updates</Card.Title>
+                    <Update class="text-muted-foreground h-4 w-4"/>
                 </Card.Header>
-                <Card.Content>
-                    <div class="text-2xl font-bold">+573</div>
-                    <p class="text-muted-foreground text-xs">+201 since last hour</p>
+                <Card.Content class="flex items-center">
+                    <div>
+                        <div class="text-2xl font-bold">{currentStatus?.available_updates.package_count} {currentStatus?.available_updates.package_count === 1 ? 'Package' : 'Packages'}</div>
+                        <p class="text-muted-foreground text-xs">{currentStatus?.available_updates?.download_size ?? '0 MB'}</p>
+                    </div>
+                    <SimpleAlertDialog buttonText="Update" onacceptclick={()=>console.log('Hello')}>
+                        {#snippet title()}
+                            Are you absolutely sure?
+                        {/snippet}
+                        {#snippet description()}
+                            This action cannot be undone. This will permanently update the packages on your device.
+                        {/snippet}
+                    </SimpleAlertDialog>
                 </Card.Content>
             </Card.Root>
         </div>
         <div class="grid gap-4 md:grid-cols-2 lg:grid-cols-7">
-            <Card.Root class="col-span-4">
-                <Card.Header>
-                    <Card.Title>Overview</Card.Title>
-                </Card.Header>
-                <Card.Content>
-<!--                    <Overview />-->
-                </Card.Content>
-            </Card.Root>
-            <Card.Root class="col-span-3">
+            {#if currentConfig}
+                <Card.Root class="sm:col-span-4 col-span-5">
+                    <Card.Header>
+                        <Card.Title class="text-primary">Overview</Card.Title>
+                    </Card.Header>
+                    <Card.Content class="grid gap-3">
+                        <div class="flex items-center gap-4">
 
-                    <Networking />
+                            <div class="grid gap-1">
+                                <p class="text-sm font-medium leading-none">Receiving/Relay Server</p>
+                            </div>
+                            <div class="ml-auto font-medium">{currentConfig.srtla_addr}</div>
+                        </div>
+
+                        <div class="flex items-center gap-4">
+
+                            <div class="grid gap-1">
+                                <p class="text-sm font-medium leading-none">Server Port</p>
+                            </div>
+                            <div class="ml-auto font-medium">{currentConfig.srtla_port}</div>
+                        </div>
+
+                        <div class="flex items-center gap-4">
+
+                            <div class="grid gap-1">
+                                <p class="text-sm font-medium leading-none">Latency / Delay</p>
+                            </div>
+                            <div class="ml-auto font-medium">{currentConfig.srt_latency} ms</div>
+                        </div>
+
+                        <div class="flex items-center gap-4">
+
+                            <div class="grid gap-1">
+                                <p class="text-sm font-medium leading-none">Max Bitrate</p>
+                            </div>
+                            <div class="ml-auto font-medium">{currentConfig.max_br} Kbps</div>
+                        </div>
+
+                        <div class="flex items-center gap-4">
+
+                            <div class="grid gap-1">
+                                <p class="text-sm font-medium leading-none">Audio Device</p>
+                            </div>
+                            <div class="ml-auto font-medium">{currentConfig.asrc}</div>
+                        </div>
+
+                        <div class="flex items-center gap-4">
+
+                            <div class="grid gap-1">
+                                <p class="text-sm font-medium leading-none">Audio Codec</p>
+                            </div>
+                            <div class="ml-auto font-medium">{currentConfig.acodec.toUpperCase()}</div>
+                        </div>
+
+                        <div class="flex items-center">
+                            <div class="ml-auto font-bold  text-2xl text-primary">
+                                <div class="flex items-center">
+                                    <SimpleAlertDialog buttonText="Configure" cancelButtonText="Cancel" confirmButtonText="Go to Settings" >
+                                        {#snippet title()}
+                                            Go to settings
+                                        {/snippet}
+                                        {#snippet description()}
+                                            Do you want to move to the preferences tab ?
+                                        {/snippet}
+                                    </SimpleAlertDialog>
+                                </div>
+                            </div>
+                        </div>
+                    </Card.Content>
+                </Card.Root>
+            {/if}
+
+            <Card.Root class="col-span-5 sm:col-span-3">
+                <Networking/>
             </Card.Root>
         </div>
     </div>

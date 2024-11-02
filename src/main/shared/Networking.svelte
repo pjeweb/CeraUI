@@ -29,7 +29,7 @@
 >
     <div>
         <Card.Title class="text-primary">Network Information</Card.Title>
-        <Card.Description>{Object.keys(currentNetwoks).length} Networks, {totalBandwith} Kbps</Card.Description>
+        <Card.Description>{Object.keys(currentNetwoks).length} Networks, {Object.values(currentNetwoks).filter((network)=> !network.error).length} used, {totalBandwith} Kbps</Card.Description>
     </div>
 
     <Network class="text-muted-primary h-4 w-4"/>
@@ -49,16 +49,16 @@
                     {/if}
                 </Toggle>
 
-                <div class="ml-4 space-y-1">
+                <div class="ml-4 spac
+                e-y-1">
                     <p class="text-sm font-medium leading-none">{network.error ? `${name} ( ${network.error} )` : name  }</p>
-                    <p class="text-muted-foreground text-sm">{network.ip}</p>
+                    <p class="text-muted-foreground text-sm">IP: {network.ip}</p>
                 </div>
                 <div class="ml-auto font-medium">{convertBytesToKbids(network.tp)} Kbps</div>
             </div>
         {/each}
-        <div class="flex items-center">
 
-
+        <div class="flex">
             <div class="ml-auto font-bold  text-2xl text-primary">{totalBandwith} Kbps</div>
         </div>
     </div>

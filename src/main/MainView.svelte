@@ -2,17 +2,8 @@
     import MainNav from "./MainNav.svelte";
     import ModeToggle from "$lib/components/ui/mode-toggle.svelte";
     import MobileNav from "./MobileNav.svelte";
-    import Navigation from "$lib/stores/navigation";
-    import {capitalizeFirstLetter} from "$lib/utils.js";
-    import General from "./tabs/General.svelte";
+    import NavigationRenderer from "./shared/NavigationRenderer.svelte";
 
-    let CurrentTab: string = $state(undefined)
-
-    $effect(() => {
-        Navigation.subscribe(currentTab => {
-            CurrentTab = capitalizeFirstLetter(currentTab);
-        })
-    })
 </script>
 
 <header
@@ -32,6 +23,5 @@
     </div>
 
 </header>
-<div>
-<General></General>
-</div>
+
+<NavigationRenderer></NavigationRenderer>
