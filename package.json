@@ -43,10 +43,12 @@
     "tailwindcss": "^3.4.9",
     "tslib": "^2.8.0",
     "typescript": "^5.6.3",
+    "vaul-svelte": "^0.3.2",
     "vite": "^5.4.10",
     "zod": "^3.23.8"
   },
   "dependencies": {
+    "@sveltejs/enhanced-img": "^0.4.0",
     "lodash-es": "^4.17.21",
     "lodash.template": "^4.5.0",
     "lucide-svelte": "^0.454.0",

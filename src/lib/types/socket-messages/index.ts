@@ -1,8 +1,9 @@
-type AudioCodecs = 'acc' | 'opus';
+import type { WifiBandNames } from '$lib/helpers/NetworkHelper';
+import type { AudioCodecs } from '$lib/helpers/SystemHelper';
+
 type WifiPhysicalNames = `${'wl' | 'wlan'}${string}`;
 type EthernetPhysicalNames = `${'eth'}${string}`;
 type PyshicalNetworkNames = `${WifiPhysicalNames | EthernetPhysicalNames}${string}`;
-type WifiBandNames = 'auto' | 'auto_50' | 'auto_24';
 
 export type NotificationType = 'success' | 'warning' | 'error' | 'info';
 type Nullable<T> = T | null;
@@ -75,7 +76,7 @@ export type StatusMessage = {
     package_count: number;
     download_size?: string;
   };
-  updating: Nullable<boolean>;
+  updating: Nullable<boolean> | { downloading: number; unpacking: number; setting_up: number; total: number };
   ssh: {
     user: string;
     user_pass: boolean;
@@ -90,21 +91,21 @@ export type StatusMessage = {
         name: string;
         password: string;
         available_channels: {
-          [key in WifiBandNames]: string;
+          [key in WifiBandNames]: { name: string };
         };
-        channel: 'string';
-        available: Array<{
-          active: boolean;
-          ssid: string;
-          signal: number;
-          security: 'WEP' | 'WPA' | 'WPA2' | 'WPA3';
-          freq: number;
-        }>;
-        saved: {
-          [key: string]: string;
-        };
-        supports_hotspot: boolean;
+        channel: WifiBandNames;
       };
+      available: Array<{
+        active: boolean;
+        ssid: string;
+        signal: number;
+        security: 'WEP' | 'WPA' | 'WPA2' | 'WPA3';
+        freq: number;
+      }>;
+      saved: {
+        [key: string]: string;
+      };
+      supports_hotspot: boolean;
     };
   };
   modems: unknown; // TODO Define Modems Type

@@ -22,6 +22,7 @@ const PipelinesStore = writable<PipelinesMessage>();
 const RevisionsStore = writable<RevisionsMessage>();
 const SensorsStatusStore = writable<SensorsStatusMessage>();
 const StatusStore = writable<StatusMessage>();
+const WifiStore = writable<WifiMessage>();
 
 const connectionUrl = `${ENV_VARIABLES.SOCKET_ENDPOINT}:${ENV_VARIABLES.SOCKET_PORT}`;
 const socket = new WebSocket(connectionUrl);
@@ -75,7 +76,6 @@ const assignMessage = (message: string) => {
       NetifStore.set(parseMessage.netif);
       break;
     case 'notification':
-      console.log(parseMessage.notification);
       NotificationsStore.set(parseMessage.notification);
       break;
     case 'pipelines':
@@ -90,6 +90,8 @@ const assignMessage = (message: string) => {
     case 'status':
       StatusStore.set({ ...get(StatusStore), ...parseMessage.status });
       break;
+    case 'wifi': {
+    }
   }
 };
 
@@ -154,4 +156,5 @@ export {
   StatusMessages,
   sendMessage,
   sendAuthMessage,
+  socket,
 };

@@ -1,20 +1,27 @@
 <script lang="ts">
     import {toast} from 'svelte-sonner';
     import {Toaster} from '$lib/components/ui/sonner';
-    import {AuthMessages, NotificationsMessages, sendAuthMessage} from '$lib/stores/websocket-store';
+    import {AuthMessages, NotificationsMessages, sendAuthMessage, StatusMessages} from '$lib/stores/websocket-store';
     import Main from "./MainView.svelte";
 
-    import type {NotificationType} from "$lib/types/socket-messages";
+    import type {NotificationType, StatusMessage} from "$lib/types/socket-messages";
     import Auth from "./Auth.svelte";
     import {authStatusStore} from "$lib/stores/auth-status";
+    import UpdatingOverlay from "$lib/components/updating-overlay.svelte"
 
     let authStatus = $state(false)
     let isCheckingAuthStatus = $state(true)
+    let updatingStatus: StatusMessage['updating'] = $state(false)
 
-    $effect(()=>{
+    $effect(() => {
+        StatusMessages.subscribe((status) => {
+           updatingStatus = status?.updating ?? false;
+        })
+    })
+    $effect(() => {
         const auth = localStorage.getItem('auth');
         if (auth) {
-            sendAuthMessage(auth, true, ()=>{
+            sendAuthMessage(auth, true, () => {
                 isCheckingAuthStatus = false;
             })
         } else {
@@ -55,6 +62,9 @@
 
 </script>
 {#if authStatus}
+    {#if updatingStatus}
+        <UpdatingOverlay details={updatingStatus}></UpdatingOverlay>
+    {/if}
     <Main></Main>
 {:else if !isCheckingAuthStatus}
     <Auth></Auth>

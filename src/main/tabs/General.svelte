@@ -9,7 +9,9 @@
     import {Update} from "svelte-radix"
     import {cn} from "$lib/utils";
     import Server from "lucide-svelte/icons/server"
-    import {ServerOff} from "lucide-svelte";
+    import {ServerOff, SquareChartGantt} from "lucide-svelte";
+    import {getUsedNetworks} from "$lib/helpers/NetworkHelper";
+    import {installSoftwareUpdates} from "$lib/helpers/SystemHelper";
 
     let temperature: Array<[string, string]> = $state([])
     let currentStatus: StatusMessage | undefined = $state(undefined)
@@ -58,8 +60,8 @@
                 <Card.Content>
                     <div class={cn( ( currentStatus?.is_streaming ? 'text-green-500 ' : 'text-amber-500 ')  + "text-2xl font-bold")}>{currentStatus?.is_streaming ? 'Streaming' : 'Offline'}</div>
                     {#if currentNetworks && currentStatus?.is_streaming}
-                        <p class="text-muted-foreground text-xs">Your transmision is
-                            using {Object.values(currentNetworks).filter((network) => !network.error).length}
+                        <p class="text-muted-foreground text-xs">Your transmission is
+                            using {getUsedNetworks(currentNetworks).length}
                             Networks using a delay of {currentConfig?.srt_latency} ms</p>
                     {/if}
                 </Card.Content>
@@ -105,22 +107,30 @@
                         <div class="text-2xl font-bold">{currentStatus?.available_updates.package_count} {currentStatus?.available_updates.package_count === 1 ? 'Package' : 'Packages'}</div>
                         <p class="text-muted-foreground text-xs">{currentStatus?.available_updates?.download_size ?? '0 MB'}</p>
                     </div>
-                    <SimpleAlertDialog buttonText="Update" onacceptclick={()=>console.log('Hello')}>
-                        {#snippet title()}
-                            Are you absolutely sure?
-                        {/snippet}
-                        {#snippet description()}
-                            This action cannot be undone. This will permanently update the packages on your device.
-                        {/snippet}
-                    </SimpleAlertDialog>
+                    {#if currentStatus?.available_updates.package_count}
+                        <SimpleAlertDialog buttonText="Update" onacceptclick={()=>console.log('Hello')}
+                                           confirmButtonText="Update" onconfirm={installSoftwareUpdates}>
+                            {#snippet dialogTitle()}
+                                Are you absolutely sure?
+                            {/snippet}
+                            {#snippet description()}
+                                Are you sure you want to start a software update? This may take several minutes. You
+                                won't be able to start a stream until it's completed. The encoder will briefly
+                                disconnect after a successful upgrade. Never remove power or reset the encoder while
+                                updating. If the encoder is powered from a battery, ensure it's fully charged.
+                            {/snippet}
+                        </SimpleAlertDialog>
+                    {/if}
                 </Card.Content>
             </Card.Root>
         </div>
         <div class="grid gap-4 md:grid-cols-2 lg:grid-cols-7">
             {#if currentConfig}
                 <Card.Root class="sm:col-span-4 col-span-5">
-                    <Card.Header>
+                    <Card.Header class="flex flex-row items-center justify-between space-y-0 pb-2">
                         <Card.Title class="text-primary">Overview</Card.Title>
+                        <SquareChartGantt class="text-muted-foreground h-4 w-4"/>
+
                     </Card.Header>
                     <Card.Content class="grid gap-3">
                         <div class="flex items-center gap-4">
@@ -170,21 +180,21 @@
                             </div>
                             <div class="ml-auto font-medium">{currentConfig.acodec.toUpperCase()}</div>
                         </div>
-
-                        <div class="flex items-center">
-                            <div class="ml-auto font-bold  text-2xl text-primary">
-                                <div class="flex items-center">
-                                    <SimpleAlertDialog buttonText="Configure" cancelButtonText="Cancel" confirmButtonText="Go to Settings" >
-                                        {#snippet title()}
-                                            Go to settings
-                                        {/snippet}
-                                        {#snippet description()}
-                                            Do you want to move to the preferences tab ?
-                                        {/snippet}
-                                    </SimpleAlertDialog>
-                                </div>
-                            </div>
-                        </div>
+                        <!--                        TODO: Handle confirm action -->
+                        <!--                        <div class="flex items-center">-->
+                        <!--                            <div class="ml-auto font-bold  text-2xl text-primary">-->
+                        <!--                                <div class="flex items-center">-->
+                        <!--                                    <SimpleAlertDialog buttonText="Configure" cancelButtonText="Cancel" confirmButtonText="Go to Settings"  confirmButtonAction={()=> navigationStore.set({'settings':{...navElements['settings']}})} >-->
+                        <!--                                        {#snippet title()}-->
+                        <!--                                            Go to settings-->
+                        <!--                                        {/snippet}-->
+                        <!--                                        {#snippet description()}-->
+                        <!--                                            Do you want to move to the preferences tab ?-->
+                        <!--                                        {/snippet}-->
+                        <!--                                    </SimpleAlertDialog>-->
+                        <!--                                </div>-->
+                        <!--                            </div>-->
+                        <!--                        </div>-->
                     </Card.Content>
                 </Card.Root>
             {/if}

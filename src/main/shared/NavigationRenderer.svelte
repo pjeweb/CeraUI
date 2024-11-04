@@ -17,6 +17,6 @@
 
 <div class="container relative pb-10 pt-10">
     {#if CurrentComponent}
-        <CurrentComponent/>
+        <CurrentComponent></CurrentComponent>
     {/if}
 </div>
