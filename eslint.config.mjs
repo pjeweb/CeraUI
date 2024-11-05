@@ -27,7 +27,7 @@ export default [
     'eslint:recommended',
     'plugin:@typescript-eslint/recommended',
     'plugin:svelte/recommended',
-    'eslint-config-prettier',
+    'plugin:prettier/recommended',
   ),
   {
     plugins: {

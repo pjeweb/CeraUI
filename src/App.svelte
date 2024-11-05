@@ -1,11 +1,10 @@
 <script lang="ts">
-    import './app.css';
-    import Layout from "./main/Layout.svelte";
-    import {ModeWatcher} from "mode-watcher";
-
-
+import './app.css';
+import Layout from './main/Layout.svelte';
+import { ModeWatcher } from 'mode-watcher';
 </script>
-<ModeWatcher/>
+
+<ModeWatcher />
 <main>
-    <Layout />
+  <Layout />
 </main>
