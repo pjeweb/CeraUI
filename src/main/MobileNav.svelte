@@ -1,10 +1,10 @@
 <script lang="ts">
     import {Icons} from "$lib/components/icons";
-    import MobileLink from "$lib/components/ui/mobile-link.svelte";
-    import * as Sheet from "$lib/components/ui/sheet";
-    import {defaultNavElement, type NavElements, navElements, siteName} from "$lib/config";
     import {Button} from "$lib/components/ui/button";
+    import MobileLink from "$lib/components/ui/mobile-link.svelte";
     import {ScrollArea} from "$lib/components/ui/scroll-area";
+    import * as Sheet from "$lib/components/ui/sheet";
+    import { type NavElements,defaultNavElement, navElements, siteName} from "$lib/config";
     import {navigationStore} from "$lib/stores/navigation";
 
     let currentNav: NavElements = $state(defaultNavElement)

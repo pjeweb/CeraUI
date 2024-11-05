@@ -1,9 +1,13 @@
 <script lang="ts">
 
+    import HotspotConfigurator from "../shared/HotspotConfigurator.svelte";
     import Networking from "../shared/Networking.svelte";
-    import * as Card from "$lib/components/ui/card"
-    import {StatusMessages} from "$lib/stores/websocket-store";
+    import WifiSelector from "../shared/WifiSelector.svelte";
+    import {EyeIcon, Router, Wifi, WifiOff} from "lucide-svelte";
     import type {StatusMessage} from "$lib/types/socket-messages";
+    import WifiQuality from "$lib/components/icons/WifiQuality.svelte";
+    import * as Card from "$lib/components/ui/card"
+    import SimpleAlertDialog from "$lib/components/ui/simple-alert-dialog.svelte";
     import {
         getConnection,
         getWifiBand,
@@ -11,12 +15,8 @@
         networkRename, turnHotspotModeOff,
         turnHotspotModeOn
     } from "$lib/helpers/NetworkHelper";
-    import {EyeIcon, Router, ScanSearch, Wifi, WifiOff} from "lucide-svelte";
+    import {StatusMessages} from "$lib/stores/websocket-store";
     import {capitalizeFirstLetter} from "$lib/utils.js";
-    import WifiQuality from "$lib/components/icons/WifiQuality.svelte";
-    import SimpleAlertDialog from "$lib/components/ui/simple-alert-dialog.svelte";
-    import HotspotConfigurator from "../shared/HotspotConfigurator.svelte";
-    import WifiSelector from "../shared/WifiSelector.svelte";
 
 
     let currentStatus: StatusMessage | undefined = $state();
@@ -50,9 +50,9 @@
                                     <p class="text-muted-foreground text-xs">
                                         <b>Channel</b>: {wifi.hotspot.channel}</p>
                                 {:else if connection}
-                                    <div class=" grid text-muted-foreground font-bold grid-cols-12 content-center ">
-                                        <p class="col-span-3">Strength: </p>
-                                        <WifiQuality class="col-span-1" signal={connection?.signal}/>
+                                    <div class="flex text-muted-foreground font-bold grid-cols-12 content-center ">
+                                        <p>Strength: </p>
+                                        <WifiQuality class="ml-1" signal={connection?.signal}/>
                                     </div>
                                     <p class="text-muted-foreground text-xs">
                                         <b>SSID</b>: {connection?.ssid}</p>
@@ -68,7 +68,7 @@
                                         <HotspotConfigurator {wifi} {deviceId}></HotspotConfigurator>
                                         <SimpleAlertDialog confirmButtonText="Close" hiddeCancelButton={true}
                                                            title="Show hotspot details">
-                                            {#snippet buttonIcon()}
+                                            {#snippet button()}
                                                 <EyeIcon></EyeIcon>
                                             {/snippet}
                                             {#snippet dialogTitle()}
@@ -83,7 +83,7 @@
                                                            extraButtonClasses="bg-yellow-600 hover:bg-yellow-600/90"
                                                            title="Turn hotspot off"
                                                            onconfirm={()=>turnHotspotModeOff(deviceId)}>
-                                            {#snippet buttonIcon()}
+                                            {#snippet button()}
                                                 <WifiOff></WifiOff>
                                             {/snippet}
                                             {#snippet dialogTitle()}
@@ -101,7 +101,7 @@
                                                            extraButtonClasses="bg-yellow-600 hover:bg-yellow-600/90"
                                                            title="Turn hotspot on"
                                                            onconfirm={()=>turnHotspotModeOn(deviceId)}>
-                                            {#snippet buttonIcon()}
+                                            {#snippet button()}
                                                 <Router></Router>
                                             {/snippet}
                                             {#snippet dialogTitle()}
@@ -122,7 +122,7 @@
                     {/each}
                 {/if}
             </div>
-            <Card.Root class="col-span-4 sm:col-span-3">
+            <Card.Root class="col-span-4 sm:col-span-4 md:col-span-3">
                 <Networking/>
             </Card.Root>
 

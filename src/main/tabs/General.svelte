@@ -1,17 +1,17 @@
 <script lang="ts">
-    import * as Card from "$lib/components/ui/card";
-    import Thermometer from "lucide-svelte/icons/thermometer";
-    import RadioTower from "lucide-svelte/icons/radio-tower";
     import Networking from "../shared/Networking.svelte";
-    import {ConfigMessages, NetifMessages, SensorsStatusMessages, StatusMessages} from "$lib/stores/websocket-store";
-    import type {ConfigMessage, NetifMessage, StatusMessage} from "$lib/types/socket-messages";
-    import SimpleAlertDialog from "$lib/components/ui/simple-alert-dialog.svelte";
-    import {Update} from "svelte-radix"
-    import {cn} from "$lib/utils";
-    import Server from "lucide-svelte/icons/server"
     import {ServerOff, SquareChartGantt} from "lucide-svelte";
+    import RadioTower from "lucide-svelte/icons/radio-tower";
+    import Server from "lucide-svelte/icons/server"
+    import Thermometer from "lucide-svelte/icons/thermometer";
+    import {Update} from "svelte-radix"
+    import type {ConfigMessage, NetifMessage, StatusMessage} from "$lib/types/socket-messages";
+    import * as Card from "$lib/components/ui/card";
+    import SimpleAlertDialog from "$lib/components/ui/simple-alert-dialog.svelte";
     import {getUsedNetworks} from "$lib/helpers/NetworkHelper";
     import {installSoftwareUpdates} from "$lib/helpers/SystemHelper";
+    import {ConfigMessages, NetifMessages, SensorsStatusMessages, StatusMessages} from "$lib/stores/websocket-store";
+    import {cn} from "$lib/utils";
 
     let temperature: Array<[string, string]> = $state([])
     let currentStatus: StatusMessage | undefined = $state(undefined)
@@ -108,8 +108,8 @@
                         <p class="text-muted-foreground text-xs">{currentStatus?.available_updates?.download_size ?? '0 MB'}</p>
                     </div>
                     {#if currentStatus?.available_updates.package_count}
-                        <SimpleAlertDialog buttonText="Update" onacceptclick={()=>console.log('Hello')}
-                                           confirmButtonText="Update" onconfirm={installSoftwareUpdates}>
+                        <SimpleAlertDialog buttonText="Update" confirmButtonText="Update"
+                                           onconfirm={installSoftwareUpdates}>
                             {#snippet dialogTitle()}
                                 Are you absolutely sure?
                             {/snippet}

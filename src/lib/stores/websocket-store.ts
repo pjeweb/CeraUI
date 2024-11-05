@@ -1,17 +1,18 @@
-import { get, readonly, writable } from 'svelte/store';
 import { ENV_VARIABLES } from '../env';
+import { get, readonly, writable } from 'svelte/store';
+import { toast } from 'svelte-sonner';
 import type {
-  AuthMessage,
-  NetifMessage,
-  ConfigMessage,
-  PipelinesMessage,
   AudioCodecsMessage,
-  StatusMessage,
+  AuthMessage,
+  ConfigMessage,
+  NetifMessage,
   NotificationsMessage,
+  PipelinesMessage,
   RevisionsMessage,
   SensorsStatusMessage,
+  StatusMessage,
+  WifiMessage,
 } from '../types/socket-messages';
-import { toast } from 'svelte-sonner';
 
 const AuthStore = writable<AuthMessage>();
 const AudioCodecsStore = writable<AudioCodecsMessage>();
@@ -61,37 +62,37 @@ socket.addEventListener('message', function (event: MessageEvent<string>) {
 });
 
 const assignMessage = (message: string) => {
-  const parseMessage = JSON.parse(message);
-  switch (Object.keys(parseMessage)[0]) {
+  const parsedMessage = JSON.parse(message);
+  switch (Object.keys(parsedMessage)[0]) {
     case 'auth':
-      AuthStore.set(parseMessage.auth);
+      AuthStore.set(parsedMessage.auth);
       break;
     case 'acodecs':
-      AudioCodecsStore.set(parseMessage.acodecs);
+      AudioCodecsStore.set(parsedMessage.acodecs);
       break;
     case 'config':
-      ConfigStore.set(parseMessage.config);
+      ConfigStore.set(parsedMessage.config);
       break;
     case 'netif':
-      NetifStore.set(parseMessage.netif);
+      NetifStore.set(parsedMessage.netif);
       break;
     case 'notification':
-      NotificationsStore.set(parseMessage.notification);
+      NotificationsStore.set(parsedMessage.notification);
       break;
     case 'pipelines':
-      PipelinesStore.set(parseMessage.pipelines);
+      PipelinesStore.set(parsedMessage.pipelines);
       break;
     case 'revisions':
-      RevisionsStore.set(parseMessage.revisions);
+      RevisionsStore.set(parsedMessage.revisions);
       break;
     case 'sensors':
-      SensorsStatusStore.set(parseMessage.sensors);
+      SensorsStatusStore.set(parsedMessage.sensors);
       break;
     case 'status':
-      StatusStore.set({ ...get(StatusStore), ...parseMessage.status });
+      StatusStore.set({ ...get(StatusStore), ...parsedMessage.status });
       break;
-    case 'wifi': {
-    }
+    case 'wifi':
+      WifiStore.set(parsedMessage.wifi);
   }
 };
 
@@ -143,10 +144,11 @@ const PipelinesMessages = readonly(PipelinesStore);
 const RevisionsMessages = readonly(RevisionsStore);
 const SensorsStatusMessages = readonly(SensorsStatusStore);
 const StatusMessages = readonly(StatusStore);
+const WifiMessages = readonly(WifiStore);
 
 export {
-  AuthMessages,
   AudioCodesMessage,
+  AuthMessages,
   ConfigMessages,
   NetifMessages,
   NotificationsMessages,
@@ -154,7 +156,8 @@ export {
   RevisionsMessages,
   SensorsStatusMessages,
   StatusMessages,
-  sendMessage,
+  WifiMessages,
   sendAuthMessage,
+  sendMessage,
   socket,
 };

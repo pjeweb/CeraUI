@@ -1,13 +1,13 @@
 <script lang="ts">
-    import {toast} from 'svelte-sonner';
-    import {Toaster} from '$lib/components/ui/sonner';
-    import {AuthMessages, NotificationsMessages, sendAuthMessage, StatusMessages} from '$lib/stores/websocket-store';
-    import Main from "./MainView.svelte";
-
-    import type {NotificationType, StatusMessage} from "$lib/types/socket-messages";
     import Auth from "./Auth.svelte";
-    import {authStatusStore} from "$lib/stores/auth-status";
+    import Main from "./MainView.svelte";
+    import {toast} from 'svelte-sonner';
+    import type {NotificationType, StatusMessage} from "$lib/types/socket-messages";
+    import {Toaster} from '$lib/components/ui/sonner';
     import UpdatingOverlay from "$lib/components/updating-overlay.svelte"
+    import {authStatusStore} from "$lib/stores/auth-status";
+    import {AuthMessages, NotificationsMessages, StatusMessages, sendAuthMessage} from '$lib/stores/websocket-store';
+
 
     let authStatus = $state(false)
     let isCheckingAuthStatus = $state(true)

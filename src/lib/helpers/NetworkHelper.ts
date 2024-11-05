@@ -1,14 +1,14 @@
-import { sendMessage, socket, StatusMessages } from '$lib/stores/websocket-store';
-import type { NetifMessage, StatusMessage } from '$lib/types/socket-messages';
-import type { ValueOf } from '$lib/types';
-import { object } from 'zod';
 import { toast } from 'svelte-sonner';
+import type { ValueOf } from '$lib/types';
+import type { NetifMessage, StatusMessage } from '$lib/types/socket-messages';
+import { sendMessage, socket } from '$lib/stores/websocket-store';
 
 export type WifiBandNames = 'auto' | 'auto_50' | 'auto_24';
+
 const wifiBandLabels: { [key in WifiBandNames]: string } = {
   auto: 'Auto (Any band)',
   auto_24: 'Auto (2.4 GHz)',
-  auto_50: 'Aut (5.0 GHz',
+  auto_50: 'Auto (5.0 GHz',
 };
 
 export const convertBytesToKbids = (bytes: number) => {

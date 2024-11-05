@@ -111,3 +111,10 @@ export type StatusMessage = {
   modems: unknown; // TODO Define Modems Type
   asrcs: ['Analog in', 'No audio', 'Pipeline default'];
 };
+
+export type WifiMessage = {
+  connect: Array<string>;
+  device: number;
+  disconnect: string;
+  new: { error: 'auth' | 'generic'; device: number | string; success: true };
+};

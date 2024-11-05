@@ -1,12 +1,12 @@
 <script lang="ts">
     import {Icons} from "$lib/components/icons";
     import {Button} from "$lib/components/ui/button";
+    import {Checkbox} from "$lib/components/ui/checkbox";
     import {Input} from "$lib/components/ui/input";
     import {Label} from "$lib/components/ui/label";
-    import {cn} from "$lib/utils.js";
     import {siteName} from "$lib/config";
-    import {Checkbox} from "$lib/components/ui/checkbox";
     import {AuthMessages, NotificationsMessages, sendAuthMessage} from "$lib/stores/websocket-store";
+    import {cn} from "$lib/utils.js";
 
 
     // import AuthenticationLight from "$lib/img/examples/authentication-light.png?enhanced";

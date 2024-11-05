@@ -1,8 +1,8 @@
 <script lang="ts">
-    import type {Snippet, SvelteComponent} from "svelte";
+    import {AlertDialog as AlertDialogDefault, type WithoutChild} from "bits-ui";
+    import type {Snippet} from "svelte";
     import * as AlertDialog from "$lib/components/ui/alert-dialog/index";
     import {buttonVariants} from "$lib/components/ui/button";
-    import {AlertDialog as AlertDialogDefault, type WithoutChild} from "bits-ui";
     import {cn} from "$lib/utils";
 
 
@@ -10,7 +10,7 @@
         className?: string;
         extraButtonClasses?: string;
         buttonText: string;
-        buttonIcon: Snippet;
+        button?: Snippet;
         hiddeCancelButton?: boolean;
         dialogTitle: Snippet;
         disabledConfirmButton?: boolean;
@@ -25,7 +25,7 @@
     let {
         open = $bindable(false),
         extraButtonClasses,
-        buttonIcon,
+        button,
         hiddeCancelButton,
         oncancel,
         onconfirm,
@@ -48,7 +48,7 @@
 <AlertDialog.Root {...restProps} bind:open>
     <AlertDialog.Trigger class={cn(`${buttonVariants({ variant: "default" })} ml-auto`, extraButtonClasses)} {title}>
         {buttonText}
-        {@render buttonIcon?.()}
+        {@render button?.()}
     </AlertDialog.Trigger>
     <AlertDialog.Portal>
         <AlertDialog.Overlay/>

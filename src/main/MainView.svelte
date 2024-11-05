@@ -1,8 +1,8 @@
 <script lang="ts">
     import MainNav from "./MainNav.svelte";
-    import ModeToggle from "$lib/components/ui/mode-toggle.svelte";
     import MobileNav from "./MobileNav.svelte";
     import NavigationRenderer from "./shared/NavigationRenderer.svelte";
+    import ModeToggle from "$lib/components/ui/mode-toggle.svelte";
 
 </script>
 

@@ -1,12 +1,12 @@
 <script lang="ts">
     import {Bolt} from "lucide-svelte";
-    import SimpleAlertDialog from "$lib/components/ui/simple-alert-dialog.svelte";
+    import type {ValueOf} from "$lib/types";
+    import type {StatusMessage} from "$lib/types/socket-messages";
     import {Input} from "$lib/components/ui/input";
     import {Label} from "$lib/components/ui/label";
     import * as Select from "$lib/components/ui/select"
-    import {changeHotspotSettings, type WifiBandNames} from "$lib/helpers/NetworkHelper";
-    import type {StatusMessage} from "$lib/types/socket-messages";
-    import type {ValueOf} from "$lib/types";
+    import SimpleAlertDialog from "$lib/components/ui/simple-alert-dialog.svelte";
+    import { type WifiBandNames,changeHotspotSettings} from "$lib/helpers/NetworkHelper";
 
     const getSelectedChannel: () => { value: WifiBandNames, label: string } = () => {
         return {value: wifi.hotspot?.channel, label: wifi.hotspot?.available_channels[wifi.hotspot?.channel].name}
@@ -47,7 +47,7 @@
                         password:hotspotProperties.password
                        }
                        )}>
-    {#snippet buttonIcon()}
+    {#snippet button()}
         <Bolt></Bolt>
     {/snippet}
     {#snippet dialogTitle()}

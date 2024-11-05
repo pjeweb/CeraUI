@@ -1,17 +1,17 @@
 <script lang="ts">
-    import {NetifMessages} from "$lib/stores/websocket-store";
+    import Network from "lucide-svelte/icons/arrow-up-down";
+    import Check from "lucide-svelte/icons/check";
+    import X from "lucide-svelte/icons/x";
     import type {NetifMessage} from "$lib/types/socket-messages";
     import * as Card from "$lib/components/ui/card";
+    import {Toggle} from "$lib/components/ui/toggle";
     import {
         convertBytesToKbids, getAvailableNetworks, getTotalBandwidth,
         getUsedNetworks,
         networkRenameWithError,
         setNetif
     } from "$lib/helpers/NetworkHelper.js";
-    import Network from "lucide-svelte/icons/arrow-up-down";
-    import {Toggle} from "$lib/components/ui/toggle";
-    import X from "lucide-svelte/icons/x";
-    import Check from "lucide-svelte/icons/check";
+    import {NetifMessages} from "$lib/stores/websocket-store";
     import {cn} from "$lib/utils";
 
     let totalBandwith: number = $state(0)

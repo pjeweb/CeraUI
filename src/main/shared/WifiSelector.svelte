@@ -1,10 +1,14 @@
 <script lang="ts">
-    import * as Card from "$lib/components/ui/card";
-    import * as Avatar from "$lib/components/ui/avatar/";
+    import {Link, ScanSearch, Trash2, Unlink} from "lucide-svelte";
+    import {toast} from "svelte-sonner";
     import type {ValueOf} from "$lib/types";
     import type {StatusMessage} from "$lib/types/socket-messages";
-    import {ScrollArea} from "$lib/components/ui/scroll-area";
     import WifiQuality from "$lib/components/icons/WifiQuality.svelte";
+    import {Button} from "$lib/components/ui/button";
+    import * as Card from "$lib/components/ui/card";
+    import {Input} from "$lib/components/ui/input";
+    import {ScrollArea} from "$lib/components/ui/scroll-area";
+    import SimpleAlertDialog from "$lib/components/ui/simple-alert-dialog.svelte";
     import {
         connectToNewWifi,
         connectWifi,
@@ -13,15 +17,29 @@
         getWifiUUID,
         networkRename, scanWifi
     } from "$lib/helpers/NetworkHelper.js";
+    import {WifiMessages} from "$lib/stores/websocket-store";
     import {cn} from "$lib/utils";
-    import {Button} from "$lib/components/ui/button";
-    import {Link, ScanSearch} from "lucide-svelte";
-    import SimpleAlertDialog from "$lib/components/ui/simple-alert-dialog.svelte";
-    import {Input} from "$lib/components/ui/input";
 
     let {wifi, wifiId}: { wifi: ValueOf<StatusMessage['wifi']>, wifiId: number } = $props()
     let networkPassword = $state('')
     let open = $state(false)
+
+    let connecting: string | undefined = $state()
+    let scanning = $state(false);
+
+    $effect(() => {
+        WifiMessages.subscribe((wifiMessage) => {
+            if (wifiMessage) {
+                if (wifiMessage.new?.error) {
+                    toast.error('WiFi connection error', {
+                        description: 'It was not possible to connect to the selected WiFi network, check the password or get closer to it and try again'
+                    })
+                } else {
+                    connecting = undefined
+                }
+            }
+        })
+    })
 
     $effect(() => {
         let internal: NodeJS.Timeout
@@ -29,15 +47,36 @@
             internal = setInterval(() => {
                 console.log('Doing wifi scan')
                 scanWifi(wifiId, false)
-            },4000)
+            }, 22000)
         }
         return () => clearInterval(internal)
-    },)
+    })
+
+    const handleWifiScan = () => {
+        scanWifi(wifiId);
+        scanning = true;
+        setTimeout(() => {
+            scanning = false
+        }, 20000)
+
+    }
+
+    const handleWifiConnect = (uuid: string, wifi: ValueOf<StatusMessage["wifi"]>["available"][number]) => {
+        connecting = uuid;
+        connectWifi(uuid, wifi);
+        networkPassword = '';
+    }
+
+    const handleNewWifiConnect = (ssid: string, password: string) => {
+        connecting = ssid;
+        connectToNewWifi(wifiId, ssid, password)
+
+    }
 </script>
 <SimpleAlertDialog confirmButtonText="Close" hiddeCancelButton={true} class="max-w-screen-sm" bind:open={open}
                    title="Search WiFi Networks"
                    extraButtonClasses="bg-green-500 hover:bg-green-500/90">
-    {#snippet buttonIcon()}
+    {#snippet button()}
         <ScanSearch></ScanSearch>
     {/snippet}
     {#snippet dialogTitle()}
@@ -50,6 +89,7 @@
                 <div class="space-y-0">
                     {#each wifi.available as availableNetwork, index }
                         {@const uuid = getWifiUUID(availableNetwork, wifi.saved)}
+                        {@const isConnecting = connecting !== undefined && (connecting === uuid || connecting === availableNetwork.ssid)}
                         <div class={cn("flex items-center pr-4 p-2",index ?'border-t-2':'mt-2', uuid ? '':  'cursor-pointer')}>
                             <WifiQuality signal={availableNetwork.signal} class="size-8"/>
                             <div class="ml-2 space-y-2 text-left">
@@ -57,22 +97,33 @@
                                 <p class="text-muted-foreground text-sm pt-0 pb-0 mt-0 mb-0">{availableNetwork.security.replaceAll(' ', ', ')}</p>
                             </div>
                             <div class="ml-auto font-medium">
-                                {#if uuid}
+                                {#if isConnecting}
+                                    <span class="loading w-[25%] text-left">
+                                        Connecting
+                                    </span>
+                                {:else if uuid}
                                     {#if availableNetwork.active }
                                         <Button variant="secondary"
-                                                onclick={()=>disconnectWifi(uuid, availableNetwork)}>Disconnect
+                                                onclick={()=>disconnectWifi(uuid, availableNetwork)}>
+                                            <span class="hidden md:block">Disconnect</span>
+                                            <span class="sm:hidden"><Unlink class="w-4"></Unlink></span>
                                         </Button>
                                     {:else}
-                                        <Button variant="secondary" onclick={()=>connectWifi(uuid, availableNetwork)}>
+                                        <Button variant="secondary"
+                                                onclick={()=>handleWifiConnect(uuid, availableNetwork)}>
                                             <span class="hidden md:block">Connect</span>
-                                            <span class="sm:hidden"><Link class="w-3"></Link></span>
+                                            <span class="sm:hidden"><Link class="w-4"></Link></span>
                                         </Button>
                                     {/if}
-                                    <SimpleAlertDialog title="Forget Wifi network" buttonText="Forget"
+                                    <SimpleAlertDialog title="Forget Wifi network"
                                                        confirmButtonText="Forget"
                                                        onconfirm={()=>forgetWifi(uuid, availableNetwork)}>
                                         {#snippet dialogTitle()}
                                             Disconnect from {availableNetwork.ssid}
+                                        {/snippet}
+                                        {#snippet button()}
+                                            <span class="hidden sm:block">Forget</span>
+                                            <Trash2 class="sm:block md:hidden w-4"></Trash2>
                                         {/snippet}
                                         {#snippet description()}
                                             Are you sure to forget <b>{availableNetwork.ssid}</b> on
@@ -80,16 +131,18 @@
                                         {/snippet}
                                     </SimpleAlertDialog>
                                 {:else}
-                                    <SimpleAlertDialog buttonText="Connect"
+                                    <SimpleAlertDialog confirmButtonText="Connect"
                                                        extraButtonClasses="bg-secondary text-secondary-foreground hover:bg-secondary/80"
-                                                       confirmButtonText="Connect"
                                                        onconfirm={()=>{
-                                                           connectToNewWifi(wifiId, availableNetwork.ssid, networkPassword )
-                                                           networkPassword='';
+                                                           handleNewWifiConnect(availableNetwork.ssid, networkPassword )
                                                             }}
                                                        oncancel={()=>networkPassword=''}>
                                         {#snippet dialogTitle()}
                                             Connect to {availableNetwork.ssid}
+                                        {/snippet}
+                                        {#snippet button()}
+                                            <span class="hidden sm:block">Connect</span>
+                                            <Link class="sm:block md:hidden w-4"></Link>
                                         {/snippet}
                                         {#snippet description()}
                                             Please Introduce the network password
@@ -106,6 +159,7 @@
 
             </Card.Content>
         </ScrollArea>
-        <Button class="w-[100%] bg-green-600 hover:bg-green-500/90" onclick={()=> scanWifi(wifiId)}>Scan</Button>
+        <Button disabled={scanning} class="w-[100%] bg-green-600 hover:bg-green-500/90" onclick={handleWifiScan}>
+            <span class={scanning ? 'loading': ''}>{scanning ? 'Scanning' : 'Scan'}</span></Button>
     </Card.Root>
 </SimpleAlertDialog>

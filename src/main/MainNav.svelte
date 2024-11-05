@@ -1,11 +1,11 @@
 <script lang="ts">
     import {cubicInOut} from "svelte/easing";
     import {crossfade} from "svelte/transition";
-    import {defaultNavElement, type NavElements, navElements, siteName} from "$lib/config"
-    import {ScrollArea} from "$lib/components/ui/scroll-area";
-    import {cn} from "$lib/utils";
     import {Icons} from "$lib/components/icons";
+    import {ScrollArea} from "$lib/components/ui/scroll-area";
+    import { type NavElements,defaultNavElement, navElements, siteName} from "$lib/config"
     import {navigationStore} from "$lib/stores/navigation";
+    import {cn} from "$lib/utils";
 
     const [send, receive] = crossfade({
         duration: 250,

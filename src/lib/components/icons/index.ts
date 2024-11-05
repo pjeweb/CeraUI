@@ -1,3 +1,16 @@
+import Apple from './apple.svelte';
+import Aria from './aria.svelte';
+import GitHub from './github.svelte';
+import Google from './google.svelte';
+import Hamburger from './hamburger.svelte';
+import Logo from './logo.svelte';
+import Npm from './npm.svelte';
+import PayPal from './paypal.svelte';
+import Pnpm from './pnpm.svelte';
+import RadixSvelte from './radix-svelte.svelte';
+import Tailwind from './tailwind.svelte';
+import Twitter from './twitter.svelte';
+import Yarn from './yarn.svelte';
 import ArrowRight from 'lucide-svelte/icons/arrow-right';
 import Check from 'lucide-svelte/icons/check';
 import ChevronLeft from 'lucide-svelte/icons/chevron-left';
@@ -23,19 +36,6 @@ import User from 'lucide-svelte/icons/user';
 import X from 'lucide-svelte/icons/x';
 
 import type { SvelteComponent } from 'svelte';
-import Apple from './apple.svelte';
-import Aria from './aria.svelte';
-import GitHub from './github.svelte';
-import Google from './google.svelte';
-import Hamburger from './hamburger.svelte';
-import Logo from './logo.svelte';
-import Npm from './npm.svelte';
-import PayPal from './paypal.svelte';
-import Pnpm from './pnpm.svelte';
-import RadixSvelte from './radix-svelte.svelte';
-import Tailwind from './tailwind.svelte';
-import Twitter from './twitter.svelte';
-import Yarn from './yarn.svelte';
 
 export type Icon = SvelteComponent;
 

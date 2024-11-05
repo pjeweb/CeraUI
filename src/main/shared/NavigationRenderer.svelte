@@ -1,6 +1,6 @@
 <script lang="ts">
-    import {navigationStore} from "$lib/stores/navigation";
     import type {SvelteComponent} from "svelte";
+    import {navigationStore} from "$lib/stores/navigation";
 
 
     let CurrentComponent: SvelteComponent | undefined = $state(undefined)

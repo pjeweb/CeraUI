@@ -1,9 +1,9 @@
 <script lang="ts">
 
+    import {toast} from "svelte-sonner";
+    import type {StatusMessage} from "$lib/types/socket-messages";
     import * as Drawer from "$lib/components/ui/drawer/index.js";
     import {Progress} from "$lib/components/ui/progress";
-    import type {StatusMessage} from "$lib/types/socket-messages";
-    import {toast} from "svelte-sonner";
 
     let {details}: { details: Exclude<StatusMessage['updating'], boolean | null> } = $props()
 
@@ -75,28 +75,3 @@
         </div>
     </Drawer.Content>
 </Drawer.Root>
-<style>
-    .loading::after {
-        display: inline-block;
-        animation: dotty steps(1, end) 1.8s infinite;
-        content: '';
-    }
-
-    @keyframes dotty {
-        0% {
-            content: '';
-        }
-        25% {
-            content: '.';
-        }
-        50% {
-            content: '..';
-        }
-        75% {
-            content: '...';
-        }
-        100% {
-            content: '';
-        }
-    }
-</style>
