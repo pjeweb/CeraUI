@@ -33,7 +33,7 @@ $inspect(hotspotProperties).with(console.log);
 
 <SimpleAlertDialog
   confirmButtonText="Save"
-  onOpenChange={open => open && resetHotSpotProperties()}
+  onOpenChange={open => resetHotSpotProperties()}
   title="Config hotspot"
   extraButtonClasses="bg-green-500 hover:bg-green-500/90"
   disabledConfirmButton={!hotspotProperties?.password?.length || !hotspotProperties?.name?.length}
@@ -76,9 +76,8 @@ $inspect(hotspotProperties).with(console.log);
       <div class="grid gap-1">
         <Label for="channel" class="mb-2 ml-1">Channel</Label>
         <Select.Root
-          id="channel"
           onSelectedChange={value => {
-            hotspotProperties.selectedChannel = value;
+            if (hotspotProperties) hotspotProperties.selectedChannel = value;
           }}
           selected={hotspotProperties.selectedChannel}>
           <Select.Trigger class="w-[180px]">

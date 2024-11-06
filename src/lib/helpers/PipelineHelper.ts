@@ -1,6 +1,6 @@
 import type { PipelinesMessage } from '$lib/types/socket-messages';
 
-type VideoInfo = {
+export type PipelineInfo = {
   device: string | null;
   encoder: string | null;
   format: string | null;
@@ -13,16 +13,20 @@ type HumanReadablePipeline = {
   asrc: boolean;
   acodec: boolean;
   identifier: string;
-  extraction: VideoInfo;
+  extraction: PipelineInfo;
 };
 
 export type GroupedPipelines = {
   [device: string]: {
-    [format: string]: HumanReadablePipeline[];
+    [format: string]: {
+      [encoder: string]: {
+        [resolution: string]: HumanReadablePipeline[];
+      };
+    };
   };
 };
 
-function parsePipelineName(name: string): VideoInfo {
+export function parsePipelineName(name: string): PipelineInfo {
   const deviceMatch = name.match(/^([^/]+)/);
   const encoderMatch = name.match(/(h264|h265)/);
 
@@ -46,21 +50,32 @@ export const groupPipelinesByDeviceAndFormat = (pipelines: PipelinesMessage): Gr
     const extraction = parsePipelineName(value.name);
     const device = extraction.device || 'unknown';
     const format = extraction.format || 'unknown';
+    const encoder = extraction.encoder || 'unknown';
+    const resolution = extraction.resolution || '[Given by the device]';
 
     if (!groupedPipelines[device]) {
       groupedPipelines[device] = {};
     }
 
     if (!groupedPipelines[device][format]) {
-      groupedPipelines[device][format] = [];
+      groupedPipelines[device][format] = {};
     }
 
-    groupedPipelines[device][format].push({
+    if (!groupedPipelines[device][format][encoder]) {
+      groupedPipelines[device][format][encoder] = {};
+    }
+
+    if (!groupedPipelines[device][format][encoder][resolution]) {
+      groupedPipelines[device][format][encoder][resolution] = [];
+    }
+
+    groupedPipelines[device][format][encoder][resolution].push({
       ...value,
       identifier: key,
       extraction,
     });
   });
+
   console.log(groupedPipelines);
   return groupedPipelines;
 };

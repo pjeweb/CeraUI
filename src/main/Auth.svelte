@@ -85,7 +85,6 @@ async function onSubmit(event: SubmitEvent) {
         <form onsubmit={onSubmit}>
           <div class="grid gap-2">
             <div class="grid gap-1">
-              <Label class="sr-only" for="password">Email</Label>
               <Input
                 bind:value={password}
                 id="password"
