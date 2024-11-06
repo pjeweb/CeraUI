@@ -17,8 +17,8 @@ type SelectInput = Selected<string | null | undefined> | undefined;
 
 let groupedPipelines: GroupedPipelines[keyof GroupedPipelines] | undefined = $state(undefined);
 let selectedInputMode: SelectInput = $state();
-let selectedFormat: string | undefined = $state();
-let selectedMode: string | undefined = $state();
+let selectedEncoder: SelectInput = $state();
+let selectedResolution: SelectInput = $state();
 let selectedFramerate: string | undefined = $state();
 let unparsedPipelines: PipelinesMessage | undefined = $state();
 let selectedPipeline: keyof PipelinesMessage | undefined = $state();
@@ -91,7 +91,8 @@ $effect.pre(() => {
               selected={{
                 value: currentSelectionInfo?.encoder,
                 label: currentSelectionInfo?.encoder?.toUpperCase() ?? '',
-              }}>
+              }}
+              onSelectedChange={value => (selectedEncoder = value)}>
               <Select.Trigger>
                 <Select.Value placeholder="Select encoding output format"></Select.Value>
               </Select.Trigger>
@@ -100,6 +101,44 @@ $effect.pre(() => {
                   {#if selectedInputMode?.value && groupedPipelines?.[selectedInputMode.value]}
                     {#each Object.keys(groupedPipelines?.[selectedInputMode.value]) as encoder}
                       <Select.Item value={encoder} label={encoder.toUpperCase()}></Select.Item>
+                    {/each}
+                  {/if}
+                </Select.Group>
+              </Select.Content>
+            </Select.Root>
+          </div>
+          <div>
+            <Label class="mb-2">Encoding Resolution</Label>
+            <Select.Root onSelectedChange={value => (selectedResolution = value)}>
+              <Select.Trigger>
+                <Select.Value placeholder="Select encoding output format"></Select.Value>
+              </Select.Trigger>
+              <Select.Content>
+                <Select.Group>
+                  {#if selectedEncoder?.value && selectedInputMode?.value && groupedPipelines?.[selectedInputMode.value]?.[selectedEncoder.value]}
+                    {@const resolutions = (Object.keys(groupedPipelines?.[selectedInputMode.value][selectedEncoder.value]))}
+                    {#each resolutions as resolution}
+                      <Select.Item value={resolution} label={resolution}></Select.Item>
+
+                    {/each}
+                  {/if}
+                </Select.Group>
+              </Select.Content>
+            </Select.Root>
+          </div>
+          <div>
+            <Label class="mb-2">Framerate (FPS)</Label>
+            <Select.Root>
+              <Select.Trigger>
+                <Select.Value placeholder="Select encoding output format"></Select.Value>
+              </Select.Trigger>
+              <Select.Content>
+                <Select.Group>
+                  {#if selectedEncoder?.value && selectedInputMode?.value && selectedResolution?.value && groupedPipelines?.[selectedInputMode.value]?.[selectedEncoder.value][selectedResolution.value]}
+                    {@const framerates = groupedPipelines?.[selectedInputMode.value][selectedEncoder.value][selectedResolution.value]}
+                    {#each framerates as framerate}
+                      <Select.Item value={framerate.extraction.fps} label={framerate.extraction.fps}></Select.Item>
+
                     {/each}
                   {/if}
                 </Select.Group>

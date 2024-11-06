@@ -63,5 +63,8 @@
     "lodash.template": "^4.5.0",
     "lucide-svelte": "^0.454.0",
     "ws": "^8.18.0"
+  },
+  "volta": {
+    "node": "22.11.0"
   }
 }
