@@ -1,4 +1,5 @@
 <script lang="ts">
+import { _ } from 'svelte-i18n';
 import { toast } from 'svelte-sonner';
 import type { StatusMessage } from '$lib/types/socket-messages';
 import * as Drawer from '$lib/components/ui/drawer/index.js';
@@ -6,56 +7,44 @@ import { Progress } from '$lib/components/ui/progress';
 
 let { details }: { details: Exclude<StatusMessage['updating'], boolean | null> } = $props();
 
-let progress: number = $state(0);
-let total: number = 3 * details.total;
-$effect(() => {
-  let { setting_up = 0, unpacking = 0, downloading = 0 } = details;
-  progress = setting_up + downloading + unpacking;
+let progress: number = $derived.by(() => {
+  let { downloading: downloading = 0, unpacking: unpacking = 0, setting_up: setting_up = 0 } = details;
+  return downloading + unpacking + setting_up;
 });
+let total: number = $derived(3 * (details.total ?? 0));
 
 $effect(() => {
   if (progress === total)
-    toast.success('Updated successfully.', {
-      description:
-        'The device is rebooting, you will be able to used it with the latest features in a couple of minutes',
+    toast.success($_('updatingOverlay.successMessage'), {
+      description: $_('updatingOverlay.successDescription'),
     });
 });
-
-const interval = setInterval(() => {
-  if (details.downloading < details.total) {
-    details.downloading++;
-  } else if (details.unpacking < details.total) {
-    details.unpacking++;
-  } else if (details.setting_up < details.total) {
-    details.setting_up++;
-  } else {
-    clearInterval(interval);
-  }
-}, 100);
 </script>
 
-<Drawer.Root open={false} closeOnOutsideClick={false} closeOnEscape={false}>
+<Drawer.Root open={true} closeOnOutsideClick={false} closeOnEscape={false}>
   <Drawer.Content class="h-[100%] w-[100%] bg-transparent/50 " disableDrag={true} data-vaul-no-drag>
     <div class="h-[100%] w-[100%]">
       <Drawer.Header>
         <div>
           <Drawer.Title>
-            <div class="loading">Updating your device software</div>
+            <div class="loading">{$_('updatingOverlay.title')}</div>
           </Drawer.Title>
           <Drawer.Description>
-            <div>You will be able to use it once the update process is complete</div>
+            <div>{$_('updatingOverlay.description')}</div>
             <div class="text-area ml-auto mr-auto mt-5 w-[100%] resize-none text-lg disabled:cursor-default md:w-[50%]">
-              <b class="loading">Updating packages</b>
-              {#if details.downloading}
-                <p><b>Downloading:</b> {`${details.downloading}/${details.total}`}</p>
+              <b class="loading">{$_('updatingOverlay.loading')}</b>
+              {#if total}
+                {#if details.downloading}
+                  <p><b>{$_('updatingOverlay.downloading')}:</b> {`${details.downloading ?? 0}/${details.total}`}</p>
+                {/if}
+                {#if details.unpacking}
+                  <p><b>{$_('updatingOverlay.unpacking')}:</b> {`${details.unpacking ?? 0}/${details.total}`}</p>
+                {/if}
+                {#if details.setting_up}
+                  <p><b>{$_('updatingOverlay.installing')}:</b> {`${details.setting_up ?? 0}/${details.total}`}</p>
+                {/if}
+                <p><b>{$_('updatingOverlay.progress')}:</b> {`${((100 * progress) / total).toFixed(2)}%`}</p>
               {/if}
-              {#if details.unpacking}
-                <p><b>Unpacking:</b> {`${details.unpacking}/${details.total}`}</p>
-              {/if}
-              {#if details.setting_up}
-                <p><b>Installing:</b> {`${details.setting_up}/${details.total}`}</p>
-              {/if}
-              <p><b>Progress:</b> {`${((100 * progress) / total).toFixed(2)}%`}</p>
             </div>
           </Drawer.Description>
         </div>

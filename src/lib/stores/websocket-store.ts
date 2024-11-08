@@ -45,6 +45,15 @@ socket.addEventListener('error', function () {
   });
 });
 
+function sendCreatePasswordMessage(password: string) {
+  sendMessage(JSON.stringify({ config: { password } }));
+  StatusStore.set({ ...get(StatusStore), set_password: false });
+  toast.message('Creating password', {
+    duration: 5000,
+    description: 'Creating the access password for your device',
+  });
+}
+
 function sendAuthMessage(password: string, isPersistent: boolean, onError: (() => unknown) | undefined = undefined) {
   const auth_req = { auth: { password, persistent_token: isPersistent } };
   sendMessage(JSON.stringify(auth_req), () => {
@@ -136,7 +145,7 @@ function waitForSocketConnection(
 }
 
 const AuthMessages = readonly(AuthStore);
-const AudioCodesMessage = readonly(AudioCodecsStore);
+const AudioCodecsMessages = readonly(AudioCodecsStore);
 const NetifMessages = readonly(NetifStore);
 const NotificationsMessages = readonly(NotificationsStore);
 const ConfigMessages = readonly(ConfigStore);
@@ -147,7 +156,7 @@ const StatusMessages = readonly(StatusStore);
 const WifiMessages = readonly(WifiStore);
 
 export {
-  AudioCodesMessage,
+  AudioCodecsMessages,
   AuthMessages,
   ConfigMessages,
   NetifMessages,
@@ -158,6 +167,7 @@ export {
   StatusMessages,
   WifiMessages,
   sendAuthMessage,
+  sendCreatePasswordMessage,
   sendMessage,
   socket,
 };

@@ -1,9 +1,24 @@
 <script lang="ts">
 import { resetMode, setMode } from 'mode-watcher';
+import { get } from 'svelte/store';
 import Moon from 'svelte-radix/Moon.svelte';
 import Sun from 'svelte-radix/Sun.svelte';
 import { Button } from '$lib/components/ui/button/index.js';
 import * as DropdownMenu from '$lib/components/ui/dropdown-menu/index.js';
+import { themeStore } from '$lib/stores/theme';
+
+let theme = get(themeStore);
+
+const handleModeChange = (mode: 'light' | 'dark' | 'system') => {
+  if (theme === 'system') {
+    resetMode();
+  } else {
+    setMode(mode);
+  }
+  themeStore.set(mode);
+};
+
+handleModeChange(theme);
 </script>
 
 <DropdownMenu.Root>
@@ -15,8 +30,8 @@ import * as DropdownMenu from '$lib/components/ui/dropdown-menu/index.js';
     </Button>
   </DropdownMenu.Trigger>
   <DropdownMenu.Content align="end">
-    <DropdownMenu.Item on:click={() => setMode('light')}>Light</DropdownMenu.Item>
-    <DropdownMenu.Item on:click={() => setMode('dark')}>Dark</DropdownMenu.Item>
-    <DropdownMenu.Item on:click={() => resetMode()}>System</DropdownMenu.Item>
+    <DropdownMenu.Item on:click={() => handleModeChange('light')}>Light</DropdownMenu.Item>
+    <DropdownMenu.Item on:click={() => handleModeChange('dark')}>Dark</DropdownMenu.Item>
+    <DropdownMenu.Item on:click={() => handleModeChange('system')}>System</DropdownMenu.Item>
   </DropdownMenu.Content>
 </DropdownMenu.Root>

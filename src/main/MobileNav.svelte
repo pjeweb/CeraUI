@@ -8,10 +8,8 @@ import { type NavElements, defaultNavElement, navElements, siteName } from '$lib
 import { navigationStore } from '$lib/stores/navigation';
 
 let currentNav: NavElements = $state(defaultNavElement);
-$effect(() => {
-  navigationStore.subscribe(navigation => {
-    currentNav = navigation;
-  });
+navigationStore.subscribe(navigation => {
+  currentNav = navigation;
 });
 
 let open = $state(false);

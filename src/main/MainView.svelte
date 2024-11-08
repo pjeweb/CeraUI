@@ -2,6 +2,7 @@
 import MainNav from './MainNav.svelte';
 import MobileNav from './MobileNav.svelte';
 import NavigationRenderer from './shared/NavigationRenderer.svelte';
+import LocaleSelector from '$lib/components/ui/locale-selector.svelte';
 import ModeToggle from '$lib/components/ui/mode-toggle.svelte';
 </script>
 
@@ -13,6 +14,7 @@ import ModeToggle from '$lib/components/ui/mode-toggle.svelte';
     <div class="flex flex-1 items-center justify-between space-x-2 md:justify-end">
       <div class="w-full flex-1 md:w-auto md:flex-none"></div>
       <nav class="flex items-center">
+        <span class="mr-3"> <LocaleSelector /></span>
         <ModeToggle />
       </nav>
     </div>

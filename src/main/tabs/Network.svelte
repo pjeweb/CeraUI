@@ -19,10 +19,8 @@ import { StatusMessages } from '$lib/stores/websocket-store';
 import { capitalizeFirstLetter } from '$lib/utils.js';
 
 let currentStatus: StatusMessage | undefined = $state();
-$effect(() => {
-  StatusMessages.subscribe(status => {
-    currentStatus = status;
-  });
+StatusMessages.subscribe(status => {
+  currentStatus = status;
 });
 </script>
 

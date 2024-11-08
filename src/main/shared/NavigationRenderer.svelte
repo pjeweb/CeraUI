@@ -4,12 +4,10 @@ import { navigationStore } from '$lib/stores/navigation';
 
 let CurrentComponent: SvelteComponent | undefined = $state(undefined);
 
-$effect(() => {
-  navigationStore.subscribe(tab => {
-    if (tab) {
-      CurrentComponent = Object.values(tab)[0].component;
-    }
-  });
+navigationStore.subscribe(tab => {
+  if (tab) {
+    CurrentComponent = Object.values(tab)[0].component;
+  }
 });
 </script>
 

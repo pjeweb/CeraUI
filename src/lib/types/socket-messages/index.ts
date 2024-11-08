@@ -18,17 +18,17 @@ export type AudioCodecsMessage = {
 };
 
 export type ConfigMessage = {
-  asrc: string;
+  asrc?: string;
   ssh_pass: string;
-  max_br: number;
+  max_br?: number;
   acodec: AudioCodecs;
-  delay: number;
-  pipeline: string;
-  srt_latency: number;
-  bitrate_overlay: boolean;
-  srtla_addr: string;
-  srtla_port: number;
-  srt_streamid: string;
+  delay?: number;
+  pipeline?: string;
+  srt_latency?: number;
+  bitrate_overlay?: boolean;
+  srtla_addr?: string;
+  srtla_port?: number;
+  srt_streamid?: string;
 };
 
 export type NetifMessage = {
@@ -71,6 +71,7 @@ export type SensorsStatusMessage = {
 };
 
 export type StatusMessage = {
+  set_password?: boolean;
   is_streaming: boolean;
   available_updates: {
     package_count: number;

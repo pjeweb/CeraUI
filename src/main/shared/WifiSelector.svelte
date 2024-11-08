@@ -28,19 +28,17 @@ let open = $state(false);
 let connecting: string | undefined = $state();
 let scanning = $state(false);
 
-$effect(() => {
-  WifiMessages.subscribe(wifiMessage => {
-    if (wifiMessage) {
-      if (wifiMessage.new?.error) {
-        toast.error('WiFi connection error', {
-          description:
-            'It was not possible to connect to the selected WiFi network, check the password or get closer to it and try again',
-        });
-      } else {
-        connecting = undefined;
-      }
+WifiMessages.subscribe(wifiMessage => {
+  if (wifiMessage) {
+    if (wifiMessage.new?.error) {
+      toast.error('WiFi connection error', {
+        description:
+          'It was not possible to connect to the selected WiFi network, check the password or get closer to it and try again',
+      });
+    } else {
+      connecting = undefined;
     }
-  });
+  }
 });
 
 $effect(() => {

@@ -13,10 +13,8 @@ const [send, receive] = crossfade({
 });
 
 let currentNav: NavElements | undefined = $state(defaultNavElement);
-$effect(() => {
-  navigationStore.subscribe(navigation => {
-    currentNav = navigation;
-  });
+navigationStore.subscribe(navigation => {
+  currentNav = navigation;
 });
 </script>
 

@@ -18,13 +18,11 @@ import { cn } from '$lib/utils';
 
 let totalBandwith: number = $state(0);
 let currentNetwoks: NetifMessage = $state({});
-$effect(() => {
-  NetifMessages.subscribe((networks: NetifMessage) => {
-    if (networks) {
-      currentNetwoks = networks;
-      totalBandwith = getTotalBandwidth(networks);
-    }
-  });
+NetifMessages.subscribe((networks: NetifMessage) => {
+  if (networks) {
+    currentNetwoks = networks;
+    totalBandwith = getTotalBandwidth(networks);
+  }
 });
 </script>
 

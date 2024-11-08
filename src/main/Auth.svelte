@@ -4,13 +4,16 @@ import { Button } from '$lib/components/ui/button';
 import { Checkbox } from '$lib/components/ui/checkbox';
 import { Input } from '$lib/components/ui/input';
 import { Label } from '$lib/components/ui/label';
+import ModeToggle from '$lib/components/ui/mode-toggle.svelte';
 import { siteName } from '$lib/config';
-import { AuthMessages, NotificationsMessages, sendAuthMessage } from '$lib/stores/websocket-store';
+import {
+  AuthMessages,
+  NotificationsMessages,
+  StatusMessages,
+  sendAuthMessage,
+  sendCreatePasswordMessage,
+} from '$lib/stores/websocket-store';
 import { cn } from '$lib/utils.js';
-
-// import AuthenticationLight from "$lib/img/examples/authentication-light.png?enhanced";
-// import AuthenticationDark from "$lib/img/examples/authentication-dark.png?enhanced";
-
 let className: string | undefined | null = $state(undefined);
 export { className as class };
 
@@ -18,28 +21,40 @@ let password: string = $state('');
 let remember: boolean = $state(false);
 
 let isLoading = $state(false);
+let setPassword: boolean = $state(false);
 
-$effect(() => {
-  AuthMessages.subscribe(message => {
-    if (message?.success && remember && password) {
-      localStorage.setItem('auth', password);
-    }
-  });
-
-  NotificationsMessages.subscribe(messages => {
-    if (
-      messages?.show?.find(message => {
-        return message.name === 'auth';
-      })
-    ) {
-      isLoading = false;
+StatusMessages.subscribe(status => {
+  if (status) {
+    setPassword = status.set_password ?? false;
+    if (setPassword) {
       localStorage.removeItem('auth');
     }
-  });
+  }
+});
+
+AuthMessages.subscribe(message => {
+  if (message?.success && remember && password) {
+    localStorage.setItem('auth', password);
+  }
+});
+
+NotificationsMessages.subscribe(messages => {
+  if (
+    messages?.show?.find(message => {
+      return message.name === 'auth';
+    })
+  ) {
+    isLoading = false;
+    localStorage.removeItem('auth');
+  }
 });
 
 function login(password: string, remember: boolean) {
   isLoading = true;
+  if (setPassword) {
+    setPassword = false;
+    sendCreatePasswordMessage(password);
+  }
   sendAuthMessage(password, remember, () => (isLoading = false));
 }
 
@@ -49,14 +64,8 @@ async function onSubmit(event: SubmitEvent) {
 }
 </script>
 
-<div class="md:hidden">
-  <!--	<enhanced:img src={AuthenticationLight} alt="Authentication" class="block dark:hidden" />-->
-  <!--	<enhanced:img src={AuthenticationDark} alt="Authentication" class="hidden dark:block" />-->
-</div>
 <div class="container relative grid h-dvh flex-col items-center justify-center lg:max-w-none lg:grid-cols-2 lg:px-0">
-  <Button href="/examples/authentication" variant="ghost" class="absolute right-4 top-4 md:right-8 md:top-8">
-    Login
-  </Button>
+  <span class="absolute right-4 top-4 md:right-8 md:top-8"><ModeToggle></ModeToggle></span>
   <div class="relative hidden h-full flex-col bg-muted p-10 text-white dark:border-r lg:flex">
     <div
       class="absolute inset-0 bg-cover"
@@ -78,7 +87,9 @@ async function onSubmit(event: SubmitEvent) {
   <div class="lg:p-8">
     <div class="mx-auto flex w-full flex-col justify-center space-y-6 sm:w-[350px]">
       <div class="flex flex-col space-y-2 text-center">
-        <h1 class="text-2xl font-semibold tracking-tight">Login with password</h1>
+        <h1 class="text-2xl font-semibold tracking-tight">
+          {setPassword ? 'Create password and login' : 'Login with password'}
+        </h1>
         <p class="text-sm text-muted-foreground">Use the device password to access the functionalities</p>
       </div>
       <div class={cn('grid gap-6', className)}>

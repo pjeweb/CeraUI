@@ -5,7 +5,7 @@ export type PipelineInfo = {
   encoder: string | null;
   format: string | null;
   resolution: string | null;
-  fps: number | null;
+  fps: number | string;
 };
 
 type HumanReadablePipeline = {
@@ -38,8 +38,8 @@ export function parsePipelineName(name: string): PipelineInfo {
     device: deviceMatch ? deviceMatch[0] : null,
     encoder: encoderMatch ? encoderMatch[0] : null,
     format: formatMatch ? formatMatch[1].replace(/_/g, ' ') : null,
-    resolution: resolutionMatch ? resolutionMatch[0] : null,
-    fps: fpsMatch ? parseFloat(fpsMatch[1]) : null,
+    resolution: resolutionMatch ? resolutionMatch[0] : '[Match device resolution]',
+    fps: fpsMatch ? parseFloat(fpsMatch[1]) : '[Match device output]',
   };
 }
 
@@ -51,7 +51,7 @@ export const groupPipelinesByDeviceAndFormat = (pipelines: PipelinesMessage): Gr
     const device = extraction.device || 'unknown';
     const format = extraction.format || 'unknown';
     const encoder = extraction.encoder || 'unknown';
-    const resolution = extraction.resolution || '[Given by the device]';
+    const resolution = extraction.resolution || 'unknown';
 
     if (!groupedPipelines[device]) {
       groupedPipelines[device] = {};
@@ -76,6 +76,5 @@ export const groupPipelinesByDeviceAndFormat = (pipelines: PipelinesMessage): Gr
     });
   });
 
-  console.log(groupedPipelines);
   return groupedPipelines;
 };

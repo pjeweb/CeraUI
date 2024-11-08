@@ -1,9 +1,7 @@
 <script lang="ts">
 import Networking from '../shared/Networking.svelte';
-import { ServerOff, SquareChartGantt } from 'lucide-svelte';
-import RadioTower from 'lucide-svelte/icons/radio-tower';
-import Server from 'lucide-svelte/icons/server';
-import Thermometer from 'lucide-svelte/icons/thermometer';
+import { RadioTower, Server, ServerOff, SquareChartGantt, Thermometer } from 'lucide-svelte';
+import { _ } from 'svelte-i18n';
 import { Update } from 'svelte-radix';
 import type { ConfigMessage, NetifMessage, StatusMessage } from '$lib/types/socket-messages';
 import * as Card from '$lib/components/ui/card';
@@ -17,30 +15,22 @@ let temperature: Array<[string, string]> = $state([]);
 let currentStatus: StatusMessage | undefined = $state(undefined);
 let currentNetworks: NetifMessage | undefined = $state();
 let currentConfig: ConfigMessage | undefined = $state();
-$effect(() => {
-  NetifMessages.subscribe((networks: NetifMessage) => {
-    currentNetworks = networks;
-  });
+NetifMessages.subscribe((networks: NetifMessage) => {
+  currentNetworks = networks;
 });
 
-$effect(() => {
-  ConfigMessages.subscribe(config => {
-    currentConfig = config;
-  });
+ConfigMessages.subscribe(config => {
+  currentConfig = config;
 });
 
-$effect(() => {
-  SensorsStatusMessages.subscribe(sensors => {
-    if (sensors) {
-      temperature = Object.entries(sensors);
-    }
-  });
+SensorsStatusMessages.subscribe(sensors => {
+  if (sensors) {
+    temperature = Object.entries(sensors);
+  }
 });
 
-$effect(() => {
-  StatusMessages.subscribe(status => {
-    currentStatus = status;
-  });
+StatusMessages.subscribe(status => {
+  currentStatus = status;
 });
 </script>
 
@@ -54,19 +44,23 @@ $effect(() => {
         </Card.Header>
         <Card.Content>
           <div class={cn((currentStatus?.is_streaming ? 'text-green-500 ' : 'text-amber-500 ') + 'text-2xl font-bold')}>
-            {currentStatus?.is_streaming ? 'Streaming' : 'Offline'}
+            {currentStatus?.is_streaming ? $_('general.streaming') : $_('general.offline')}
           </div>
           {#if currentNetworks && currentStatus?.is_streaming}
             <p class="text-xs text-muted-foreground">
-              Your transmission is using {getUsedNetworks(currentNetworks).length}
-              Networks using a delay of {currentConfig?.srt_latency} ms
+              {$_('general.streamingMessage', {
+                values: {
+                  usingNetworksCount: getUsedNetworks(currentNetworks).length,
+                  srtLatency: currentConfig?.srt_latency,
+                },
+              })}
             </p>
           {/if}
         </Card.Content>
       </Card.Root>
       <Card.Root>
         <Card.Header class="flex flex-row items-center justify-between space-y-0 pb-2">
-          <Card.Title class="text-sm font-medium">Temperature</Card.Title>
+          <Card.Title class="text-sm font-medium">{$_('general.temperature')}</Card.Title>
           <Thermometer class="h-4 w-4 text-muted-foreground" />
         </Card.Header>
         <Card.Content>
@@ -76,7 +70,7 @@ $effect(() => {
       </Card.Root>
       <Card.Root>
         <Card.Header class="flex flex-row items-center justify-between space-y-0 pb-2">
-          <Card.Title class="text-sm font-medium">Relay Server</Card.Title>
+          <Card.Title class="text-sm font-medium">{$_('general.relayServer')}</Card.Title>
           {#if currentConfig?.srtla_addr}
             <Server class="h-4 w-4 text-muted-foreground" />
           {:else}
@@ -86,13 +80,13 @@ $effect(() => {
         <Card.Content>
           <div class="text-2xl font-bold">{currentConfig?.srtla_addr ?? 'None'}</div>
           <p class="text-xs text-muted-foreground">
-            {currentConfig?.srtla_addr ? `Port: ${currentConfig?.srtla_port}` : "You haven't configured any server"}
+            {currentConfig?.srtla_addr ? `Port: ${currentConfig?.srtla_port}` : $_('general.youHaventConfigured')}
           </p>
         </Card.Content>
       </Card.Root>
       <Card.Root>
         <Card.Header class="flex flex-row items-center justify-between space-y-0 pb-2">
-          <Card.Title class="text-sm font-medium">Updates</Card.Title>
+          <Card.Title class="text-sm font-medium">{$_('general.updates')}</Card.Title>
           <Update class="h-4 w-4 text-muted-foreground" />
         </Card.Header>
         <Card.Content class="flex items-center">
@@ -106,13 +100,10 @@ $effect(() => {
           {#if currentStatus?.available_updates.package_count}
             <SimpleAlertDialog buttonText="Update" confirmButtonText="Update" onconfirm={installSoftwareUpdates}>
               {#snippet dialogTitle()}
-                Are you absolutely sure?
+                {$_('general.areYouSure')}
               {/snippet}
               {#snippet description()}
-                Are you sure you want to start a software update? This may take several minutes. You won't be able to
-                start a stream until it's completed. The encoder will briefly disconnect after a successful upgrade.
-                Never remove power or reset the encoder while updating. If the encoder is powered from a battery, ensure
-                it's fully charged.
+                {$_('general.updateConfirmation')}
               {/snippet}
             </SimpleAlertDialog>
           {/if}
@@ -123,66 +114,51 @@ $effect(() => {
       {#if currentConfig}
         <Card.Root class="col-span-5 sm:col-span-4">
           <Card.Header class="flex flex-row items-center justify-between space-y-0 pb-2">
-            <Card.Title class="text-primary">Overview</Card.Title>
+            <Card.Title class="text-primary">{$_('general.overview')}</Card.Title>
             <SquareChartGantt class="h-4 w-4 text-muted-foreground" />
           </Card.Header>
           <Card.Content class="grid gap-3">
             <div class="flex items-center gap-4">
               <div class="grid gap-1">
-                <p class="text-sm font-medium leading-none">Receiving/Relay Server</p>
+                <p class="text-sm font-medium leading-none">{$_('general.relayServer')}</p>
               </div>
               <div class="ml-auto font-medium">{currentConfig.srtla_addr}</div>
             </div>
 
             <div class="flex items-center gap-4">
               <div class="grid gap-1">
-                <p class="text-sm font-medium leading-none">Server Port</p>
+                <p class="text-sm font-medium leading-none">{$_('general.port')}</p>
               </div>
               <div class="ml-auto font-medium">{currentConfig.srtla_port}</div>
             </div>
 
             <div class="flex items-center gap-4">
               <div class="grid gap-1">
-                <p class="text-sm font-medium leading-none">Latency / Delay</p>
+                <p class="text-sm font-medium leading-none">{$_('general.latency')}</p>
               </div>
               <div class="ml-auto font-medium">{currentConfig.srt_latency} ms</div>
             </div>
 
             <div class="flex items-center gap-4">
               <div class="grid gap-1">
-                <p class="text-sm font-medium leading-none">Max Bitrate</p>
+                <p class="text-sm font-medium leading-none">{$_('general.maxBitrate')}</p>
               </div>
               <div class="ml-auto font-medium">{currentConfig.max_br} Kbps</div>
             </div>
 
             <div class="flex items-center gap-4">
               <div class="grid gap-1">
-                <p class="text-sm font-medium leading-none">Audio Device</p>
+                <p class="text-sm font-medium leading-none">{$_('general.audioDevice')}</p>
               </div>
               <div class="ml-auto font-medium">{currentConfig.asrc}</div>
             </div>
 
             <div class="flex items-center gap-4">
               <div class="grid gap-1">
-                <p class="text-sm font-medium leading-none">Audio Codec</p>
+                <p class="text-sm font-medium leading-none">{$_('general.audioCodec')}</p>
               </div>
-              <div class="ml-auto font-medium">{currentConfig.acodec.toUpperCase()}</div>
+              <div class="ml-auto font-medium">{currentConfig?.acodec?.toUpperCase()}</div>
             </div>
-            <!--                        TODO: Handle confirm action -->
-            <!--                        <div class="flex items-center">-->
-            <!--                            <div class="ml-auto font-bold  text-2xl text-primary">-->
-            <!--                                <div class="flex items-center">-->
-            <!--                                    <SimpleAlertDialog buttonText="Configure" cancelButtonText="Cancel" confirmButtonText="Go to Settings"  confirmButtonAction={()=> navigationStore.set({'settings':{...navElements['settings']}})} >-->
-            <!--                                        {#snippet title()}-->
-            <!--                                            Go to settings-->
-            <!--                                        {/snippet}-->
-            <!--                                        {#snippet description()}-->
-            <!--                                            Do you want to move to the preferences tab ?-->
-            <!--                                        {/snippet}-->
-            <!--                                    </SimpleAlertDialog>-->
-            <!--                                </div>-->
-            <!--                            </div>-->
-            <!--                        </div>-->
           </Card.Content>
         </Card.Root>
       {/if}
