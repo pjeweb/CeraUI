@@ -22,6 +22,8 @@
     "port": "Port",
     "overview": "Overview",
     "latency": "Latency / Delay",
+    "packages": "Packages",
+    "package": "Package",
     "maxBitrate": "Max Bitrate",
     "audioDevice": "Audio Device",
     "audioCodec": "Audio Codec",
@@ -68,5 +70,83 @@
     "stopStreaming": "Stop Streaming",
     "changeBitrateNotice": "You can change the bitrate even if you are streaming.",
     "audioSettingsMessage": "The audio settings will be shown once you select a valid option on the encoder section"
+  },
+  "network": {
+    "hotspot": {
+      "name": "Name",
+      "channel": "Channel",
+      "password": "Password"
+    },
+    "wifi": {
+      "strength": "Strength",
+      "ssid": "SSID",
+      "security": "Security",
+      "band": "Band"
+    },
+    "dialog": {
+      "close": "Close",
+      "turnOff": "Turn off",
+      "turnOn": "Turn on",
+      "hotspotDetails": "Hotspot Details",
+      "turnHotspotOff": "Turn hotspot mode off",
+      "turnHotspotOn": "Turn hotspot mode on",
+      "turnHotspotOffDescription": "This will immediately disconnect any connected clients and turn the hotspot OFF.",
+      "turnHotspotOnDescription": "Are you sure you want to turn the hotspot mode ON? It will allow sharing your internet but disconnect all WiFi connections."
+    }
+  },
+  "hotspotConfigurator": {
+    "dialog": {
+      "save": "Save",
+      "configHotspot": "Config hotspot",
+      "configureHotspot": "Configure your hotspot"
+    },
+    "hotspot": {
+      "name": "Name",
+      "password": "Password",
+      "channel": "Channel",
+      "placeholderName": "CERABOX",
+      "placeholderPassword": "********",
+      "selectChannel": "Select a channel"
+    }
+  },
+  "wifiSelector" : {
+    "dialog": {
+      "close": "Close",
+      "searchWifi": "Search WiFi Networks",
+      "availableNetworks": "Available networks for {network}",
+      "connecting": "Connecting",
+      "forgetNetwork": "Forget WiFi network",
+      "disconnectFrom": "Disconnect from {ssid}",
+      "confirmForget": "Are you sure to forget {ssid} on the {network} network?",
+      "connectTo": "Connect to {ssid}",
+      "introducePassword": "Please introduce the network password"
+    },
+    "button": {
+      "disconnect": "Disconnect",
+      "connect": "Connect",
+      "forget": "Forget",
+      "scanning": "Scanning",
+      "scan": "Scan"
+    },
+    "hotspot": {
+      "placeholderPassword": "********"
+    }
+  },
+  "networking": {
+    "card": {
+      "networkInfoTitle": "Network Information",
+      "networkInfoDescription": "{total} Networks, {available} Available, {used} Used, {bandwidth} Kbps",
+      "identifier": "Identifier"
+    },
+    "toggle": {
+      "disableNetwork": "Disable network",
+      "enableNetwork": "Enable Network"
+    }
+  },
+  "wifiStatus": {
+    "disconnected": "Disconnected",
+    "connected": "Connected",
+    "hotspot": "Hotspot"
   }
+
 }

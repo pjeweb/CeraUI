@@ -1,5 +1,6 @@
 <script lang="ts">
 import { Bolt } from 'lucide-svelte';
+import { _ } from 'svelte-i18n';
 import type { ValueOf } from '$lib/types';
 import type { StatusMessage } from '$lib/types/socket-messages';
 import { Input } from '$lib/components/ui/input';
@@ -32,9 +33,9 @@ $inspect(hotspotProperties).with(console.log);
 </script>
 
 <SimpleAlertDialog
-  confirmButtonText="Save"
-  onOpenChange={open => resetHotSpotProperties()}
-  title="Config hotspot"
+  confirmButtonText={$_('hotspotConfigurator.dialog.save')}
+  onOpenChange={() => resetHotSpotProperties()}
+  title={$_('hotspotConfigurator.dialog.configHotspot')}
   extraButtonClasses="bg-green-500 hover:bg-green-500/90"
   disabledConfirmButton={!hotspotProperties?.password?.length || !hotspotProperties?.name?.length}
   onconfirm={() =>
@@ -48,40 +49,40 @@ $inspect(hotspotProperties).with(console.log);
     <Bolt></Bolt>
   {/snippet}
   {#snippet dialogTitle()}
-    Configure your hotspot
+    {$_('hotspotConfigurator.dialog.configureHotspot')}
   {/snippet}
   {#snippet description()}
     <div class="grid gap-2">
       <div class="grid gap-1">
-        <Label for="name" class="mb-1">Name</Label>
+        <Label for="name" class="mb-1">{$_('hotspotConfigurator.hotspot.name')}</Label>
         <Input
           bind:value={hotspotProperties.name}
           id="name"
-          placeholder="CERABOX"
+          placeholder={$_('hotspotConfigurator.hotspot.placeholderName')}
           autocapitalize="none"
           autocomplete="off"
           autocorrect="off" />
       </div>
       <div class="grid gap-1">
-        <Label for="password" class="mb-1">Password</Label>
+        <Label for="password" class="mb-1">{$_('hotspotConfigurator.hotspot.password')}</Label>
         <Input
           bind:value={hotspotProperties.password}
           id="password"
           type="password"
-          placeholder="********"
+          placeholder={$_('hotspotConfigurator.hotspot.placeholderPassword')}
           autocapitalize="none"
           autocomplete="off"
           autocorrect="off" />
       </div>
       <div class="grid gap-1">
-        <Label for="channel" class="mb-2 ml-1">Channel</Label>
+        <Label for="channel" class="mb-2 ml-1">{$_('hotspotConfigurator.hotspot.channel')}</Label>
         <Select.Root
           onSelectedChange={value => {
             if (hotspotProperties) hotspotProperties.selectedChannel = value;
           }}
           selected={hotspotProperties.selectedChannel}>
           <Select.Trigger class="w-[180px]">
-            <Select.Value placeholder="Select a channel"></Select.Value>
+            <Select.Value placeholder={$_('hotspotConfigurator.hotspot.selectChannel')}></Select.Value>
           </Select.Trigger>
           <Select.Content>
             <Select.Group>

@@ -19,6 +19,8 @@
     "updates": "Actualizaciones",
     "none": "Ninguno",
     "youHaventConfigured": "No has configurado ningún servidor",
+    "packages": "Paquetes",
+    "package": "Paquete",
     "port": "Puerto",
     "overview": "Resumen",
     "latency": "Latencia / Retraso",
@@ -27,7 +29,7 @@
     "audioCodec": "Códec de audio",
     "areYouSure": "¿Estás absolutamente seguro?",
     "updateConfirmation": "¿Estás seguro de que deseas iniciar una actualización de software? Esto puede tomar varios minutos. No podrás iniciar un stream hasta que se haya completado la actualización. El codificador se desconectará brevemente después de una actualización exitosa. Nunca elimines la potencia o resetees el encoder mientras se realiza la actualización. Si el codificador es alimentado por batería, asegúrate de que esté completamente cargado.",
-    "streamingMessage" : "Su transmisión está utilizando {usingNetworksCount} redes con una latencia de {srtLatency} ms"
+    "streamingMessage": "Su transmisión está utilizando {usingNetworksCount} redes con una latencia de {srtLatency} ms"
   },
   "auth": {
     "createPassword": "Crear Contraseña",
@@ -68,7 +70,82 @@
     "stopStreaming": "Detener Transmisión",
     "changeBitrateNotice": "Puedes cambiar el bitrate incluso si estás transmitiendo.",
     "audioSettingsMessage": "Los ajustes de audio se mostrarán una vez seleccione una opción válida en la sección de codificador"
-
+  },
+  "network": {
+    "hotspot": {
+      "name": "Nombre",
+      "channel": "Canal",
+      "password": "Contraseña"
+    },
+    "wifi": {
+      "strength": "Fuerza",
+      "ssid": "SSID",
+      "security": "Seguridad",
+      "band": "Banda"
+    },
+    "dialog": {
+      "close": "Cerrar",
+      "turnOff": "Apagar",
+      "turnOn": "Encender",
+      "hotspotDetails": "Detalles del Punto de Acceso",
+      "turnHotspotOff": "Apagar modo punto de acceso",
+      "turnHotspotOn": "Encender modo punto de acceso",
+      "turnHotspotOffDescription": "Esto desconectará a todos los clientes y apagará el punto de acceso.",
+      "turnHotspotOnDescription": "¿Estás seguro de que deseas encender el modo punto de acceso? Esto permitirá compartir internet pero desconectará todas las conexiones WiFi."
+    }
+  },
+  "hotspotConfigurator": {
+    "dialog": {
+      "save": "Guardar",
+      "configHotspot": "Configurar punto de acceso",
+      "configureHotspot": "Configura tu punto de acceso"
+    },
+    "hotspot": {
+      "name": "Nombre",
+      "password": "Contraseña",
+      "channel": "Canal",
+      "placeholderName": "CERABOX",
+      "placeholderPassword": "********",
+      "selectChannel": "Seleccione un canal"
+    }
+  },
+  "wifiSelector": {
+    "dialog": {
+      "close": "Cerrar",
+      "searchWifi": "Buscar redes WiFi",
+      "availableNetworks": "Redes disponibles para {network}",
+      "connecting": "Conectando",
+      "forgetNetwork": "Olvidar red WiFi",
+      "disconnectFrom": "Desconectar de {ssid}",
+      "confirmForget": "¿Seguro que deseas olvidar {ssid} en la red {network}?",
+      "connectTo": "Conectar a {ssid}",
+      "introducePassword": "Por favor, introduce la contraseña de la red"
+    },
+    "button": {
+      "disconnect": "Desconectar",
+      "connect": "Conectar",
+      "forget": "Olvidar",
+      "scanning": "Escaneando",
+      "scan": "Escanear"
+    },
+    "hotspot": {
+      "placeholderPassword": "********"
+    }
+  },
+  "networking": {
+    "card": {
+      "networkInfoTitle": "Información de la Red",
+      "networkInfoDescription": "{total} Redes, {available} Disponibles, {used} en Uso, {bandwidth} Kbps",
+      "identifier": "Identificador"
+    },
+    "toggle": {
+      "disableNetwork": "Desactivar red",
+      "enableNetwork": "Activar red"
+    }
+  },
+  "wifiStatus": {
+    "disconnected": "Desconectado",
+    "connected": "Conectado",
+    "hotspot": "Punto de Acceso"
   }
-
 }

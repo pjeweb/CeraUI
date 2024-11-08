@@ -1,5 +1,6 @@
 <script lang="ts">
 import { Link, ScanSearch, Trash2, Unlink } from 'lucide-svelte';
+import { _ } from 'svelte-i18n';
 import { toast } from 'svelte-sonner';
 import type { ValueOf } from '$lib/types';
 import type { StatusMessage } from '$lib/types/socket-messages';
@@ -73,17 +74,17 @@ const handleNewWifiConnect = (ssid: string, password: string) => {
 </script>
 
 <SimpleAlertDialog
-  confirmButtonText="Close"
+  confirmButtonText={$_('wifiSelector.dialog.close')}
   hiddeCancelButton={true}
   class="max-w-screen-sm"
   bind:open
-  title="Search WiFi Networks"
+  title={$_('wifiSelector.dialog.searchWifi')}
   extraButtonClasses="bg-green-500 hover:bg-green-500/90">
   {#snippet button()}
     <ScanSearch></ScanSearch>
   {/snippet}
   {#snippet dialogTitle()}
-    Available networks for {networkRename(wifi.ifname)}
+    {$_('wifiSelector.dialog.availableNetworks', { values: { network: networkRename(wifi.ifname) } })}
   {/snippet}
   <Card.Root class="col-span-3 pr-0">
     <ScrollArea class="w-100 h-96" type="auto">
@@ -103,53 +104,59 @@ const handleNewWifiConnect = (ssid: string, password: string) => {
               </div>
               <div class="ml-auto font-medium">
                 {#if isConnecting}
-                  <span class="loading w-[25%] text-left"> Connecting </span>
+                  <span class="loading w-[25%] text-left">{$_('wifiSelector.dialog.connecting')}</span>
                 {:else if uuid}
                   {#if availableNetwork.active}
                     <Button variant="secondary" onclick={() => disconnectWifi(uuid, availableNetwork)}>
-                      <span class="hidden md:block">Disconnect</span>
+                      <span class="hidden md:block">{$_('wifiSelector.button.disconnect')}</span>
                       <span class="sm:hidden"><Unlink class="w-4"></Unlink></span>
                     </Button>
                   {:else}
                     <Button variant="secondary" onclick={() => handleWifiConnect(uuid, availableNetwork)}>
-                      <span class="hidden md:block">Connect</span>
+                      <span class="hidden md:block">{$_('wifiSelector.button.connect')}</span>
                       <span class="sm:hidden"><Link class="w-4"></Link></span>
                     </Button>
                   {/if}
                   <SimpleAlertDialog
-                    title="Forget Wifi network"
-                    confirmButtonText="Forget"
+                    title={$_('wifiSelector.dialog.forgetNetwork')}
+                    confirmButtonText={$_('wifiSelector.button.forget')}
                     onconfirm={() => forgetWifi(uuid, availableNetwork)}>
                     {#snippet dialogTitle()}
-                      Disconnect from {availableNetwork.ssid}
+                      {$_('wifiSelector.dialog.disconnectFrom', { values: { ssid: availableNetwork.ssid } })}
                     {/snippet}
                     {#snippet button()}
-                      <span class="hidden sm:block">Forget</span>
+                      <span class="hidden sm:block">{$_('wifiSelector.button.forget')}</span>
                       <Trash2 class="w-4 sm:block md:hidden"></Trash2>
                     {/snippet}
                     {#snippet description()}
-                      Are you sure to forget <b>{availableNetwork.ssid}</b> on the <b>{networkRename(wifi.ifname)}</b> network?
+                      {$_('wifiSelector.dialog.confirmForget', {
+                        values: { ssid: availableNetwork.ssid, network: networkRename(wifi.ifname) },
+                      })}
                     {/snippet}
                   </SimpleAlertDialog>
                 {:else}
                   <SimpleAlertDialog
-                    confirmButtonText="Connect"
+                    confirmButtonText={$_('wifiSelector.button.connect')}
                     extraButtonClasses="bg-secondary text-secondary-foreground hover:bg-secondary/80"
                     onconfirm={() => {
                       handleNewWifiConnect(availableNetwork.ssid, networkPassword);
                     }}
                     oncancel={() => (networkPassword = '')}>
                     {#snippet dialogTitle()}
-                      Connect to {availableNetwork.ssid}
+                      {$_('wifiSelector.dialog.connectTo', { values: { ssid: availableNetwork.ssid } })}
                     {/snippet}
                     {#snippet button()}
-                      <span class="hidden sm:block">Connect</span>
+                      <span class="hidden sm:block">{$_('wifiSelector.button.connect')}</span>
                       <Link class="w-4 sm:block md:hidden"></Link>
                     {/snippet}
                     {#snippet description()}
-                      Please Introduce the network password
+                      {$_('wifiSelector.dialog.introducePassword')}
                     {/snippet}
-                    <Input bind:value={networkPassword} id="password" type="password" placeholder="********"></Input>
+                    <Input
+                      bind:value={networkPassword}
+                      id="password"
+                      type="password"
+                      placeholder={$_('wifiSelector.hotspot.placeholderPassword')}></Input>
                   </SimpleAlertDialog>
                 {/if}
               </div>
@@ -159,6 +166,8 @@ const handleNewWifiConnect = (ssid: string, password: string) => {
       </Card.Content>
     </ScrollArea>
     <Button disabled={scanning} class="w-[100%] bg-green-600 hover:bg-green-500/90" onclick={handleWifiScan}>
-      <span class={scanning ? 'loading' : ''}>{scanning ? 'Scanning' : 'Scan'}</span></Button>
+      <span class={scanning ? 'loading' : ''}
+        >{scanning ? $_('wifiSelector.button.scanning') : $_('wifiSelector.button.scan')}</span
+      ></Button>
   </Card.Root>
 </SimpleAlertDialog>

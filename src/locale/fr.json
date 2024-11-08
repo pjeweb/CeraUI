@@ -19,6 +19,8 @@
     "updates": "Mises à jour",
     "none": "Aucun",
     "youHaventConfigured": "Vous n'avez configuré aucun serveur",
+    "packages": "Paquets",
+    "package": "Paquet",
     "port": "Port",
     "overview": "Aperçu",
     "latency": "Latence / Délai",
@@ -68,6 +70,85 @@
     "stopStreaming": "Arrêter le Streaming",
     "changeBitrateNotice": "Vous pouvez changer le débit binaire même si vous diffusez.",
     "audioSettingsMessage": "Les paramètres audio s'afficheront une fois que vous aurez sélectionné une option valide dans la section encodeur"
+  },
+  "network": {
+    "hotspot": {
+      "name": "Nom",
+      "channel": "Canal",
+      "password": "Mot de passe"
+    },
+    "wifi": {
+      "strength": "Force",
+      "ssid": "SSID",
+      "security": "Sécurité",
+      "band": "Bande"
+    },
+    "dialog": {
+      "close": "Fermer",
+      "turnOff": "Éteindre",
+      "turnOn": "Allumer",
+      "hotspotDetails": "Détails du Point d'Accès",
+      "turnHotspotOff": "Désactiver le mode point d'accès",
+      "turnHotspotOn": "Activer le mode point d'accès",
+      "turnHotspotOffDescription": "Cela déconnectera immédiatement tous les clients et désactivera le point d'accès.",
+      "turnHotspotOnDescription": "Êtes-vous sûr de vouloir activer le mode point d'accès ? Cela permettra de partager votre internet mais déconnectera toutes les connexions WiFi."
+    }
+  },
+  "hotspotConfigurator": {
+    "dialog": {
+      "save": "Enregistrer",
+      "configHotspot": "Configurer le point d'accès",
+      "configureHotspot": "Configurez votre point d'accès"
+    },
+    "hotspot": {
+      "name": "Nom",
+      "password": "Mot de passe",
+      "channel": "Canal",
+      "placeholderName": "CERABOX",
+      "placeholderPassword": "********",
+      "selectChannel": "Sélectionnez un canal"
+    }
+  },
+  "wifiSelector": {
+    "dialog": {
+      "close": "Fermer",
+      "searchWifi": "Rechercher des réseaux WiFi",
+      "availableNetworks": "Réseaux disponibles pour {network}",
+      "connecting": "Connexion",
+      "forgetNetwork": "Oublier le réseau WiFi",
+      "disconnectFrom": "Se déconnecter de {ssid}",
+      "confirmForget": "Êtes-vous sûr d'oublier {ssid} sur le réseau {network}?",
+      "connectTo": "Se connecter à {ssid}",
+      "introducePassword": "Veuillez introduire le mot de passe du réseau"
+    },
+    "button": {
+      "disconnect": "Déconnecter",
+      "connect": "Connecter",
+      "forget": "Oublier",
+      "scanning": "Balayage",
+      "scan": "Balayer"
+    },
+    "hotspot": {
+      "placeholderPassword": "********"
+    }
+  },
+  "networking": {
+    "card": {
+      "networkInfoTitle": "Informations Réseau",
+      "networkInfoDescription": "{total} Réseaux, {available} Disponibles, {used} Utilisés, {bandwidth} Kbps",
+      "identifier": "Identifiant"
+    },
+    "toggle": {
+      "disableNetwork": "Désactiver le réseau",
+      "enableNetwork": "Activer le réseau"
+    }
+  },
+  "wifiStatus": {
+    "disconnected": "Déconnecté",
+    "connected": "Connecté",
+    "hotspot": "Point d'accès"
   }
 
+
 }
+

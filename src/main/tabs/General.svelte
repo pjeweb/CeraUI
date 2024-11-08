@@ -39,7 +39,7 @@ StatusMessages.subscribe(status => {
     <div class="grid gap-4 md:grid-cols-2 lg:grid-cols-4">
       <Card.Root>
         <Card.Header class="flex flex-row items-center justify-between space-y-0 pb-2">
-          <Card.Title class="text-sm font-medium">Status</Card.Title>
+          <Card.Title class="text-sm font-medium">{$_('general.status')}</Card.Title>
           <RadioTower class="h-4 w-4 text-muted-foreground" />
         </Card.Header>
         <Card.Content>
@@ -93,7 +93,7 @@ StatusMessages.subscribe(status => {
           <div>
             <div class="text-2xl font-bold">
               {currentStatus?.available_updates.package_count}
-              {currentStatus?.available_updates.package_count === 1 ? 'Package' : 'Packages'}
+              {currentStatus?.available_updates.package_count === 1 ? $_('general.package') : $_('general.packages')}
             </div>
             <p class="text-xs text-muted-foreground">{currentStatus?.available_updates?.download_size ?? '0 MB'}</p>
           </div>

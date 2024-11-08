@@ -1,7 +1,6 @@
 <script lang="ts">
-import Network from 'lucide-svelte/icons/arrow-up-down';
-import Check from 'lucide-svelte/icons/check';
-import X from 'lucide-svelte/icons/x';
+import { ArrowUpDown, Check, X } from 'lucide-svelte';
+import { _ } from 'svelte-i18n';
 import type { NetifMessage } from '$lib/types/socket-messages';
 import * as Card from '$lib/components/ui/card';
 import { Toggle } from '$lib/components/ui/toggle';
@@ -28,14 +27,20 @@ NetifMessages.subscribe((networks: NetifMessage) => {
 
 <Card.Header class="flex flex-row items-center justify-between space-y-0 pb-2">
   <div>
-    <Card.Title class="text-primary">Network Information</Card.Title>
-    <Card.Description
-      >{Object.keys(currentNetwoks).length} Networks, {getAvailableNetworks(currentNetwoks).length} Available, {getUsedNetworks(
-        currentNetwoks,
-      ).length} used, {totalBandwith} Kbps</Card.Description>
+    <Card.Title class="text-primary">{$_('networking.card.networkInfoTitle')}</Card.Title>
+    <Card.Description>
+      {$_('networking.card.networkInfoDescription', {
+        values: {
+          total: Object.keys(currentNetwoks).length,
+          available: getAvailableNetworks(currentNetwoks).length,
+          used: getUsedNetworks(currentNetwoks).length,
+          bandwidth: totalBandwith,
+        },
+      })}
+    </Card.Description>
   </div>
 
-  <Network class="text-muted-primary h-4 w-4" />
+  <ArrowUpDown class="text-muted-primary h-4 w-4" />
 </Card.Header>
 <Card.Content>
   <div class="space-y-8">
@@ -44,7 +49,7 @@ NetifMessages.subscribe((networks: NetifMessage) => {
         <Toggle
           variant="outline"
           class={cn(network.enabled ? 'data-[state=on]:bg-green-600' : 'bg-red-600')}
-          title={network.enabled ? 'Disable network' : 'Enable Network'}
+          title={network.enabled ? $_('networking.toggle.disableNetwork') : $_('networking.toggle.enableNetwork')}
           disabled={!!network.error}
           bind:pressed={network.enabled}
           onPressedChange={() => setNetif(name, network.ip, !network.enabled)}>
@@ -55,12 +60,10 @@ NetifMessages.subscribe((networks: NetifMessage) => {
           {/if}
         </Toggle>
 
-        <div
-          class="spac e-y-1
-                ml-4">
-          <p class="text-sm font-medium leading-none">{`${networkRenameWithError(name, network.error)}`}</p>
+        <div class="ml-4 space-y-1">
+          <p class="text-sm font-medium leading-none">{networkRenameWithError(name, network.error)}</p>
           <p class="text-sm text-muted-foreground">IP: {network.ip}</p>
-          <p class="text-sm text-muted-foreground">Identifier: {name}</p>
+          <p class="text-sm text-muted-foreground">{$_('networking.card.identifier')}: {name}</p>
         </div>
         <div class="ml-auto font-medium">{convertBytesToKbids(network.tp)} Kbps</div>
       </div>
