@@ -109,7 +109,7 @@
       "selectChannel": "Select a channel"
     }
   },
-  "wifiSelector" : {
+  "wifiSelector": {
     "dialog": {
       "close": "Close",
       "searchWifi": "Search WiFi Networks",
@@ -147,6 +147,10 @@
     "disconnected": "Disconnected",
     "connected": "Connected",
     "hotspot": "Hotspot"
+  },
+  "navigation": {
+    "general": "General",
+    "network": "Network",
+    "streaming": "Streaming"
   }
-
 }

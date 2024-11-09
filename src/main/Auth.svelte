@@ -1,9 +1,11 @@
 <script lang="ts">
+import { _ } from 'svelte-i18n';
 import { Icons } from '$lib/components/icons';
 import { Button } from '$lib/components/ui/button';
 import { Checkbox } from '$lib/components/ui/checkbox';
 import { Input } from '$lib/components/ui/input';
 import { Label } from '$lib/components/ui/label';
+import LocaleSelector from '$lib/components/ui/locale-selector.svelte';
 import ModeToggle from '$lib/components/ui/mode-toggle.svelte';
 import { siteName } from '$lib/config';
 import {
@@ -65,7 +67,10 @@ async function onSubmit(event: SubmitEvent) {
 </script>
 
 <div class="container relative grid h-dvh flex-col items-center justify-center lg:max-w-none lg:grid-cols-2 lg:px-0">
-  <span class="absolute right-4 top-4 md:right-8 md:top-8"><ModeToggle></ModeToggle></span>
+  <span class="absolute right-4 top-4 flex md:right-8 md:top-8">
+    <span class="mr-3"> <LocaleSelector /></span>
+    <ModeToggle></ModeToggle>
+  </span>
   <div class="relative hidden h-full flex-col bg-muted p-10 text-white dark:border-r lg:flex">
     <div
       class="absolute inset-0 bg-cover"
@@ -88,9 +93,9 @@ async function onSubmit(event: SubmitEvent) {
     <div class="mx-auto flex w-full flex-col justify-center space-y-6 sm:w-[350px]">
       <div class="flex flex-col space-y-2 text-center">
         <h1 class="text-2xl font-semibold tracking-tight">
-          {setPassword ? 'Create password and login' : 'Login with password'}
+          {setPassword ? $_('auth.createPasswordAndLogin') : $_('auth.loginWithPassword')}
         </h1>
-        <p class="text-sm text-muted-foreground">Use the device password to access the functionalities</p>
+        <p class="text-sm text-muted-foreground">{$_('auth.usePassword')}</p>
       </div>
       <div class={cn('grid gap-6', className)}>
         <form onsubmit={onSubmit}>
@@ -118,7 +123,7 @@ async function onSubmit(event: SubmitEvent) {
             <Label
               for="remember"
               class="text-sm font-medium leading-none peer-disabled:cursor-not-allowed peer-disabled:opacity-70">
-              Remember me
+              {$_('auth.rememberMe')}
             </Label>
           </div>
         </form>
@@ -132,7 +137,7 @@ async function onSubmit(event: SubmitEvent) {
           </div>
         </div>
       </div>
-      <p class="px-8 text-center text-sm text-muted-foreground">Just sign in and enjoy bringing the joy</p>
+      <p class="px-8 text-center text-sm text-muted-foreground">{$_('auth.footerText')}</p>
     </div>
   </div>
 </div>

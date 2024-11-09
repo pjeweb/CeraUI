@@ -147,6 +147,11 @@
     "disconnected": "Déconnecté",
     "connected": "Connecté",
     "hotspot": "Point d'accès"
+  },
+  "navigation": {
+    "general": "Général",
+    "network": "Réseau",
+    "streaming": "Diffusion"
   }
 
 

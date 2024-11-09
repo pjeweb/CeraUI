@@ -39,7 +39,6 @@
     "usePassword": "Usa la contraseña del dispositivo para acceder a las funcionalidades",
     "signIn": "Ingresar",
     "rememberMe": "Recuérdame",
-    "separatorText": "Nombre del Sitio",
     "footerText": "Solo ingresa y disfruta trayendo la alegría"
   },
   "settings": {
@@ -147,5 +146,10 @@
     "disconnected": "Desconectado",
     "connected": "Conectado",
     "hotspot": "Punto de Acceso"
+  },
+  "navigation": {
+    "general": "General",
+    "network": "Red",
+    "streaming": "Streaming"
   }
 }

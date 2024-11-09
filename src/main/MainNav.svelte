@@ -1,12 +1,12 @@
 <script lang="ts">
 import { cubicInOut } from 'svelte/easing';
 import { crossfade } from 'svelte/transition';
+import { _ } from 'svelte-i18n';
 import { Icons } from '$lib/components/icons';
 import { ScrollArea } from '$lib/components/ui/scroll-area';
 import { type NavElements, defaultNavElement, navElements, siteName } from '$lib/config';
 import { navigationStore } from '$lib/stores/navigation';
 import { cn } from '$lib/utils';
-
 const [send, receive] = crossfade({
   duration: 250,
   easing: cubicInOut,
@@ -45,7 +45,7 @@ navigationStore.subscribe(navigation => {
             </div>
           {/if}
           <span class="relative">
-            {navigation.label}
+            {$_(`navigation.${navigation.label}`)}
           </span>
         </button>
       {/each}
