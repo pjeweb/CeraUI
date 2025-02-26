@@ -1,14 +1,15 @@
+import { get } from 'svelte/store';
 import { toast } from 'svelte-sonner';
 import type { ValueOf } from '$lib/types';
 import type { NetifMessage, StatusMessage } from '$lib/types/socket-messages';
-import { sendMessage, socket } from '$lib/stores/websocket-store';
+import { StatusMessages, sendMessage, socket } from '$lib/stores/websocket-store';
 
 export type WifiBandNames = 'auto' | 'auto_50' | 'auto_24';
 
 const wifiBandLabels: { [key in WifiBandNames]: string } = {
   auto: 'Auto (Any band)',
   auto_24: 'Auto (2.4 GHz)',
-  auto_50: 'Auto (5.0 GHz',
+  auto_50: 'Auto (5.0 GHz)',
 };
 
 export const convertBytesToKbids = (bytes: number) => {
@@ -27,9 +28,31 @@ export const networkRenameWithError = (name: string, error?: string) => {
   return name;
 };
 export const networkRename = (name: string) => {
-  name = name.replace('wlan', 'WiFi ').replace('eth', 'Ethernet ');
-  const nameValues = name.split(' ');
-  return `${nameValues[0]} - ${Number.parseInt(nameValues[1]) + 1}`;
+  const originalName = name;
+  if (name.startsWith('wl')) {
+    name = 'WiFI ';
+  } else if (name.startsWith('eth') || name.startsWith('en')) {
+    name = 'Ethernet ';
+  } else if (name.startsWith('ww')) {
+    name = 'Modem ';
+  }
+
+  name += Number.parseInt(originalName[originalName.length - 1]) + 1;
+  return name;
+};
+
+export const getModemNetworkName = (name: string) => {
+  const { modems } = get(StatusMessages);
+  const modem = Object.values(modems).find(modem => modem.ifname === name);
+  return modem?.status.network + ' (' + modem?.status.network_type + ')';
+};
+
+export const renameSupportedModemNetwork = (item: string): string => {
+  // Extract individual components like "3g2g" -> ["3G", "2G"]
+  return item
+    .replace(/(\d+g)/gi, match => match.toUpperCase())
+    .split(/(?<=G)(?=\d)/)
+    .join(' / ');
 };
 
 export const getAvailableNetworks = (message?: NetifMessage) => {
@@ -88,7 +111,6 @@ export const getWifiBand = (freq: number) => {
 
 export const turnHotspotModeOn = (deviceId: number) => {
   socket.send(JSON.stringify({ wifi: { hotspot: { start: { device: `${deviceId}` } } } }));
-  console.log(deviceId);
 };
 
 export const turnHotspotModeOff = (deviceId: number) => {
@@ -106,7 +128,44 @@ export const changeHotspotSettings = ({
   password: string;
   channel: string;
 }) => {
+  console.log(channel);
   socket.send(JSON.stringify({ wifi: { hotspot: { config: { device: `${deviceId}`, name, password, channel } } } }));
+};
+export const changeModemSettings = ({
+  network_type,
+  roaming,
+  network,
+  autoconfig,
+  apn,
+  username,
+  password,
+  device,
+}: {
+  network_type: string;
+  roaming?: boolean;
+  network?: string;
+  autoconfig?: boolean;
+  apn: string;
+  username: string;
+  password: string;
+  device: number | string;
+}) => {
+  socket.send(
+    JSON.stringify({
+      modems: {
+        config: {
+          network_type,
+          roaming: roaming ?? false,
+          network: `${network ?? ''}`,
+          autoconfig: autoconfig ?? false,
+          apn,
+          username,
+          password,
+          device: `${device}`,
+        },
+      },
+    }),
+  );
 };
 
 export const scanWifi = (deviceId: number | string, notification = true) => {
@@ -176,7 +235,6 @@ export const getWifiUUID = (
     return wifiNetwork.ssid === value;
   });
   if (found) {
-    console.log(saved[found]);
     return saved[found];
   }
   return undefined;

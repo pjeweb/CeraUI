@@ -6,6 +6,7 @@ import { ScrollArea } from '$lib/components/ui/scroll-area';
 import * as Sheet from '$lib/components/ui/sheet';
 import { type NavElements, defaultNavElement, navElements, siteName } from '$lib/config';
 import { navigationStore } from '$lib/stores/navigation';
+import { capitalizeFirstLetter } from '$lib/utils.js';
 
 let currentNav: NavElements = $state(defaultNavElement);
 navigationStore.subscribe(navigation => {
@@ -41,7 +42,7 @@ const handleClick = (nav: NavElements) => {
           {@const isActive = currentNav && Object.keys(currentNav)[0] === identifier}
           {#if identifier}
             <MobileLink {identifier} {isActive} onclick={() => handleClick({ [identifier]: navigation })}>
-              {navigation.label}
+              {capitalizeFirstLetter(navigation.label)}
             </MobileLink>
           {/if}
         {/each}

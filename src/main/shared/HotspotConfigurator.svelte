@@ -10,7 +10,10 @@ import SimpleAlertDialog from '$lib/components/ui/simple-alert-dialog.svelte';
 import { type WifiBandNames, changeHotspotSettings } from '$lib/helpers/NetworkHelper';
 
 const getSelectedChannel: () => { value: WifiBandNames; label: string } = () => {
-  return { value: wifi.hotspot?.channel, label: wifi.hotspot?.available_channels[wifi.hotspot?.channel].name };
+  return {
+    value: wifi.hotspot?.channel ?? 'auto',
+    label: wifi.hotspot?.available_channels[wifi.hotspot?.channel].name ?? 'Auto',
+  };
 };
 
 let { deviceId, wifi }: { deviceId: number; wifi: ValueOf<StatusMessage['wifi']> } = $props();
@@ -28,23 +31,22 @@ const resetHotSpotProperties = () => {
     name: wifi.hotspot?.name,
   };
 };
-
-$inspect(hotspotProperties).with(console.log);
 </script>
 
 <SimpleAlertDialog
   confirmButtonText={$_('hotspotConfigurator.dialog.save')}
-  onOpenChange={() => resetHotSpotProperties()}
+  oncancel={() => resetHotSpotProperties()}
   title={$_('hotspotConfigurator.dialog.configHotspot')}
   extraButtonClasses="bg-green-500 hover:bg-green-500/90"
   disabledConfirmButton={!hotspotProperties?.password?.length || !hotspotProperties?.name?.length}
-  onconfirm={() =>
+  onconfirm={() => {
     changeHotspotSettings({
       channel: hotspotProperties.selectedChannel.value ?? 'auto',
       deviceId: hotspotProperties.deviceId,
-      name: hotspotProperties.name,
-      password: hotspotProperties.password,
-    })}>
+      name: hotspotProperties.name ?? '',
+      password: hotspotProperties.password ?? '',
+    });
+  }}>
   {#snippet button()}
     <Bolt></Bolt>
   {/snippet}
@@ -77,8 +79,8 @@ $inspect(hotspotProperties).with(console.log);
       <div class="grid gap-1">
         <Label for="channel" class="mb-2 ml-1">{$_('hotspotConfigurator.hotspot.channel')}</Label>
         <Select.Root
-          onSelectedChange={value => {
-            if (hotspotProperties) hotspotProperties.selectedChannel = value;
+          onSelectedChange={selected => {
+            if (hotspotProperties && selected && selected) hotspotProperties.selectedChannel = selected;
           }}
           selected={hotspotProperties.selectedChannel}>
           <Select.Trigger class="w-[180px]">

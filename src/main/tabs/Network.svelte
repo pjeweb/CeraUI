@@ -1,13 +1,15 @@
 <script lang="ts">
 import HotspotConfigurator from '../shared/HotspotConfigurator.svelte';
+import ModemConfigurator from '../shared/ModemConfigurator.svelte';
 import Networking from '../shared/Networking.svelte';
 import WifiSelector from '../shared/WifiSelector.svelte';
-import { EyeIcon, Router, Wifi, WifiOff } from 'lucide-svelte';
+import { Antenna, EyeIcon, Router, Wifi, WifiOff } from 'lucide-svelte';
 import { _ } from 'svelte-i18n';
 import type { StatusMessage } from '$lib/types/socket-messages';
 import WifiQuality from '$lib/components/icons/WifiQuality.svelte';
 import * as Card from '$lib/components/ui/card';
 import SimpleAlertDialog from '$lib/components/ui/simple-alert-dialog.svelte';
+
 import {
   getConnection,
   getWifiBand,
@@ -28,12 +30,15 @@ StatusMessages.subscribe(status => {
 <div class="flex-col md:flex">
   <div class="flex-1 space-y-4 p-8 pt-6">
     <div class="grid gap-4 md:grid-cols-7 lg:grid-cols-7">
+      <Card.Root class="col-span-4 sm:col-span-4 md:col-span-3">
+        <Networking />
+      </Card.Root>
       <div class="col-span-4 grid grid-rows-2 gap-4 md:grid-cols-4 lg:grid-cols-4">
         {#if currentStatus}
           {#each Object.values(currentStatus.wifi) as wifi, deviceId (deviceId)}
             {@const wifiStatus = getWifiStatus(wifi)}
             {@const connection = getConnection(wifi)}
-            <Card.Root class="col-span-2 row-span-2 sm:col-span-2">
+            <Card.Root class="col-span-4 row-span-2 sm:col-span-2">
               <Card.Header class="flex flex-row items-center justify-between space-y-0 pb-2">
                 <Card.Title class="text-sm font-medium">
                   {networkRename(wifi.ifname)}
@@ -124,9 +129,50 @@ StatusMessages.subscribe(status => {
           {/each}
         {/if}
       </div>
-      <Card.Root class="col-span-4 sm:col-span-4 md:col-span-3">
-        <Networking />
-      </Card.Root>
+    </div>
+  </div>
+  <div class="flex-1 space-y-4 p-8 pt-6">
+    <div class="grid gap-4 md:grid-cols-7 lg:grid-cols-7">
+      <div class="col-span-4 grid grid-rows-2 gap-4 md:grid-cols-4 lg:grid-cols-4">
+        {#if currentStatus?.modems}
+          {#each Object.entries(currentStatus.modems) as [deviceId, modem]}
+            <Card.Root class="col-span-4 row-span-2 sm:col-span-2">
+              <Card.Header class="flex flex-row items-center justify-between space-y-0 pb-2">
+                <div>
+                  <Card.Title class="text-sm font-medium">Modem: {modem.name.replace('| Unknown', '')}</Card.Title>
+                  <Card.Description>
+                    <div class="flex grid-cols-12 content-center text-muted-foreground">
+                      {#if modem.status.network_type}
+                        <span class="mr-2 flex">
+                          <p class="font-bold">{$_('network.modem.network')}</p>
+                          <span>
+                            {`: ${modem.status.network_type} `}
+                          </span>
+                        </span>
+                      {/if}
+
+                      <span class="mr-2 flex">
+                        <p class="font-bold">{$_('network.modem.status')}</p>
+                        <span>
+                          {`: ${capitalizeFirstLetter($_('network.modem.connectionStatus.' + modem.status.connection))} `}
+                        </span>
+                      </span>
+                      <span class="flex">
+                        <p class="font-bold">{$_('network.modem.signal')}</p>
+                        <span>{`: ${modem.status?.signal ?? 0}%`}</span>
+                      </span>
+                    </div>
+                  </Card.Description>
+                </div>
+                <Antenna class="h-4 w-4 text-muted-foreground" />
+              </Card.Header>
+              <Card.Content>
+                <ModemConfigurator {modem} {deviceId}></ModemConfigurator>
+              </Card.Content>
+            </Card.Root>
+          {/each}
+        {/if}
+      </div>
     </div>
   </div>
 </div>

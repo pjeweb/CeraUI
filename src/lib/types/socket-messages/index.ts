@@ -6,6 +6,43 @@ type EthernetPhysicalNames = `${'eth'}${string}`;
 type PyshicalNetworkNames = `${WifiPhysicalNames | EthernetPhysicalNames}${string}`;
 
 export type NotificationType = 'success' | 'warning' | 'error' | 'info';
+
+export type ModemNetworkType = '3g' | '4g' | '4g3g' | '5g' | '5g4g' | '5g3g' | '5g4g3g';
+type ConnectionStatus = 'connected' | 'failed' | 'registered' | 'connecting';
+type ModemNetwork = '4G' | '3G' | '5G' | 'Unknown';
+
+export interface ModemConfig {
+  apn: string;
+  username: string;
+  password: string;
+  roaming: boolean;
+  network: string;
+}
+
+interface ModemStatus {
+  connection: ConnectionStatus;
+  ModemNetwork: string;
+  network_type: ModemNetwork;
+  signal: number;
+  roaming: boolean;
+  network?: string;
+}
+
+export type ModemList = { [key: string]: Modem };
+
+export interface Modem {
+  ifname: string;
+  name: string;
+  network_type: {
+    supported: ModemNetworkType[];
+    active: ModemNetworkType;
+  };
+  config?: ModemConfig; // Optional since a modem with no SIM won't have config
+  available_networks: Record<string, unknown>;
+  status: ModemStatus;
+  no_sim?: boolean; // Optional for modems without a SIM card
+}
+
 type Nullable<T> = T | null;
 // Message Specific Types
 export type AuthMessage = {
@@ -63,7 +100,7 @@ export type RevisionsMessage = {
   belaUI: string;
   belacoder: string;
   srtla: string;
-  'BELABOX image': string;
+  'CERABOX image': string;
 };
 
 export type SensorsStatusMessage = {
@@ -109,8 +146,8 @@ export type StatusMessage = {
       supports_hotspot: boolean;
     };
   };
-  modems: unknown; // TODO Define Modems Type
   asrcs: ['Analog in', 'No audio', 'Pipeline default'];
+  modems: ModemList;
 };
 
 export type WifiMessage = {

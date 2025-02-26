@@ -82,6 +82,19 @@
       "security": "Seguridad",
       "band": "Banda"
     },
+    "modem": {
+      "signal": "Señal",
+      "status": "Estado",
+      "network": "Red",
+      "save": "Guardar",
+      "autoapn": "APN Automático",
+      "connectionStatus": {
+        "registered" : "Registrado",
+        "connected": "Conectado",
+        "disconnected": "Desconectado",
+        "connecting": "Conectando"
+      }
+    },
     "dialog": {
       "close": "Cerrar",
       "turnOff": "Apagar",
@@ -132,6 +145,9 @@
     }
   },
   "networking": {
+    "modem": {
+      "networkName": "Nombre de red"
+    },
     "card": {
       "networkInfoTitle": "Información de la Red",
       "networkInfoDescription": "{total} Redes, {available} Disponibles, {used} en Uso, {bandwidth} Kbps",

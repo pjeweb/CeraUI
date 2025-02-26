@@ -7,6 +7,7 @@ import { Toggle } from '$lib/components/ui/toggle';
 import {
   convertBytesToKbids,
   getAvailableNetworks,
+  getModemNetworkName,
   getTotalBandwidth,
   getUsedNetworks,
   networkRenameWithError,
@@ -17,6 +18,7 @@ import { cn } from '$lib/utils';
 
 let totalBandwith: number = $state(0);
 let currentNetwoks: NetifMessage = $state({});
+
 NetifMessages.subscribe((networks: NetifMessage) => {
   if (networks) {
     currentNetwoks = networks;
@@ -64,6 +66,11 @@ NetifMessages.subscribe((networks: NetifMessage) => {
           <p class="text-sm font-medium leading-none">{networkRenameWithError(name, network.error)}</p>
           <p class="text-sm text-muted-foreground">IP: {network.ip}</p>
           <p class="text-sm text-muted-foreground">{$_('networking.card.identifier')}: {name}</p>
+          {#if name.startsWith('ww')}
+            <p class="text-sm text-muted-foreground">
+              {$_('networking.modem.networkName')}: {getModemNetworkName(name)}
+            </p>
+          {/if}
         </div>
         <div class="ml-auto font-medium">{convertBytesToKbids(network.tp)} Kbps</div>
       </div>

@@ -14,10 +14,10 @@ export const navElements: NavElements = {
 const navElementsEntries = Object.entries(navElements);
 
 export const defaultNavElement = {
-  [navElementsEntries[0][0]]: {
-    label: navElementsEntries[0][1].label,
-    component: navElementsEntries[0][1].component,
+  [navElementsEntries[1][0]]: {
+    label: navElementsEntries[1][1].label,
+    component: navElementsEntries[1][1].component,
   },
 };
 
-export const siteName = 'CeraBOX';
+export const siteName = 'CERABOX';

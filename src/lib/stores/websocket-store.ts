@@ -13,6 +13,7 @@ import type {
   StatusMessage,
   WifiMessage,
 } from '../types/socket-messages';
+import { deepMerge } from '$lib/helpers/ObjectsHelper';
 
 const AuthStore = writable<AuthMessage>();
 const AudioCodecsStore = writable<AudioCodecsMessage>();
@@ -98,7 +99,19 @@ const assignMessage = (message: string) => {
       SensorsStatusStore.set(parsedMessage.sensors);
       break;
     case 'status':
-      StatusStore.set({ ...get(StatusStore), ...parsedMessage.status });
+      {
+        const currentStatus = get(StatusStore);
+        if (parsedMessage.status.modems) {
+          StatusStore.set({
+            ...currentStatus,
+            ...parsedMessage.status,
+            modems: deepMerge(currentStatus?.modems ? currentStatus.modems : {}, parsedMessage.status?.modems),
+          });
+        } else {
+          StatusStore.set({ ...currentStatus, ...parsedMessage.status });
+        }
+      }
+
       break;
     case 'wifi':
       WifiStore.set(parsedMessage.wifi);

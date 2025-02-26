@@ -83,6 +83,19 @@
       "security": "Sécurité",
       "band": "Bande"
     },
+    "modem": {
+      "signal": "Signal",
+      "status": "État",
+      "network": "Réseau",
+      "save": "Enregistrer",
+      "autoapn": "APN Automatique",
+      "connectionStatus": {
+        "registered": "Enregistré",
+        "connected": "Connecté",
+        "disconnected": "Déconnecté",
+        "connecting": "Connexion en cours"
+      }
+    },
     "dialog": {
       "close": "Fermer",
       "turnOff": "Éteindre",

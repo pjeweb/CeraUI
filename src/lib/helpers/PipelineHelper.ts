@@ -37,7 +37,7 @@ export function parsePipelineName(name: string): PipelineInfo {
   return {
     device: deviceMatch ? deviceMatch[0] : null,
     encoder: encoderMatch ? encoderMatch[0] : null,
-    format: formatMatch ? formatMatch[1].replace(/_/g, ' ') : null,
+    format: formatMatch ? formatMatch[1].replace(/_/g, ' ').replace('libuvch264', 'USB_Optimized') : null,
     resolution: resolutionMatch ? resolutionMatch[0] : '[Match device resolution]',
     fps: fpsMatch ? parseFloat(fpsMatch[1]) : '[Match device output]',
   };
