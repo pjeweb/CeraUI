@@ -134,7 +134,7 @@ StatusMessages.subscribe(status => {
   <div class="flex-1 space-y-4 p-8 pt-6">
     <div class="grid gap-4 md:grid-cols-7 lg:grid-cols-7">
       <div class="col-span-4 grid grid-rows-2 gap-4 md:grid-cols-4 lg:grid-cols-4">
-        {#if currentStatus?.modems}
+        {#if currentStatus?.modems && Object.keys(currentStatus.modems).length}
           {#each Object.entries(currentStatus.modems) as [deviceId, modem]}
             <Card.Root class="col-span-4 row-span-2 sm:col-span-2">
               <Card.Header class="flex flex-row items-center justify-between space-y-0 pb-2">

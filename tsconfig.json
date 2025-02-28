@@ -24,5 +24,6 @@
     "include": ["*.ts","*.svelte"]
   },
   "include": ["src/**/*.d.ts", "src/**/*.ts", "src/**/*.js", "src/**/*.svelte"],
-  "references": [{ "path": "./tsconfig.node.json" }]
+  "references": [{ "path": "./tsconfig.node.json" }],
+  "exclude": ["./.env"]
 }

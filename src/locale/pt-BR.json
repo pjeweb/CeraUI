@@ -90,6 +90,7 @@
       "save": "Salvar",
       "autoapn": "APN Automático",
       "connectionStatus": {
+        "failed": "fracassado",
         "registered": "Registrado",
         "connected": "Conectado",
         "disconnected": "Desconectado",

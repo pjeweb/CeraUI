@@ -90,7 +90,9 @@
       "save": "Save",
       "autoapn": "Automatic APN",
       "connectionStatus": {
+        "failed": "failed",
         "registered": "Registered",
+        "enabled": "Enabled",
         "connected": "Connected",
         "disconnected": "Disconnected",
         "connecting": "Connecting"

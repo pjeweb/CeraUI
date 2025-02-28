@@ -89,8 +89,10 @@
       "save": "Guardar",
       "autoapn": "APN Automático",
       "connectionStatus": {
+        "failed": "Fallida",
         "registered" : "Registrado",
         "connected": "Conectado",
+        "enabled": "Habilitada",
         "disconnected": "Desconectado",
         "connecting": "Conectando"
       }

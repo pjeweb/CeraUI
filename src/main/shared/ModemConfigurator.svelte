@@ -20,10 +20,10 @@ const getSelectedNetwork: () => { value: ModemNetworkType; label: string } = () 
 const getCurrentModemConfig = () => {
   return {
     selectedNetwork: getSelectedNetwork(),
-    apn: modem.config.apn as string,
-    username: modem.config.username as string,
-    password: modem.config.password as string,
-    autoconfig: modem.config.autoconfig as boolean,
+    autoconfig: modem.config?.autoconfig || false,
+    apn: modem.config?.apn || '',
+    username: modem.config?.username || '',
+    password: modem.config?.password || '',
   };
 };
 
@@ -57,7 +57,11 @@ const checkChanges = () => {
 <div class="grid gap-2">
   <div class="mt-3 grid gap-1">
     <Label for="channel" class="mb-2 ml-1">Network Type</Label>
-    <Select.Root selected={modemProperties.selectedNetwork}>
+    <Select.Root
+      selected={modemProperties.selectedNetwork}
+      onSelectedChange={val => {
+        modemProperties.selectedNetwork = val;
+      }}>
       <Select.Trigger class="w-[180px]">
         <Select.Value placeholder="Select Network Type"></Select.Value>
       </Select.Trigger>
