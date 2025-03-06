@@ -98,7 +98,11 @@ StatusMessages.subscribe(status => {
             <p class="text-xs text-muted-foreground">{currentStatus?.available_updates?.download_size ?? '0 MB'}</p>
           </div>
           {#if currentStatus?.available_updates.package_count}
-            <SimpleAlertDialog buttonText="Update" confirmButtonText="Update" onconfirm={installSoftwareUpdates}>
+            <SimpleAlertDialog
+              buttonText="Update"
+              confirmButtonText="Update"
+              onconfirm={installSoftwareUpdates}
+              extraButtonClasses="ml-auto">
               {#snippet dialogTitle()}
                 {$_('general.areYouSure')}
               {/snippet}

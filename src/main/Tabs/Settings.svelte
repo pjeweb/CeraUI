@@ -51,6 +51,9 @@ let srtlaServerPort: number | undefined = $state();
 let srtStreamId: string | undefined = $state();
 let srtLatency: number | undefined = $state();
 
+const normalizeValue = (value: number, min: number, max: number, step = 1) =>
+  Math.max(min, Math.min(max, Math.round(value / step) * step));
+
 AudioCodecsMessages.subscribe(audioCodecsMessage => {
   if (audioCodecsMessage && !audioCodecs) {
     audioCodecs = audioCodecsMessage;
@@ -339,10 +342,21 @@ const startStreamingWithCurrentConfig = () => {
                 min={500}
                 step={50}
                 onValueChange={value => {
-                  selectedBitrate = value[0];
-                  updateMaxBitrate();
+                  setTimeout(() => {
+                    selectedBitrate = value[0];
+                    updateMaxBitrate();
+                  });
                 }} />
-              <Input bind:value={selectedBitrate} type="number" step="1" min="500" max="12000"></Input>
+              <Input
+                type="number"
+                step="50"
+                max={12000}
+                min={500}
+                bind:value={selectedBitrate}
+                onblur={() => {
+                  selectedBitrate = normalizeValue(selectedBitrate, 2000, 12000, 50);
+                  updateMaxBitrate();
+                }}></Input>
               {#if isStreaming}
                 <p class="text-xs">{$_('settings.changeBitrateNotice')}</p>
               {/if}
@@ -399,13 +413,21 @@ const startStreamingWithCurrentConfig = () => {
               <Label>{$_('settings.audioDelay')}</Label>
               <Slider
                 class="mb-2 mt-2"
-                disabled={isStreaming}
                 value={[selectedAudioDelay]}
+                onValueChange={value => (selectedAudioDelay = value[0])}
+                disabled={isStreaming}
                 max={2000}
                 min={-2000}
-                step={5}
-                onValueChange={value => (selectedAudioDelay = value[0])} />
-              <Input bind:value={selectedAudioDelay} type="number" step="5" min="-2000" max="2000"></Input>
+                step={5}></Slider>
+              <Input
+                bind:value={selectedAudioDelay}
+                type="number"
+                step="5"
+                min="-2000"
+                max="2000"
+                onblur={() => {
+                  selectedAudioDelay = normalizeValue(selectedAudioDelay, 2000, 12000, 50);
+                }}></Input>
             </div>
           {/if}
 
@@ -433,7 +455,20 @@ const startStreamingWithCurrentConfig = () => {
           <Input bind:value={srtStreamId}></Input>
           {#if srtLatency !== undefined}
             <Label>{$_('settings.srtLatency')}</Label>
-            <Input type="number" bind:value={srtLatency}></Input>
+            <Slider
+              class="mb-2 mt-2"
+              value={[srtLatency]}
+              max={12000}
+              min={2000}
+              step={50}
+              onValueChange={value => (srtLatency = value[0])}></Slider>
+            <Input
+              type="number"
+              step="1"
+              bind:value={srtLatency}
+              onblur={() => {
+                srtLatency = normalizeValue(srtLatency, 2000, 12000, 50);
+              }}></Input>
           {/if}
         </Card.Content>
       </Card.Root>

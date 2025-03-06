@@ -80,7 +80,7 @@ const handleNewWifiConnect = (ssid: string, password: string) => {
   bind:open
   title={$_('wifiSelector.dialog.searchWifi')}
   extraButtonClasses="bg-green-500 hover:bg-green-500/90">
-  {#snippet button()}
+  {#snippet icon()}
     <ScanSearch></ScanSearch>
   {/snippet}
   {#snippet dialogTitle()}
@@ -124,7 +124,7 @@ const handleNewWifiConnect = (ssid: string, password: string) => {
                     {#snippet dialogTitle()}
                       {$_('wifiSelector.dialog.disconnectFrom', { values: { ssid: availableNetwork.ssid } })}
                     {/snippet}
-                    {#snippet button()}
+                    {#snippet icon()}
                       <span class="hidden sm:block">{$_('wifiSelector.button.forget')}</span>
                       <Trash2 class="w-4 sm:block md:hidden"></Trash2>
                     {/snippet}
@@ -145,7 +145,7 @@ const handleNewWifiConnect = (ssid: string, password: string) => {
                     {#snippet dialogTitle()}
                       {$_('wifiSelector.dialog.connectTo', { values: { ssid: availableNetwork.ssid } })}
                     {/snippet}
-                    {#snippet button()}
+                    {#snippet icon()}
                       <span class="hidden sm:block">{$_('wifiSelector.button.connect')}</span>
                       <Link class="w-4 sm:block md:hidden"></Link>
                     {/snippet}

@@ -28,6 +28,7 @@
     "audioDevice": "Dispositif audio",
     "audioCodec": "Codec audio",
     "areYouSure": "Êtes-vous absolument sûr?",
+    "updateButton": "mise à jour",
     "updateConfirmation": "Êtes-vous sûr de vouloir démarrer une mise à jour logicielle ? Cela peut prendre plusieurs minutes. Vous ne pourrez pas démarrer un flux jusqu'à ce qu'il n'ait pas été terminé. Le encodeur se déconnectera brièvement après une mise à jour réussie. N'éliminez jamais la puissance ou réinitialisez l'encodeur pendant la mise à jour. Si l'encodeur est alimenté par une batterie, assurez-vous qu'il est complètement chargé.",
     "streamingMessage": "Votre transmission utilise {usingNetworksCount} réseaux avec une latence de {srtLatency} ms"
   },
@@ -118,7 +119,7 @@
       "name": "Nom",
       "password": "Mot de passe",
       "channel": "Canal",
-      "placeholderName": "CERABOX",
+      "placeholderName": "BELABOX",
       "placeholderPassword": "********",
       "selectChannel": "Sélectionnez un canal"
     }
@@ -147,6 +148,9 @@
     }
   },
   "networking": {
+    "modem": {
+      "networkName": "Nom du réseau"
+    },
     "card": {
       "networkInfoTitle": "Informations Réseau",
       "networkInfoDescription": "{total} Réseaux, {available} Disponibles, {used} Utilisés, {bandwidth} Kbps",
@@ -165,9 +169,41 @@
   "navigation": {
     "general": "Général",
     "network": "Réseau",
-    "streaming": "Diffusion"
+    "streaming": "Diffusion",
+    "advanced": "Avancé"
+  },
+  "advanced": {
+    "systemSettings": "Paramètres du système",
+    "developerOptions": "Options du développeur",
+    "lanPassword": "Mot de passe de l'interface Web LAN (belaUI)",
+    "lanPasswordTooltip": "Définissez un mot de passe pour protéger l'accès à l'interface Web belaUI.",
+    "minLength": "Longueur minimale : 8 caractères",
+    "newPassword": "Nouveau mot de passe",
+    "save": "Enregistrer",
+    "cloudRemoteKey": "Clé distante de BELABOX Cloud",
+    "cloudRemoteKeyTooltip": "Saisissez la clé distante pour accéder à BELABOX Cloud.",
+    "reboot": "Redémarrer",
+    "rebootTooltip": "Redémarrez l'appareil pour appliquer les modifications.",
+    "powerOff": "Éteindre",
+    "powerOffTooltip": "Éteignez l'appareil en toute sécurité.",
+    "confirmReboot": "Voulez-vous redémarrer l'appareil ?",
+    "confirmPowerOff": "Voulez-vous éteindre cet appareil ?",
+    "sshPassword": "Mot de passe SSH (Nom d'utilisateur : {sshUser})",
+    "sshPasswordTooltip": "Utilisez ce mot de passe pour vous connecter via SSH.",
+    "passwordCopied": "Mot de passe copié",
+    "passwordCopiedDesc": "Le mot de passe SSH a été copié dans le presse-papiers.",
+    "reset": "Réinitialiser",
+    "resetTooltip": "Réinitialisez le mot de passe SSH.",
+    "startSSH": "Démarrer le serveur SSH",
+    "stopSSH": "Arrêter le serveur SSH",
+    "sshToggleTooltip": "Démarrer ou arrêter le serveur SSH.",
+    "belaboxLog": "Journal BELABOX",
+    "systemLog": "Journal du système",
+    "download": "Télécharger",
+    "belaboxLogTooltip": "Téléchargez les journaux pour le dépannage.",
+    "systemLogTooltip": "Téléchargez les journaux système pour le débogage.",
+    "confirmBelaboxLog": "Êtes-vous sûr de vouloir télécharger le journal BELABOX ? Il peut contenir des informations sensibles, telles que des mots de passe.",
+    "confirmSystemLog": "Êtes-vous sûr de vouloir télécharger le journal système ? Il peut contenir des informations sensibles, telles que des mots de passe."
   }
-
-
 }
 

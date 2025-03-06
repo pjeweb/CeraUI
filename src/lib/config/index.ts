@@ -1,3 +1,4 @@
+import Advanced from '../../main/Tabs/Advanced.svelte';
 import General from '../../main/Tabs/General.svelte';
 import Network from '../../main/Tabs/Network.svelte';
 import Settings from '../../main/Tabs/Settings.svelte';
@@ -9,15 +10,16 @@ export const navElements: NavElements = {
   general: { label: 'general', component: General },
   wifi: { label: 'network', component: Network },
   settings: { label: 'streaming', component: Settings },
+  advanced: { label: 'advanced', component: Advanced },
 };
 
 const navElementsEntries = Object.entries(navElements);
 
 export const defaultNavElement = {
-  [navElementsEntries[1][0]]: {
-    label: navElementsEntries[1][1].label,
-    component: navElementsEntries[1][1].component,
+  [navElementsEntries[2][0]]: {
+    label: navElementsEntries[2][1].label,
+    component: navElementsEntries[2][1].component,
   },
 };
 
-export const siteName = 'CERABOX';
+export const siteName = 'CeraUI for BELABOX©';

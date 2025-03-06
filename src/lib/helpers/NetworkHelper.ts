@@ -30,14 +30,18 @@ export const networkRenameWithError = (name: string, error?: string) => {
 export const networkRename = (name: string) => {
   const originalName = name;
   if (name.startsWith('wl')) {
-    name = 'WiFI ';
+    name = 'WiFI';
   } else if (name.startsWith('eth') || name.startsWith('en')) {
-    name = 'Ethernet ';
+    if (Number.parseInt(name[name.length - 1]) < 2) {
+      name = 'Ethernet';
+    } else {
+      name = 'ETH-Modem';
+    }
   } else if (name.startsWith('ww')) {
-    name = 'Modem ';
+    name = 'Modem';
   }
 
-  name += Number.parseInt(originalName[originalName.length - 1]) + 1;
+  name += ' ' + (Number.parseInt(originalName[originalName.length - 1]) + name === 'ETH-Modem' ? -1 : +1);
   return name;
 };
 

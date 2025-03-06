@@ -66,6 +66,9 @@ export type ConfigMessage = {
   srtla_addr?: string;
   srtla_port?: number;
   srt_streamid?: string;
+  remote_key?: string;
+  relay_account?: string;
+  relay_server?: string;
 };
 
 export type NetifMessage = {
@@ -96,11 +99,15 @@ export type PipelinesMessage = {
   };
 };
 
+export type RelayMessage = {
+  accounts: { [key: string]: string };
+  servers: { [key: string]: { name: string } };
+};
 export type RevisionsMessage = {
   belaUI: string;
   belacoder: string;
   srtla: string;
-  'CERABOX image': string;
+  'BELABOX image': string;
 };
 
 export type SensorsStatusMessage = {
@@ -114,7 +121,9 @@ export type StatusMessage = {
     package_count: number;
     download_size?: string;
   };
-  updating: Nullable<boolean> | { downloading: number; unpacking: number; setting_up: number; total: number };
+  updating:
+    | Nullable<boolean>
+    | { downloading: number; unpacking: number; setting_up: number; total: number; result?: number };
   ssh: {
     user: string;
     user_pass: boolean;

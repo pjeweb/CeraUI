@@ -28,6 +28,7 @@
     "audioDevice": "Audio Device",
     "audioCodec": "Audio Codec",
     "areYouSure": "Are you absolutely sure?",
+    "updateButton": "Update",
     "updateConfirmation": "Are you sure you want to start a software update? This may take several minutes. You won't be able to start a stream until it's completed. The encoder will briefly disconnect after a successful upgrade. Never remove power or reset the encoder while updating. If the encoder is powered from a battery, ensure it's fully charged.",
     "streamingMessage": "Your transmission is using {usingNetworksCount} Networks with a delay of {srtLatency} ms"
   },
@@ -119,7 +120,7 @@
       "name": "Name",
       "password": "Password",
       "channel": "Channel",
-      "placeholderName": "CERABOX",
+      "placeholderName": "BELABOX",
       "placeholderPassword": "********",
       "selectChannel": "Select a channel"
     }
@@ -147,7 +148,11 @@
       "placeholderPassword": "********"
     }
   },
+
   "networking": {
+    "modem": {
+      "networkName": "Network Name"
+    },
     "card": {
       "networkInfoTitle": "Network Information",
       "networkInfoDescription": "{total} Networks, {available} Available, {used} Used, {bandwidth} Kbps",
@@ -166,6 +171,40 @@
   "navigation": {
     "general": "General",
     "network": "Network",
-    "streaming": "Streaming"
+    "streaming": "Streaming",
+    "advanced": "Advanced"
+  },
+  "advanced": {
+    "systemSettings": "System Settings",
+    "developerOptions": "Developer Options",
+    "lanPassword": "LAN Web Interface (belaUI) Password",
+    "lanPasswordTooltip": "Set a password to protect access to the belaUI web interface.",
+    "minLength": "Minimum length: 8 characters",
+    "newPassword": "New Password",
+    "save": "Save",
+    "cloudRemoteKey": "BELABOX Cloud Remote Key",
+    "cloudRemoteKeyTooltip": "Enter the remote key for BELABOX cloud access.",
+    "reboot": "Reboot",
+    "rebootTooltip": "Restart the device to apply changes.",
+    "powerOff": "Power Off",
+    "powerOffTooltip": "Shut down the device safely.",
+    "confirmReboot": "Do you want to reboot the device?",
+    "confirmPowerOff": "Do you want to power off this device?",
+    "sshPassword": "SSH Password (User Name: {sshUser})",
+    "sshPasswordTooltip": "Use this password to log in via SSH.",
+    "passwordCopied": "Password Copied",
+    "passwordCopiedDesc": "The SSH Password has been copied to the clipboard.",
+    "reset": "Reset",
+    "resetTooltip": "Reset the SSH password to a new one.",
+    "startSSH": "Start SSH Server",
+    "stopSSH": "Stop SSH Server",
+    "sshToggleTooltip": "Start or stop the SSH server.",
+    "belaboxLog": "BELABOX Log",
+    "systemLog": "System Log",
+    "download": "Download",
+    "belaboxLogTooltip": "Download logs for troubleshooting.",
+    "systemLogTooltip": "Download system logs for debugging.",
+    "confirmBelaboxLog": "Are you sure you want to download the BELABOX log? It may contain sensitive information such as passwords.",
+    "confirmSystemLog": "Are you sure you want to download the system log? It may contain sensitive information such as passwords."
   }
 }

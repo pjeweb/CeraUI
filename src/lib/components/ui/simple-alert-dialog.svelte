@@ -9,7 +9,8 @@ type Props = AlertDialogDefault.RootProps & {
   className?: string;
   extraButtonClasses?: string;
   buttonText: string;
-  button?: Snippet;
+  icon?: Snippet;
+  iconPosition?: 'right' | 'left';
   hiddeCancelButton?: boolean;
   dialogTitle: Snippet;
   disabledConfirmButton?: boolean;
@@ -24,7 +25,8 @@ type Props = AlertDialogDefault.RootProps & {
 let {
   open = $bindable(false),
   extraButtonClasses,
-  button,
+  icon,
+  iconPosition,
   hiddeCancelButton,
   oncancel,
   onconfirm,
@@ -43,9 +45,15 @@ let {
 </script>
 
 <AlertDialog.Root {...restProps} bind:open>
-  <AlertDialog.Trigger class={cn(`${buttonVariants({ variant: 'default' })} ml-auto`, extraButtonClasses)} {title}>
+  <AlertDialog.Trigger
+    class={cn(
+      iconPosition === 'left' ? 'flex-row-reverse' : '',
+      buttonVariants({ variant: 'default' }),
+      extraButtonClasses,
+    )}
+    {title}>
     {buttonText}
-    {@render button?.()}
+    {@render icon()}
   </AlertDialog.Trigger>
   <AlertDialog.Portal>
     <AlertDialog.Overlay />

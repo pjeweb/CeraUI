@@ -27,6 +27,7 @@
     "maxBitrate": "Taxa de Bits Máxima",
     "audioDevice": "Dispositivo de Áudio",
     "audioCodec": "Codec de Áudio",
+    "updateButton": "Actualizar",
     "areYouSure": "Você tem certeza?",
     "updateConfirmation": "Tem certeza de que deseja iniciar uma atualização de software? Isso pode levar vários minutos. Você não poderá iniciar um fluxo até que a atualização seja concluída. O codificador se desconectará brevemente após uma atualização bem-sucedida. Nunca remova a potência ou reinicialize o codificador enquanto estiver realizando a atualização. Se o codificador for alimentado por bateria, certifique-se de que esteja completamente carregado",
     "streamingMessage": "Sua transmissão está usando {usingNetworksCount} redes com uma latência de {srtLatency} ms"
@@ -118,7 +119,7 @@
       "name": "Nome",
       "password": "Senha",
       "channel": "Canal",
-      "placeholderName": "CERABOX",
+      "placeholderName": "BELABOX",
       "placeholderPassword": "********",
       "selectChannel": "Selecione um canal"
     }
@@ -147,6 +148,9 @@
     }
   },
   "networking": {
+    "modem": {
+      "networkName": "Nome da rede"
+    },
     "card": {
       "networkInfoTitle": "Informações da Rede",
       "networkInfoDescription": "{total} Redes, {available} Disponíveis, {used} em Uso, {bandwidth} Kbps",
@@ -165,8 +169,40 @@
   "navigation": {
     "general": "Geral",
     "network": "Rede",
-    "streaming": "Transmissão"
+    "streaming": "Transmissão",
+    "advanced": "Avançado"
+  },
+  "advanced": {
+    "systemSettings": "Configurações do sistema",
+    "developerOptions": "Opções do desenvolvedor",
+    "lanPassword": "Senha da Interface Web LAN (belaUI)",
+    "lanPasswordTooltip": "Defina uma senha para proteger o acesso à interface web belaUI.",
+    "minLength": "Comprimento mínimo: 8 caracteres",
+    "newPassword": "Nova senha",
+    "save": "Salvar",
+    "cloudRemoteKey": "Chave remota do BELABOX Cloud",
+    "cloudRemoteKeyTooltip": "Digite a chave remota para acessar o BELABOX Cloud.",
+    "reboot": "Reiniciar",
+    "rebootTooltip": "Reinicie o dispositivo para aplicar as alterações.",
+    "powerOff": "Desligar",
+    "powerOffTooltip": "Desligue o dispositivo com segurança.",
+    "confirmReboot": "Deseja reiniciar o dispositivo?",
+    "confirmPowerOff": "Deseja desligar este dispositivo?",
+    "sshPassword": "Senha SSH (Nome de usuário: {sshUser})",
+    "sshPasswordTooltip": "Use esta senha para fazer login via SSH.",
+    "passwordCopied": "Senha copiada",
+    "passwordCopiedDesc": "A senha SSH foi copiada para a área de transferência.",
+    "reset": "Redefinir",
+    "resetTooltip": "Redefina a senha SSH para uma nova.",
+    "startSSH": "Iniciar servidor SSH",
+    "stopSSH": "Parar servidor SSH",
+    "sshToggleTooltip": "Iniciar ou parar o servidor SSH.",
+    "belaboxLog": "Log do BELABOX",
+    "systemLog": "Log do sistema",
+    "download": "Baixar",
+    "belaboxLogTooltip": "Baixe os logs para solução de problemas.",
+    "systemLogTooltip": "Baixe os logs do sistema para depuração.",
+    "confirmBelaboxLog": "Tem certeza de que deseja baixar o log do BELABOX? Ele pode conter informações sensíveis, como senhas.",
+    "confirmSystemLog": "Tem certeza de que deseja baixar o log do sistema? Ele pode conter informações sensíveis, como senhas."
   }
-
-
 }

@@ -47,7 +47,7 @@ const resetHotSpotProperties = () => {
       password: hotspotProperties.password ?? '',
     });
   }}>
-  {#snippet button()}
+  {#snippet icon()}
     <Bolt></Bolt>
   {/snippet}
   {#snippet dialogTitle()}

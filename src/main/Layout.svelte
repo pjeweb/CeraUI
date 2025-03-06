@@ -14,7 +14,7 @@ let isCheckingAuthStatus = $state(true);
 let updatingStatus: StatusMessage['updating'] = $state(false);
 const setupLocaleResult = setupLocale();
 StatusMessages.subscribe(status => {
-  updatingStatus = status?.updating ?? false;
+  updatingStatus = (status?.updating ?? false) && (status?.updating as any).result !== 0;
 });
 const auth = localStorage.getItem('auth');
 if (auth) {
@@ -38,13 +38,13 @@ AuthMessages.subscribe(message => {
   authStatusStore.subscribe(status => {
     authStatus = status;
   });
-
-  NotificationsMessages.subscribe(notifications => {
-    notifications?.show?.forEach(notification => {
-      toast[notification.type as NotificationType](notification.name.toUpperCase().replace('BELABOX', 'CERABOX'), {
-        description: notification.msg.replace('BELABOX', 'CERABOX'),
-        duration: notification.duration * 1500,
-      });
+});
+NotificationsMessages.subscribe(notifications => {
+  notifications?.show?.forEach(notification => {
+    toast[notification.type as NotificationType](notification.name.toUpperCase(), {
+      description: notification.msg,
+      duration: notification.is_persistent ? Infinity : notification.duration * 2500,
+      dismissable: !notification.is_dismissable,
     });
   });
 });

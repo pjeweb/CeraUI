@@ -8,12 +8,14 @@ import type {
   NetifMessage,
   NotificationsMessage,
   PipelinesMessage,
+  RelayMessage,
   RevisionsMessage,
   SensorsStatusMessage,
   StatusMessage,
   WifiMessage,
 } from '../types/socket-messages';
-import { deepMerge } from '$lib/helpers/ObjectsHelper';
+import { mergeModems } from '$lib/helpers/ObjectsHelper';
+import { downloadLog } from '$lib/helpers/SystemHelper';
 
 const AuthStore = writable<AuthMessage>();
 const AudioCodecsStore = writable<AudioCodecsMessage>();
@@ -21,6 +23,7 @@ const ConfigStore = writable<ConfigMessage>();
 const NetifStore = writable<NetifMessage>();
 const NotificationsStore = writable<NotificationsMessage>();
 const PipelinesStore = writable<PipelinesMessage>();
+const RelaysStore = writable<RelayMessage>();
 const RevisionsStore = writable<RevisionsMessage>();
 const SensorsStatusStore = writable<SensorsStatusMessage>();
 const StatusStore = writable<StatusMessage>();
@@ -92,6 +95,9 @@ const assignMessage = (message: string) => {
     case 'pipelines':
       PipelinesStore.set(parsedMessage.pipelines);
       break;
+    case 'relays':
+      RelaysStore.set(parsedMessage.relays);
+      break;
     case 'revisions':
       RevisionsStore.set(parsedMessage.revisions);
       break;
@@ -105,7 +111,7 @@ const assignMessage = (message: string) => {
           StatusStore.set({
             ...currentStatus,
             ...parsedMessage.status,
-            modems: deepMerge(currentStatus?.modems ? currentStatus.modems : {}, parsedMessage.status?.modems),
+            modems: mergeModems(currentStatus?.modems ? currentStatus.modems : {}, parsedMessage.status?.modems),
           });
         } else {
           StatusStore.set({ ...currentStatus, ...parsedMessage.status });
@@ -115,6 +121,10 @@ const assignMessage = (message: string) => {
       break;
     case 'wifi':
       WifiStore.set(parsedMessage.wifi);
+      break;
+    case 'log':
+      downloadLog(parsedMessage.log);
+      break;
   }
 };
 
@@ -163,6 +173,7 @@ const NetifMessages = readonly(NetifStore);
 const NotificationsMessages = readonly(NotificationsStore);
 const ConfigMessages = readonly(ConfigStore);
 const PipelinesMessages = readonly(PipelinesStore);
+const RelaysMessages = readonly(RelaysStore);
 const RevisionsMessages = readonly(RevisionsStore);
 const SensorsStatusMessages = readonly(SensorsStatusStore);
 const StatusMessages = readonly(StatusStore);
@@ -175,6 +186,7 @@ export {
   NetifMessages,
   NotificationsMessages,
   PipelinesMessages,
+  RelaysMessages,
   RevisionsMessages,
   SensorsStatusMessages,
   StatusMessages,

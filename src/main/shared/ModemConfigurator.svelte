@@ -55,7 +55,7 @@ const checkChanges = () => {
 </script>
 
 <div class="grid gap-2">
-  <div class="mt-3 grid gap-1">
+  <div class="mt-1 grid gap-1">
     <Label for="channel" class="mb-2 ml-1">Network Type</Label>
     <Select.Root
       selected={modemProperties.selectedNetwork}
@@ -120,5 +120,5 @@ const checkChanges = () => {
     </div>
   {/if}
 
-  <Button class="w-[100%]" onclick={saveModemConfig} disabled={!checkChanges()}>{$_('network.modem.save')}</Button>
+  <Button class="mt-2 w-[100%]" onclick={saveModemConfig} disabled={!checkChanges()}>{$_('network.modem.save')}</Button>
 </div>

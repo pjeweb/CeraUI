@@ -1,8 +1,15 @@
 {
-  "name": "svelte-ts-template",
+  "name": "cera-ui",
   "private": true,
-  "version": "0.0.0",
+  "version": "0.0.1",
+  "description": "A modern UI built with Svelte + Vite for the BELABOX belaUI WebSocket backend.",
   "type": "module",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/CERALIVE/CeraUI.git"
+  },
+  "author": "Andrés Cera",
+  "license": "GPL-3.0",
   "scripts": {
     "dev": "vite",
     "dev:host": "vite --host",
@@ -44,6 +51,7 @@
     "prettier-plugin-tailwindcss": "^0.6.8",
     "svelte": "^5.1.16",
     "svelte-check": "^4.0.7",
+    "svelte-copy": "^2.0.0",
     "svelte-eslint-parser": "^0.43.0",
     "svelte-i18n": "^4.0.1",
     "svelte-radix": "^2.0.1",

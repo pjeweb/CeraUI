@@ -79,7 +79,7 @@ StatusMessages.subscribe(status => {
                       confirmButtonText={$_('network.dialog.close')}
                       hiddeCancelButton={true}
                       title={$_('network.dialog.hotspotDetails')}>
-                      {#snippet button()}
+                      {#snippet icon()}
                         <EyeIcon></EyeIcon>
                       {/snippet}
                       {#snippet dialogTitle()}
@@ -95,7 +95,7 @@ StatusMessages.subscribe(status => {
                       extraButtonClasses="bg-yellow-600 hover:bg-yellow-600/90"
                       title={$_('network.dialog.turnHotspotOff')}
                       onconfirm={() => turnHotspotModeOff(deviceId)}>
-                      {#snippet button()}
+                      {#snippet icon()}
                         <WifiOff></WifiOff>
                       {/snippet}
                       {#snippet dialogTitle()}
@@ -112,7 +112,7 @@ StatusMessages.subscribe(status => {
                       extraButtonClasses="bg-yellow-600 hover:bg-yellow-600/90"
                       title={$_('network.dialog.turnHotspotOn')}
                       onconfirm={() => turnHotspotModeOn(deviceId)}>
-                      {#snippet button()}
+                      {#snippet icon()}
                         <Router></Router>
                       {/snippet}
                       {#snippet dialogTitle()}
@@ -141,26 +141,27 @@ StatusMessages.subscribe(status => {
                 <div>
                   <Card.Title class="text-sm font-medium">Modem: {modem.name.replace('| Unknown', '')}</Card.Title>
                   <Card.Description>
-                    <div class="flex grid-cols-12 content-center text-muted-foreground">
-                      {#if modem.status.network_type}
-                        <span class="mr-2 flex">
-                          <p class="font-bold">{$_('network.modem.network')}</p>
-                          <span>
-                            {`: ${modem.status.network_type} `}
-                          </span>
-                        </span>
-                      {/if}
-
-                      <span class="mr-2 flex">
+                    <div class="grid grid-cols-12 content-center text-muted-foreground">
+                      <span class="col-span-12 flex">
                         <p class="font-bold">{$_('network.modem.status')}</p>
                         <span>
                           {`: ${capitalizeFirstLetter($_('network.modem.connectionStatus.' + modem.status.connection))} `}
                         </span>
                       </span>
-                      <span class="flex">
-                        <p class="font-bold">{$_('network.modem.signal')}</p>
-                        <span>{`: ${modem.status?.signal ?? 0}%`}</span>
-                      </span>
+                      <div class="col-span-12 flex">
+                        <span class="mr-2 flex">
+                          <p class="font-bold">{$_('network.modem.signal')}</p>
+                          <span>{`: ${modem.status?.signal ?? 0}%`}</span>
+                        </span>
+                        {#if modem.status.network_type}
+                          <span class="mr-2 flex">
+                            <p class="font-bold">{$_('network.modem.network')}</p>
+                            <span>
+                              {`: ${modem.status.network_type} `}
+                            </span>
+                          </span>
+                        {/if}
+                      </div>
                     </div>
                   </Card.Description>
                 </div>
