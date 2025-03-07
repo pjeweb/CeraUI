@@ -62,6 +62,8 @@
     "noAudioSupport": "La configuración seleccionada actualmente no admite ningún tipo de configuración de audio",
     "selectValidOption": "La configuración de audio se mostrará una vez que seleccione una opción válida en la sección de codificación",
     "receiverServer": "Servidor receptor",
+    "relayServer": "Servidor de Retransmisión",
+    "relayServerAccount": "Cuenta de Retransmisión",
     "srtlaServerAddress": "Dirección del servidor receptor SRTLA",
     "srtlaServerPort": "Puerto del servidor SRTLA",
     "srtStreamId": "ID de transmisión SRT (opcional)",

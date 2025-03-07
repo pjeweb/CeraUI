@@ -1,7 +1,7 @@
 <script lang="ts">
 import { Binary, ServerIcon, Volume } from 'lucide-svelte';
 import { _ } from 'svelte-i18n';
-import type { AudioCodecsMessage, PipelinesMessage } from '$lib/types/socket-messages';
+import type { AudioCodecsMessage, ConfigMessage, PipelinesMessage, RelayMessage } from '$lib/types/socket-messages';
 import type { Selected } from 'bits-ui';
 import { Button } from '$lib/components/ui/button';
 import * as Card from '$lib/components/ui/card';
@@ -12,7 +12,13 @@ import { Slider } from '$lib/components/ui/slider';
 
 import { type GroupedPipelines, groupPipelinesByDeviceAndFormat, parsePipelineName } from '$lib/helpers/PipelineHelper';
 import { type AudioCodecs, startStreaming, stopStreaming, updateBitrate } from '$lib/helpers/SystemHelper';
-import { AudioCodecsMessages, ConfigMessages, PipelinesMessages, StatusMessages } from '$lib/stores/websocket-store';
+import {
+  AudioCodecsMessages,
+  ConfigMessages,
+  PipelinesMessages,
+  RelaysMessages,
+  StatusMessages,
+} from '$lib/stores/websocket-store';
 
 type SelectInputString = Selected<string | null | undefined> | undefined;
 type SelectInputNumberOrString = Selected<number | string | null | undefined> | undefined;
@@ -50,7 +56,13 @@ let srtlaServerAddress: string | undefined = $state();
 let srtlaServerPort: number | undefined = $state();
 let srtStreamId: string | undefined = $state();
 let srtLatency: number | undefined = $state();
+let relayMessage: RelayMessage | undefined = $state();
 
+const defaultRelaySelection = { value: '-1', label: 'Manual Configuration' };
+let selectedRelayServer: typeof defaultRelaySelection | undefined = $state(undefined);
+let selectedRelayAccount: typeof defaultRelaySelection | undefined = $state(undefined);
+
+let savedConfig: ConfigMessage | undefined = $state(undefined);
 const normalizeValue = (value: number, min: number, max: number, step = 1) =>
   Math.max(min, Math.min(max, Math.round(value / step) * step));
 
@@ -59,6 +71,7 @@ AudioCodecsMessages.subscribe(audioCodecsMessage => {
     audioCodecs = audioCodecsMessage;
   }
 });
+
 StatusMessages.subscribe(status => {
   if (status) {
     isStreaming = status.is_streaming;
@@ -84,6 +97,7 @@ StatusMessages.subscribe(status => {
 // Subscribe to configuration messages
 ConfigMessages.subscribe(config => {
   if (config) {
+    savedConfig = config;
     if (srtLatency === undefined) {
       srtLatency = config.srt_latency ?? 2000;
     }
@@ -122,6 +136,23 @@ ConfigMessages.subscribe(config => {
   }
 });
 
+RelaysMessages.subscribe(message => {
+  relayMessage = message;
+  if (relayMessage && savedConfig.relay_server) {
+    selectedRelayServer = savedConfig.relay_server
+      ? { value: savedConfig.relay_server, label: message.servers[savedConfig.relay_server].name }
+      : defaultRelaySelection;
+    if (savedConfig?.relay_account !== undefined) {
+      selectedRelayAccount = {
+        value: savedConfig.relay_account,
+        label: message.accounts[savedConfig.relay_account].name,
+      };
+    }
+  } else {
+    selectedRelayServer = defaultRelaySelection;
+    selectedRelayAccount = defaultRelaySelection;
+  }
+});
 // Subscribe to pipeline messages
 PipelinesMessages.subscribe(message => {
   if (message) {
@@ -133,7 +164,7 @@ PipelinesMessages.subscribe(message => {
 });
 
 $effect.pre(() => {
-  if (selectedPipeline && unparsedPipelines) {
+  if (selectedPipeline && unparsedPipelines !== undefined) {
     const parsedPipeline = parsePipelineName(unparsedPipelines[selectedPipeline].name);
     selectedInputMode = {
       value: parsedPipeline.format,
@@ -200,19 +231,23 @@ const startStreamingWithCurrentConfig = () => {
   if (pipelineData.acodec) {
     config.acodec = selectedAudioCodec!.value!;
   }
-  if (srtlaServerAddress) {
+  if ((selectedRelayServer?.value == '-1' || selectedRelayServer?.value === undefined) && srtlaServerAddress) {
     config.srtla_addr = srtlaServerAddress;
+  } else {
+    config.relay_server = selectedRelayServer!.value;
   }
   if (srtLatency !== undefined) {
     config.srt_latency = srtLatency;
   }
 
-  if (srtlaServerPort !== undefined) {
-    config.srtla_port = srtlaServerPort;
+  if (selectedRelayAccount?.value == '-1' || selectedRelayAccount?.value === undefined) {
+    if (srtlaServerPort !== undefined) {
+      config.srtla_port = srtlaServerPort;
+    }
+    config.srt_streamid = srtStreamId ?? '';
+  } else {
+    config.relay_account = selectedRelayAccount!.value;
   }
-
-  config.srt_streamid = srtStreamId ?? '';
-
   config.delay = selectedAudioDelay;
   config.max_br = selectedBitrate!;
   startStreaming(config);
@@ -447,12 +482,56 @@ const startStreamingWithCurrentConfig = () => {
           <ServerIcon class="h-4 w-4 text-muted-foreground" />
         </Card.Header>
         <Card.Content>
-          <Label>{$_('settings.srtlaServerAddress')}</Label>
-          <Input bind:value={srtlaServerAddress}></Input>
-          <Label>{$_('settings.srtlaServerPort')}</Label>
-          <Input type="number" bind:value={srtlaServerPort}></Input>
-          <Label>{$_('settings.srtStreamId')}</Label>
-          <Input bind:value={srtStreamId}></Input>
+          <Label>{$_('settings.relayServer')}</Label>
+          <Select.Root
+            selected={selectedRelayServer}
+            disabled={relayMessage === undefined}
+            onSelectedChange={value => value && (selectedRelayServer = value)}>
+            <Select.Trigger>
+              <Select.Value></Select.Value>
+            </Select.Trigger>
+            <Select.Content>
+              <Select.Group>
+                <Select.Item value="-1">Manual Configutarion</Select.Item>
+                {#if relayMessage?.servers}
+                  {#each Object.entries(relayMessage?.servers) as [server, serverInfo]}
+                    <Select.Item value={server} label={serverInfo.name}></Select.Item>
+                  {/each}
+                {/if}
+              </Select.Group>
+            </Select.Content>
+          </Select.Root>
+          {#if selectedRelayServer?.value === '-1' || selectedRelayServer?.value === undefined}
+            <Label>{$_('settings.srtlaServerAddress')}</Label>
+            <Input bind:value={srtlaServerAddress}></Input>
+          {/if}
+          {#if selectedRelayServer?.value !== '-1' && selectedRelayServer?.value !== undefined}
+            <Label>{$_('settings.relayServerAccount')}</Label>
+            <Select.Root
+              selected={selectedRelayAccount}
+              disabled={relayMessage === undefined}
+              onSelectedChange={value => value && (selectedRelayAccount = value)}>
+              <Select.Trigger>
+                <Select.Value></Select.Value>
+              </Select.Trigger>
+              <Select.Content>
+                <Select.Group>
+                  <Select.Item value="-1">Manual Configutarion</Select.Item>
+                  {#if relayMessage?.servers}
+                    {#each Object.entries(relayMessage?.accounts) as [account, accountInfo]}
+                      <Select.Item value={account} label={accountInfo.name}></Select.Item>
+                    {/each}
+                  {/if}
+                </Select.Group>
+              </Select.Content>
+            </Select.Root>
+          {/if}
+          {#if selectedRelayAccount?.value === '-1' || selectedRelayAccount?.value === undefined}
+            <Label>{$_('settings.srtlaServerPort')}</Label>
+            <Input type="number" bind:value={srtlaServerPort}></Input>
+            <Label>{$_('settings.srtStreamId')}</Label>
+            <Input bind:value={srtStreamId}></Input>
+          {/if}
           {#if srtLatency !== undefined}
             <Label>{$_('settings.srtLatency')}</Label>
             <Slider

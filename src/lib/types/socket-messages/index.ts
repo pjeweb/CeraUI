@@ -100,7 +100,7 @@ export type PipelinesMessage = {
 };
 
 export type RelayMessage = {
-  accounts: { [key: string]: string };
+  accounts: { [key: string]: { name: string } };
   servers: { [key: string]: { name: string } };
 };
 export type RevisionsMessage = {

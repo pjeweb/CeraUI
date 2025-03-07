@@ -63,6 +63,8 @@
     "noAudioSupport": "The current selected config doesn't support any kind of audio setting",
     "selectValidOption": "The audio settings will be shown once you select a valid option on the encoder section",
     "receiverServer": "Receiver Server",
+    "relayServer": "Relay Server",
+    "relayServerAccount": "Relay Server Account",
     "srtlaServerAddress": "SRTLA receiver server address",
     "srtlaServerPort": "SRTLA receiver port",
     "srtStreamId": "SRT stream id (optional)",
