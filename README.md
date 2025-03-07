@@ -17,7 +17,6 @@ One of the long-term objectives of this project, which will commence once the UI
 
 ## Roadmap
 
-- **Automatic Relay Server Selection**: *Work in Progress* - After entering the BELABOX cloud key, automatic relay server selection is not yet implemented. I am actively working on this feature to improve usability and performance.
 - **Updating Overlay Image**: Find a better picture for the updating overlay.
 
 ## Installation

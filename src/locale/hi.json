@@ -1,0 +1,212 @@
+{
+  "updatingOverlay": {
+    "title": "आपके डिवाइस का सॉफ्टवेयर अपडेट हो रहा है",
+    "description": "अपडेट प्रक्रिया पूरी होने के बाद आप इसका उपयोग कर सकेंगे",
+    "loading": "पैकेज अपडेट हो रहे हैं",
+    "downloading": "डाउनलोड हो रहा है:",
+    "unpacking": "अनपैक हो रहा है:",
+    "installing": "इंस्टॉल हो रहा है:",
+    "progress": "प्रगति:",
+    "successMessage": "सफलतापूर्वक अपडेट हो गया।",
+    "successDescription": "डिवाइस रीस्टार्ट हो रहा है, आप कुछ मिनटों में नवीनतम सुविधाओं के साथ इसका उपयोग कर सकेंगे"
+  },
+  "general": {
+    "status": "स्थिति",
+    "streaming": "स्ट्रीमिंग",
+    "offline": "ऑफलाइन",
+    "temperature": "तापमान",
+    "relayServer": "रिले सर्वर",
+    "updates": "अपडेट",
+    "none": "कोई नहीं",
+    "youHaventConfigured": "आपने कोई सर्वर कॉन्फ़िगर नहीं किया है",
+    "port": "पोर्ट",
+    "overview": "अवलोकन",
+    "latency": "लेटेंसी / देरी",
+    "packages": "पैकेज",
+    "package": "पैकेज",
+    "maxBitrate": "अधिकतम बिटरेट",
+    "audioDevice": "ऑडियो डिवाइस",
+    "audioCodec": "ऑडियो कोडेक",
+    "areYouSure": "क्या आप पूरी तरह से सुनिश्चित हैं?",
+    "updateButton": "अपडेट करें",
+    "updateConfirmation": "क्या आप सुनिश्चित हैं कि आप सॉफ़्टवेयर अपडेट शुरू करना चाहते हैं? इसमें कई मिनट लग सकते हैं। अपडेट पूरा होने तक आप स्ट्रीम शुरू नहीं कर पाएंगे। सफल अपग्रेड के बाद एनकोडर अस्थायी रूप से डिस्कनेक्ट हो जाएगा। अपडेट करते समय कभी भी पावर न हटाएं या एनकोडर को रीसेट न करें। यदि एनकोडर बैटरी से चल रहा है, तो सुनिश्चित करें कि वह पूरी तरह से चार्ज है।",
+    "streamingMessage": "आपका ट्रांसमिशन {usingNetworksCount} नेटवर्क का उपयोग कर रहा है जिसमें {srtLatency} मिलीसेकंड की देरी है"
+  },
+  "auth": {
+    "createPassword": "पासवर्ड बनाएं",
+    "login": "लॉगिन करें",
+    "createPasswordAndLogin": "पासवर्ड बनाएं और लॉगिन करें",
+    "loginWithPassword": "पासवर्ड से लॉगिन करें",
+    "usePassword": "सुविधाओं तक पहुंचने के लिए डिवाइस पासवर्ड का उपयोग करें",
+    "signIn": "साइन इन करें",
+    "rememberMe": "मुझे याद रखें",
+    "separatorText": "साइट का नाम",
+    "footerText": "बस साइन इन करें और खुशी लाने का आनंद लें"
+  },
+  "settings": {
+    "encoderSettings": "एनकोडर सेटिंग्स",
+    "inputMode": "इनपुट मोड",
+    "selectOutputFormat": "आउटपुट फॉर्मेट चुनें",
+    "encodingFormat": "एनकोडिंग फॉर्मेट",
+    "selectEncodingFormat": "एनकोडिंग आउटपुट फॉर्मेट चुनें",
+    "encodingResolution": "एनकोडिंग रिज़ॉल्यूशन",
+    "selectEncodingResolution": "एनकोडिंग रिज़ॉल्यूशन चुनें",
+    "framerate": "फ्रेमरेट (FPS)",
+    "selectFramerate": "फ्रेमरेट चुनें",
+    "bitrate": "बिटरेट (Kbps)",
+    "audioSettings": "ऑडियो सेटिंग्स",
+    "audioSource": "ऑडियो स्रोत",
+    "selectAudioSource": "ऑडियो स्रोत चुनें",
+    "audioCodec": "ऑडियो कोडेक",
+    "selectAudioCodec": "ऑडियो कोडेक चुनें",
+    "audioDelay": "ऑडियो देरी (ms)",
+    "noAudioSupport": "वर्तमान में चयनित कॉन्फ़िगरेशन किसी भी प्रकार की ऑडियो सेटिंग का समर्थन नहीं करता है",
+    "selectValidOption": "एनकोडर सेक्शन में वैध विकल्प चुनने के बाद ऑडियो सेटिंग्स दिखाई जाएंगी",
+    "manualConfiguration": "मैनुअल कॉन्फ़िगरेशन",
+    "receiverServer": "रिसीवर सर्वर",
+    "relayServer": "रिले सर्वर",
+    "relayServerAccount": "रिले सर्वर खाता",
+    "srtlaServerAddress": "SRTLA रिसीवर सर्वर पता",
+    "srtlaServerPort": "SRTLA रिसीवर पोर्ट",
+    "srtStreamId": "SRT स्ट्रीम आईडी (वैकल्पिक)",
+    "srtLatency": "SRT लेटेंसी (ms)",
+    "startStreaming": "स्ट्रीमिंग शुरू करें",
+    "stopStreaming": "स्ट्रीमिंग बंद करें",
+    "changeBitrateNotice": "आप स्ट्रीमिंग करते समय भी बिटरेट बदल सकते हैं।",
+    "audioSettingsMessage": "एनकोडर सेक्शन में वैध विकल्प चुनने के बाद ऑडियो सेटिंग्स दिखाई जाएंगी"
+  },
+  "network": {
+    "hotspot": {
+      "name": "नाम",
+      "channel": "चैनल",
+      "password": "पासवर्ड"
+    },
+    "wifi": {
+      "strength": "स्ट्रेंथ",
+      "ssid": "SSID",
+      "security": "सुरक्षा",
+      "band": "बैंड"
+    },
+    "modem": {
+      "signal": "सिग्नल",
+      "status": "स्थिति",
+      "network": "नेटवर्क",
+      "save": "सहेजें",
+      "autoapn": "स्वचालित APN",
+      "connectionStatus": {
+        "failed": "विफल",
+        "registered": "पंजीकृत",
+        "enabled": "सक्षम",
+        "connected": "जुड़ा हुआ",
+        "disconnected": "डिस्कनेक्ट किया गया",
+        "connecting": "कनेक्ट हो रहा है"
+      }
+    },
+    "dialog": {
+      "close": "बंद करें",
+      "turnOff": "बंद करें",
+      "turnOn": "चालू करें",
+      "hotspotDetails": "हॉटस्पॉट विवरण",
+      "turnHotspotOff": "हॉटस्पॉट मोड बंद करें",
+      "turnHotspotOn": "हॉटस्पॉट मोड चालू करें",
+      "turnHotspotOffDescription": "यह तुरंत सभी कनेक्टेड क्लाइंट को डिस्कनेक्ट कर देगा और हॉटस्पॉट बंद कर देगा।",
+      "turnHotspotOnDescription": "क्या आप सुनिश्चित हैं कि आप हॉटस्पॉट मोड चालू करना चाहते हैं? यह आपके इंटरनेट को साझा करने की अनुमति देगा लेकिन सभी वाई-फाई कनेक्शन को डिस्कनेक्ट कर देगा।"
+    }
+  },
+  "hotspotConfigurator": {
+    "dialog": {
+      "save": "सहेजें",
+      "configHotspot": "हॉटस्पॉट कॉन्फ़िगर करें",
+      "configureHotspot": "अपना हॉटस्पॉट कॉन्फ़िगर करें"
+    },
+    "hotspot": {
+      "name": "नाम",
+      "password": "पासवर्ड",
+      "channel": "चैनल",
+      "placeholderName": "BELABOX",
+      "placeholderPassword": "********",
+      "selectChannel": "चैनल चुनें"
+    }
+  },
+  "wifiSelector": {
+    "dialog": {
+      "close": "बंद करें",
+      "searchWifi": "वाई-फाई नेटवर्क खोजें",
+      "availableNetworks": "{network} के लिए उपलब्ध नेटवर्क",
+      "connecting": "कनेक्ट हो रहा है",
+      "forgetNetwork": "वाई-फाई नेटवर्क भूल जाएं",
+      "disconnectFrom": "{ssid} से डिस्कनेक्ट करें",
+      "confirmForget": "क्या आप {network} नेटवर्क पर {ssid} को भूलना चाहते हैं?",
+      "connectTo": "{ssid} से कनेक्ट करें",
+      "introducePassword": "कृपया नेटवर्क पासवर्ड दर्ज करें"
+    },
+    "button": {
+      "disconnect": "डिस्कनेक्ट करें",
+      "connect": "कनेक्ट करें",
+      "forget": "भूल जाएं",
+      "scanning": "स्कैन हो रहा है",
+      "scan": "स्कैन करें"
+    },
+    "hotspot": {
+      "placeholderPassword": "********"
+    }
+  },
+  "networking": {
+    "modem": {
+      "networkName": "नेटवर्क नाम"
+    },
+    "card": {
+      "networkInfoTitle": "नेटवर्क जानकारी",
+      "networkInfoDescription": "{total} नेटवर्क, {available} उपलब्ध, {used} उपयोग में, {bandwidth} Kbps",
+      "identifier": "पहचानकर्ता"
+    },
+    "toggle": {
+      "disableNetwork": "नेटवर्क अक्षम करें",
+      "enableNetwork": "नेटवर्क सक्षम करें"
+    }
+  },
+  "wifiStatus": {
+    "disconnected": "डिस्कनेक्ट किया गया",
+    "connected": "कनेक्टेड",
+    "hotspot": "हॉटस्पॉट"
+  },
+  "navigation": {
+    "general": "सामान्य",
+    "network": "नेटवर्क",
+    "streaming": "स्ट्रीमिंग",
+    "advanced": "उन्नत"
+  },
+  "advanced": {
+    "systemSettings": "सिस्टम सेटिंग्स",
+    "developerOptions": "डेवलपर विकल्प",
+    "lanPassword": "LAN वेब इंटरफेस (belaUI) पासवर्ड",
+    "lanPasswordTooltip": "belaUI वेब इंटरफ़ेस तक पहुंच की सुरक्षा के लिए पासवर्ड सेट करें।",
+    "minLength": "न्यूनतम लंबाई: 8 अक्षर",
+    "newPassword": "नया पासवर्ड",
+    "save": "सहेजें",
+    "cloudRemoteKey": "BELABOX क्लाउड रिमोट की",
+    "cloudRemoteKeyTooltip": "BELABOX क्लाउड एक्सेस के लिए रिमोट की दर्ज करें।",
+    "reboot": "रीबूट करें",
+    "rebootTooltip": "परिवर्तन लागू करने के लिए डिवाइस को पुनरारंभ करें।",
+    "powerOff": "पावर ऑफ करें",
+    "powerOffTooltip": "डिवाइस को सुरक्षित रूप से बंद करें।",
+    "confirmReboot": "क्या आप डिवाइस को रीबूट करना चाहते हैं?",
+    "confirmPowerOff": "क्या आप इस डिवाइस को बंद करना चाहते हैं?",
+    "sshPassword": "SSH पासवर्ड (उपयोगकर्ता नाम: {sshUser})",
+    "sshPasswordTooltip": "SSH के माध्यम से लॉगिन करने के लिए इस पासवर्ड का उपयोग करें।",
+    "passwordCopied": "पासवर्ड कॉपी किया गया",
+    "passwordCopiedDesc": "SSH पासवर्ड क्लिपबोर्ड पर कॉपी किया गया है।",
+    "reset": "रीसेट करें",
+    "resetTooltip": "SSH पासवर्ड को नए पासवर्ड पर रीसेट करें।",
+    "startSSH": "SSH सर्वर शुरू करें",
+    "stopSSH": "SSH सर्वर रोकें",
+    "sshToggleTooltip": "SSH सर्वर को शुरू या बंद करें।",
+    "belaboxLog": "BELABOX लॉग",
+    "systemLog": "सिस्टम लॉग",
+    "download": "डाउनलोड करें",
+    "belaboxLogTooltip": "समस्या निवारण के लिए लॉग डाउनलोड करें।",
+    "systemLogTooltip": "डीबगिंग के लिए सिस्टम लॉग डाउनलोड करें।",
+    "confirmBelaboxLog": "क्या आप सुनिश्चित हैं कि आप BELABOX लॉग डाउनलोड करना चाहते हैं? इसमें पासवर्ड जैसी संवेदनशील जानकारी हो सकती है।",
+    "confirmSystemLog": "क्या आप सुनिश्चित हैं कि आप सिस्टम लॉग डाउनलोड करना चाहते हैं? इसमें पासवर्ड जैसी संवेदनशील जानकारी हो सकती है।"
+  }
+}

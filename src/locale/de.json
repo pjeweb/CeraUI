@@ -1,0 +1,212 @@
+{
+  "updatingOverlay": {
+    "title": "Die Software Ihres Geräts wird aktualisiert",
+    "description": "Sie können es benutzen, sobald der Aktualisierungsprozess abgeschlossen ist",
+    "loading": "Pakete werden aktualisiert",
+    "downloading": "Herunterladen:",
+    "unpacking": "Entpacken:",
+    "installing": "Installieren:",
+    "progress": "Fortschritt:",
+    "successMessage": "Erfolgreich aktualisiert.",
+    "successDescription": "Das Gerät wird neu gestartet, Sie können es in wenigen Minuten mit den neuesten Funktionen benutzen"
+  },
+  "general": {
+    "status": "Status",
+    "streaming": "Streaming",
+    "offline": "Offline",
+    "temperature": "Temperatur",
+    "relayServer": "Relay-Server",
+    "updates": "Updates",
+    "none": "Keine",
+    "youHaventConfigured": "Sie haben keinen Server konfiguriert",
+    "port": "Port",
+    "overview": "Übersicht",
+    "latency": "Latenz / Verzögerung",
+    "packages": "Pakete",
+    "package": "Paket",
+    "maxBitrate": "Maximale Bitrate",
+    "audioDevice": "Audiogerät",
+    "audioCodec": "Audio-Codec",
+    "areYouSure": "Sind Sie absolut sicher?",
+    "updateButton": "Aktualisieren",
+    "updateConfirmation": "Sind Sie sicher, dass Sie ein Software-Update starten möchten? Dies kann mehrere Minuten dauern. Sie können keinen Stream starten, bis das Update abgeschlossen ist. Der Encoder wird nach einem erfolgreichen Upgrade kurzzeitig getrennt. Entfernen Sie während der Aktualisierung niemals die Stromversorgung und setzen Sie den Encoder nicht zurück. Wenn der Encoder mit einer Batterie betrieben wird, stellen Sie sicher, dass diese vollständig geladen ist.",
+    "streamingMessage": "Ihre Übertragung nutzt {usingNetworksCount} Netzwerke mit einer Verzögerung von {srtLatency} ms"
+  },
+  "auth": {
+    "createPassword": "Passwort erstellen",
+    "login": "Anmelden",
+    "createPasswordAndLogin": "Passwort erstellen und anmelden",
+    "loginWithPassword": "Mit Passwort anmelden",
+    "usePassword": "Verwenden Sie das Gerätepasswort, um auf die Funktionen zuzugreifen",
+    "signIn": "Einloggen",
+    "rememberMe": "Angemeldet bleiben",
+    "separatorText": "Seitenname",
+    "footerText": "Melden Sie sich einfach an und genießen Sie es, Freude zu bringen"
+  },
+  "settings": {
+    "encoderSettings": "Encoder-Einstellungen",
+    "inputMode": "Eingabemodus",
+    "selectOutputFormat": "Ausgabeformat auswählen",
+    "encodingFormat": "Kodierungsformat",
+    "selectEncodingFormat": "Kodierungsausgabeformat auswählen",
+    "encodingResolution": "Kodierungsauflösung",
+    "selectEncodingResolution": "Kodierungsauflösung auswählen",
+    "framerate": "Bildrate (FPS)",
+    "selectFramerate": "Bildrate auswählen",
+    "bitrate": "Bitrate (Kbps)",
+    "audioSettings": "Audio-Einstellungen",
+    "audioSource": "Audioquelle",
+    "selectAudioSource": "Audioquelle auswählen",
+    "audioCodec": "Audio-Codec",
+    "selectAudioCodec": "Audio-Codec auswählen",
+    "audioDelay": "Audioverzögerung (ms)",
+    "noAudioSupport": "Die aktuell ausgewählte Konfiguration unterstützt keine Audioeinstellungen",
+    "selectValidOption": "Die Audioeinstellungen werden angezeigt, sobald Sie eine gültige Option im Encoder-Abschnitt auswählen",
+    "manualConfiguration": "Manuelle Konfiguration",
+    "receiverServer": "Empfänger-Server",
+    "relayServer": "Relay-Server",
+    "relayServerAccount": "Relay-Server-Konto",
+    "srtlaServerAddress": "SRTLA-Empfängerserveradresse",
+    "srtlaServerPort": "SRTLA-Empfängerport",
+    "srtStreamId": "SRT-Stream-ID (optional)",
+    "srtLatency": "SRT-Latenz (ms)",
+    "startStreaming": "Streaming starten",
+    "stopStreaming": "Streaming stoppen",
+    "changeBitrateNotice": "Sie können die Bitrate auch während des Streamings ändern.",
+    "audioSettingsMessage": "Die Audioeinstellungen werden angezeigt, sobald Sie eine gültige Option im Encoder-Abschnitt auswählen"
+  },
+  "network": {
+    "hotspot": {
+      "name": "Name",
+      "channel": "Kanal",
+      "password": "Passwort"
+    },
+    "wifi": {
+      "strength": "Signalstärke",
+      "ssid": "SSID",
+      "security": "Sicherheit",
+      "band": "Band"
+    },
+    "modem": {
+      "signal": "Signal",
+      "status": "Status",
+      "network": "Netzwerk",
+      "save": "Speichern",
+      "autoapn": "Automatischer APN",
+      "connectionStatus": {
+        "failed": "Fehlgeschlagen",
+        "registered": "Registriert",
+        "enabled": "Aktiviert",
+        "connected": "Verbunden",
+        "disconnected": "Getrennt",
+        "connecting": "Verbinde"
+      }
+    },
+    "dialog": {
+      "close": "Schließen",
+      "turnOff": "Ausschalten",
+      "turnOn": "Einschalten",
+      "hotspotDetails": "Hotspot-Details",
+      "turnHotspotOff": "Hotspot-Modus ausschalten",
+      "turnHotspotOn": "Hotspot-Modus einschalten",
+      "turnHotspotOffDescription": "Dadurch werden sofort alle verbundenen Clients getrennt und der Hotspot ausgeschaltet.",
+      "turnHotspotOnDescription": "Sind Sie sicher, dass Sie den Hotspot-Modus einschalten möchten? Dadurch wird das Teilen Ihres Internets ermöglicht, aber alle WLAN-Verbindungen werden getrennt."
+    }
+  },
+  "hotspotConfigurator": {
+    "dialog": {
+      "save": "Speichern",
+      "configHotspot": "Hotspot konfigurieren",
+      "configureHotspot": "Konfigurieren Sie Ihren Hotspot"
+    },
+    "hotspot": {
+      "name": "Name",
+      "password": "Passwort",
+      "channel": "Kanal",
+      "placeholderName": "BELABOX",
+      "placeholderPassword": "********",
+      "selectChannel": "Kanal auswählen"
+    }
+  },
+  "wifiSelector": {
+    "dialog": {
+      "close": "Schließen",
+      "searchWifi": "WLAN-Netzwerke suchen",
+      "availableNetworks": "Verfügbare Netzwerke für {network}",
+      "connecting": "Verbinde",
+      "forgetNetwork": "WLAN-Netzwerk vergessen",
+      "disconnectFrom": "Von {ssid} trennen",
+      "confirmForget": "Möchten Sie {ssid} im {network}-Netzwerk wirklich vergessen?",
+      "connectTo": "Mit {ssid} verbinden",
+      "introducePassword": "Bitte geben Sie das Netzwerkpasswort ein"
+    },
+    "button": {
+      "disconnect": "Trennen",
+      "connect": "Verbinden",
+      "forget": "Vergessen",
+      "scanning": "Scanne",
+      "scan": "Scannen"
+    },
+    "hotspot": {
+      "placeholderPassword": "********"
+    }
+  },
+  "networking": {
+    "modem": {
+      "networkName": "Netzwerkname"
+    },
+    "card": {
+      "networkInfoTitle": "Netzwerkinformationen",
+      "networkInfoDescription": "{total} Netzwerke, {available} Verfügbar, {used} Verwendet, {bandwidth} Kbps",
+      "identifier": "Kennung"
+    },
+    "toggle": {
+      "disableNetwork": "Netzwerk deaktivieren",
+      "enableNetwork": "Netzwerk aktivieren"
+    }
+  },
+  "wifiStatus": {
+    "disconnected": "Getrennt",
+    "connected": "Verbunden",
+    "hotspot": "Hotspot"
+  },
+  "navigation": {
+    "general": "Allgemein",
+    "network": "Netzwerk",
+    "streaming": "Streaming",
+    "advanced": "Erweitert"
+  },
+  "advanced": {
+    "systemSettings": "Systemeinstellungen",
+    "developerOptions": "Entwickleroptionen",
+    "lanPassword": "LAN-Weboberfläche (belaUI) Passwort",
+    "lanPasswordTooltip": "Legen Sie ein Passwort fest, um den Zugriff auf die belaUI-Weboberfläche zu schützen.",
+    "minLength": "Mindestlänge: 8 Zeichen",
+    "newPassword": "Neues Passwort",
+    "save": "Speichern",
+    "cloudRemoteKey": "BELABOX Cloud Remote-Schlüssel",
+    "cloudRemoteKeyTooltip": "Geben Sie den Remote-Schlüssel für den BELABOX-Cloud-Zugriff ein.",
+    "reboot": "Neustart",
+    "rebootTooltip": "Starten Sie das Gerät neu, um Änderungen zu übernehmen.",
+    "powerOff": "Ausschalten",
+    "powerOffTooltip": "Schalten Sie das Gerät sicher aus.",
+    "confirmReboot": "Möchten Sie das Gerät neu starten?",
+    "confirmPowerOff": "Möchten Sie dieses Gerät ausschalten?",
+    "sshPassword": "SSH-Passwort (Benutzername: {sshUser})",
+    "sshPasswordTooltip": "Verwenden Sie dieses Passwort, um sich über SSH anzumelden.",
+    "passwordCopied": "Passwort kopiert",
+    "passwordCopiedDesc": "Das SSH-Passwort wurde in die Zwischenablage kopiert.",
+    "reset": "Zurücksetzen",
+    "resetTooltip": "Setzen Sie das SSH-Passwort auf ein neues zurück.",
+    "startSSH": "SSH-Server starten",
+    "stopSSH": "SSH-Server stoppen",
+    "sshToggleTooltip": "SSH-Server starten oder stoppen.",
+    "belaboxLog": "BELABOX-Protokoll",
+    "systemLog": "Systemprotokoll",
+    "download": "Herunterladen",
+    "belaboxLogTooltip": "Laden Sie Protokolle zur Fehlerbehebung herunter.",
+    "systemLogTooltip": "Laden Sie Systemprotokolle zum Debuggen herunter.",
+    "confirmBelaboxLog": "Sind Sie sicher, dass Sie das BELABOX-Protokoll herunterladen möchten? Es kann sensible Informationen wie Passwörter enthalten.",
+    "confirmSystemLog": "Sind Sie sicher, dass Sie das Systemprotokoll herunterladen möchten? Es kann sensible Informationen wie Passwörter enthalten."
+  }
+}

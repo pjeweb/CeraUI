@@ -58,7 +58,7 @@ let srtStreamId: string | undefined = $state();
 let srtLatency: number | undefined = $state();
 let relayMessage: RelayMessage | undefined = $state();
 
-const defaultRelaySelection = { value: '-1', label: 'Manual Configuration' };
+const defaultRelaySelection = { value: '-1', label: $_('settings.manualConfiguration') };
 let selectedRelayServer: typeof defaultRelaySelection | undefined = $state(undefined);
 let selectedRelayAccount: typeof defaultRelaySelection | undefined = $state(undefined);
 
@@ -492,7 +492,7 @@ const startStreamingWithCurrentConfig = () => {
             </Select.Trigger>
             <Select.Content>
               <Select.Group>
-                <Select.Item value="-1">Manual Configutarion</Select.Item>
+                <Select.Item value="-1">{$_('settings.manualConfiguration')}</Select.Item>
                 {#if relayMessage?.servers}
                   {#each Object.entries(relayMessage?.servers) as [server, serverInfo]}
                     <Select.Item value={server} label={serverInfo.name}></Select.Item>
@@ -516,7 +516,7 @@ const startStreamingWithCurrentConfig = () => {
               </Select.Trigger>
               <Select.Content>
                 <Select.Group>
-                  <Select.Item value="-1">Manual Configutarion</Select.Item>
+                  <Select.Item value="-1">{$_('settings.manualConfiguration')}</Select.Item>
                   {#if relayMessage?.servers}
                     {#each Object.entries(relayMessage?.accounts) as [account, accountInfo]}
                       <Select.Item value={account} label={accountInfo.name}></Select.Item>
