@@ -53,14 +53,14 @@ let {
     )}
     {title}>
     {buttonText}
-    {@render icon()}
+    {@render icon?.()}
   </AlertDialog.Trigger>
   <AlertDialog.Portal>
     <AlertDialog.Overlay />
     <AlertDialog.Content {...contentProps} class={cn(className)}>
       <AlertDialog.Header>
         <AlertDialog.Title>
-          {@render dialogTitle()}
+          {@render dialogTitle?.()}
         </AlertDialog.Title>
         <AlertDialog.Description>
           {@render description?.()}

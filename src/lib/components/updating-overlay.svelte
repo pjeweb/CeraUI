@@ -7,6 +7,7 @@ import { Progress } from '$lib/components/ui/progress';
 
 let { details }: { details: Exclude<StatusMessage['updating'], boolean | null> } = $props();
 
+console.log(details)
 let progress: number = $derived.by(() => {
   let { downloading: downloading = 0, unpacking: unpacking = 0, setting_up: setting_up = 0 } = details;
   return downloading + unpacking + setting_up;

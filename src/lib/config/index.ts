@@ -16,9 +16,9 @@ export const navElements: NavElements = {
 const navElementsEntries = Object.entries(navElements);
 
 export const defaultNavElement = {
-  [navElementsEntries[2][0]]: {
-    label: navElementsEntries[2][1].label,
-    component: navElementsEntries[2][1].component,
+  [navElementsEntries[0][0]]: {
+    label: navElementsEntries[0][1].label,
+    component: navElementsEntries[0][1].component,
   },
 };
 
