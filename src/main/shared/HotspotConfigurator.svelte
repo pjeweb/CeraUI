@@ -80,7 +80,7 @@ const resetHotSpotProperties = () => {
         <Label for="channel" class="mb-2 ml-1">{$_('hotspotConfigurator.hotspot.channel')}</Label>
         <Select.Root
           onSelectedChange={selected => {
-            if (hotspotProperties && selected && selected) hotspotProperties.selectedChannel = selected;
+            if (hotspotProperties && selected !== undefined) hotspotProperties.selectedChannel = selected;
           }}
           selected={hotspotProperties.selectedChannel}>
           <Select.Trigger class="w-[180px]">

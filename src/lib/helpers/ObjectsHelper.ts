@@ -4,7 +4,7 @@ function isObject(item: unknown) {
   return item && typeof item === 'object' && !Array.isArray(item);
 }
 
-export function mergeModems(target: ModemList, ...sources: any[]): any {
+export function mergeModems(target: ModemList, ...sources: ModemList[]): ModemList {
   if (!sources.length) return target;
   const source = sources.shift();
 
@@ -29,7 +29,7 @@ export function mergeModems(target: ModemList, ...sources: any[]): any {
 
   return deepMerge(target, ...sources);
 }
-
+// eslint-disable-next-line @typescript-eslint/no-explicit-any
 export function deepMerge(target: any, ...sources: any[]): any {
   if (!sources.length) return target;
   const source = sources.shift();

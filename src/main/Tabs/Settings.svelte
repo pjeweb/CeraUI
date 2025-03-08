@@ -36,6 +36,7 @@ let selectedPipeline: keyof PipelinesMessage | undefined = $state();
 let initialSelectedPipeline: keyof PipelinesMessage | undefined = $state();
 
 let selectedBitrate: number = $state(0);
+// eslint-disable-next-line unused-imports/no-unused-vars
 let areThereChanges: boolean = $state(false);
 let initialSelectedBitrate: number | undefined = $state();
 let isStreaming: boolean | undefined = $state();
@@ -138,7 +139,7 @@ ConfigMessages.subscribe(config => {
 
 RelaysMessages.subscribe(message => {
   relayMessage = message;
-  if (relayMessage && savedConfig.relay_server) {
+  if (relayMessage && savedConfig !== undefined && savedConfig.relay_server) {
     selectedRelayServer = savedConfig.relay_server
       ? { value: savedConfig.relay_server, label: message.servers[savedConfig.relay_server].name }
       : defaultRelaySelection;

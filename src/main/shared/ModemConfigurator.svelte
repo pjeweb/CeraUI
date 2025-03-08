@@ -39,6 +39,7 @@ const saveModemConfig = () => {
 };
 let modemProperties = $state(getCurrentModemConfig());
 
+// eslint-disable-next-line unused-imports/no-unused-vars
 const resetHotSpotProperties = () => {
   modemProperties = getCurrentModemConfig();
 };

@@ -6,12 +6,6 @@ import { StatusMessages, sendMessage, socket } from '$lib/stores/websocket-store
 
 export type WifiBandNames = 'auto' | 'auto_50' | 'auto_24';
 
-const wifiBandLabels: { [key in WifiBandNames]: string } = {
-  auto: 'Auto (Any band)',
-  auto_24: 'Auto (2.4 GHz)',
-  auto_50: 'Auto (5.0 GHz)',
-};
-
 export const convertBytesToKbids = (bytes: number) => {
   return Math.round((bytes * 8) / 1024);
 };

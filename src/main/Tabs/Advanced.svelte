@@ -1,63 +1,64 @@
 <script lang="ts">
-  import { Eye, EyeOff, Hammer, Logs, PowerOff, RotateCcw } from "lucide-svelte";
-  import Settings from "lucide-svelte/icons/settings";
-  import { _ } from "svelte-i18n";
-  import { toast } from "svelte-sonner";
-  import type { RevisionsMessage } from "$lib/types/socket-messages";
-  import { Button } from "$lib/components/ui/button";
-  import * as Card from "$lib/components/ui/card";
-  import { Input } from "$lib/components/ui/input";
-  import { Label } from "$lib/components/ui/label";
-  import SimpleAlertDialog from "$lib/components/ui/simple-alert-dialog.svelte";
-  import {
-    getBelaboxLog,
-    getSystemLog,
-    powerOff,
-    reboot,
-    resetSSHPasword,
-    savePassword, saveRemoteKey,
-    startSSH,
-    stopSSH
-  } from "$lib/helpers/SystemHelper";
-  import { ConfigMessages, RevisionsMessages, StatusMessages } from "$lib/stores/websocket-store";
-  import { cn } from "$lib/utils";
+import { Eye, EyeOff, Hammer, Logs, PowerOff, RotateCcw } from 'lucide-svelte';
+import Settings from 'lucide-svelte/icons/settings';
+import { _ } from 'svelte-i18n';
+import { toast } from 'svelte-sonner';
+import type { RevisionsMessage } from '$lib/types/socket-messages';
+import { Button } from '$lib/components/ui/button';
+import * as Card from '$lib/components/ui/card';
+import { Input } from '$lib/components/ui/input';
+import { Label } from '$lib/components/ui/label';
+import SimpleAlertDialog from '$lib/components/ui/simple-alert-dialog.svelte';
+import {
+  getBelaboxLog,
+  getSystemLog,
+  powerOff,
+  reboot,
+  resetSSHPasword,
+  savePassword,
+  saveRemoteKey,
+  startSSH,
+  stopSSH,
+} from '$lib/helpers/SystemHelper';
+import { ConfigMessages, RevisionsMessages, StatusMessages } from '$lib/stores/websocket-store';
+import { cn } from '$lib/utils';
 
-  let currentRemoteKey = $state("");
-  let remoteKey = $state("");
+let currentRemoteKey = $state('');
+let remoteKey = $state('');
 
-  let showPassword = $state(false);
-  let showRemoteKey = $state(false);
-  let showSSHPassword = $state(false);
+let showPassword = $state(false);
+let showRemoteKey = $state(false);
+let showSSHPassword = $state(false);
 
-  let password = $state("");
-  let sshPassword = $state("");
-  let sshStatus = $state(false);
-  let sshUser = $state("");
-  let sshPasswordChanged = $state(false);
+let password = $state('');
+let sshPassword = $state('');
+let sshStatus = $state(false);
+let sshUser = $state('');
+let sshPasswordChanged = $state(false);
 
-  ConfigMessages.subscribe(config => {
-    currentRemoteKey = config?.remote_key ?? "";
-    remoteKey = config?.remote_key ?? "";
-  });
+ConfigMessages.subscribe(config => {
+  currentRemoteKey = config?.remote_key ?? '';
+  remoteKey = config?.remote_key ?? '';
+});
 
-  let revisions = $state<RevisionsMessage | undefined>();
-  RevisionsMessages.subscribe(revisionMessage => {
-    revisions = revisionMessage;
-  });
+let revisions = $state<RevisionsMessage | undefined>();
+RevisionsMessages.subscribe(revisionMessage => {
+  revisions = revisionMessage;
+});
 
-  ConfigMessages.subscribe(configMessage => {
-    if (sshPasswordChanged && configMessage.ssh_pass && sshPassword !== configMessage.ssh_pass) {
-      toast.success($_("advanced.passwordCopied"), {
-        description: $_("advanced.passwordCopiedDesc")
-      });
-      sshPasswordChanged = false;
-    }
-    sshPassword = configMessage?.ssh_pass ?? "";
-  });
-  StatusMessages.subscribe(statusMessage => {
-    sshStatus = statusMessage?.ssh.active ?? false;
-    sshUser = statusMessage?.ssh.user ?? "";
-  });
+ConfigMessages.subscribe(configMessage => {
+  if (sshPasswordChanged && configMessage.ssh_pass && sshPassword !== configMessage.ssh_pass) {
+    toast.success($_('advanced.passwordCopied'), {
+      description: $_('advanced.passwordCopiedDesc'),
+    });
+    sshPasswordChanged = false;
+  }
+  sshPassword = configMessage?.ssh_pass ?? '';
+});
+StatusMessages.subscribe(statusMessage => {
+  sshStatus = statusMessage?.ssh.active ?? false;
+  sshUser = statusMessage?.ssh.user ?? '';
+});
 </script>
 
 <div class="flex-col md:flex">
@@ -129,7 +130,10 @@
                   <Button
                     variant="outline"
                     class="rounded-l-none border-l-0 bg-red-600 hover:bg-red-700"
-                    disabled={remoteKey === currentRemoteKey} onclick={() => {saveRemoteKey(remoteKey)}}>
+                    disabled={remoteKey === currentRemoteKey}
+                    onclick={() => {
+                      saveRemoteKey(remoteKey);
+                    }}>
                     {$_('advanced.save')}
                   </Button>
                 </div>

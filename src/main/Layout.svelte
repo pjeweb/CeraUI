@@ -14,7 +14,7 @@ let isCheckingAuthStatus = $state(true);
 let updatingStatus: StatusMessage['updating'] = $state(false);
 const setupLocaleResult = setupLocale();
 StatusMessages.subscribe(status => {
-  updatingStatus = (status?.updating ?? false) && (status?.updating as any).result !== 0;
+  updatingStatus = status?.updating && typeof status.updating !== 'boolean' && status.updating.result !== 0;
 });
 const auth = localStorage.getItem('auth');
 if (auth) {
@@ -52,9 +52,9 @@ NotificationsMessages.subscribe(notifications => {
 
 {#await setupLocaleResult}
   <div></div>
-{:then}
+{:then _locateResult}
   {#if authStatus}
-    {#if updatingStatus}
+    {#if updatingStatus && typeof updatingStatus !== 'boolean'}
       <UpdatingOverlay details={updatingStatus}></UpdatingOverlay>
     {/if}
     <Main></Main>
