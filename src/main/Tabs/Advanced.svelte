@@ -244,7 +244,7 @@ StatusMessages.subscribe(statusMessage => {
               <!-- SSH Toggle Button -->
               <Button
                 class={cn(
-                  sshStatus ? 'bg-yellow1-600 hover:bg-yellow-700' : 'bg-green-600 hover:bg-green-700',
+                  sshStatus ? 'bg-yellow-600 hover:bg-yellow-700' : 'bg-green-600 hover:bg-green-700',
                   'mt-2 w-full flex-none',
                 )}
                 onclick={sshStatus ? stopSSH : startSSH}>
