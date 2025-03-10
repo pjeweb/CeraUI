@@ -1,0 +1,222 @@
+{
+  "updatingOverlay": {
+    "title": "جاري تحديث برنامج جهازك",
+    "description": "ستتمكن من استخدامه بمجرد اكتمال عملية التحديث",
+    "loading": "جاري تحديث الحزم",
+    "downloading": "جاري التنزيل:",
+    "unpacking": "جاري فك التعبئة:",
+    "installing": "جاري التثبيت:",
+    "progress": "التقدم:",
+    "successMessage": "تم التحديث بنجاح.",
+    "successDescription": "يتم إعادة تشغيل الجهاز، وستتمكن من استخدامه بأحدث الميزات في غضون دقائق"
+  },
+  "general": {
+    "status": "الحالة",
+    "streaming": "البث",
+    "offline": "غير متصل",
+    "temperature": "درجة الحرارة",
+    "relayServer": "خادم الترحيل",
+    "updates": "التحديثات",
+    "none": "لا شيء",
+    "youHaventConfigured": "لم تقم بتكوين أي خادم",
+    "port": "المنفذ",
+    "overview": "نظرة عامة",
+    "latency": "زمن الاستجابة / التأخير",
+    "packages": "الحزم",
+    "package": "حزمة",
+    "maxBitrate": "الحد الأقصى لمعدل البت",
+    "audioDevice": "جهاز الصوت",
+    "audioCodec": "ترميز الصوت",
+    "areYouSure": "هل أنت متأكد تماماً؟",
+    "updateButton": "تحديث",
+    "updateConfirmation": "هل أنت متأكد من رغبتك في بدء تحديث البرنامج؟ قد يستغرق هذا عدة دقائق. لن تتمكن من بدء البث حتى يكتمل. سيتم قطع اتصال جهاز الترميز لفترة وجيزة بعد الترقية الناجحة. لا تقم أبداً بإزالة الطاقة أو إعادة ضبط جهاز الترميز أثناء التحديث. إذا كان جهاز الترميز يعمل بالبطارية، فتأكد من شحنها بالكامل.",
+    "streamingMessage": "يستخدم بثك {usingNetworksCount} شبكات مع تأخير {srtLatency} مللي ثانية"
+  },
+  "auth": {
+    "createPassword": "إنشاء كلمة المرور",
+    "login": "تسجيل الدخول",
+    "createPasswordAndLogin": "إنشاء كلمة المرور وتسجيل الدخول",
+    "loginWithPassword": "تسجيل الدخول باستخدام كلمة المرور",
+    "usePassword": "استخدم كلمة مرور الجهاز للوصول إلى الوظائف",
+    "signIn": "تسجيل الدخول",
+    "rememberMe": "تذكرني",
+    "separatorText": "اسم الموقع",
+    "footerText": "ما عليك سوى تسجيل الدخول والاستمتاع بجلب الفرح"
+  },
+  "settings": {
+    "encoderSettings": "إعدادات المرمز",
+    "inputMode": "وضع الإدخال",
+    "selectInputMode": "اختر وضع الإدخال",
+    "selectEncodingOutputFormat": "اختر ترميز الإخراج",
+    "selectEncodingFormat": "حدد تنسيق إخراج الترميز",
+    "encodingResolution": "دقة الترميز",
+    "selectEncodingResolution": "حدد دقة الترميز",
+    "framerate": "معدل الإطارات (FPS)",
+    "selectFramerate": "حدد معدل الإطارات",
+    "bitrate": "معدل البت (Kbps)",
+    "audioSettings": "إعدادات الصوت",
+    "audioSource": "مصدر الصوت",
+    "selectAudioSource": "حدد مصدر الصوت",
+    "audioCodec": "ترميز الصوت",
+    "selectAudioCodec": "حدد ترميز الصوت",
+    "audioDelay": "تأخير الصوت (مللي ثانية)",
+    "noAudioSupport": "التكوين المحدد حاليا لا يدعم أي نوع من إعدادات الصوت",
+    "selectValidOption": "ستظهر إعدادات الصوت بمجرد تحديد خيار صالح في قسم الترميز",
+    "manualConfiguration": "الإعداد اليدوي",
+    "receiverServer": "خادم الاستقبال",
+    "relayServer": "خادم الترحيل",
+    "relayServerAccount": "حساب خادم الترحيل",
+    "srtlaServerAddress": "عنوان خادم استقبال SRTLA",
+    "srtlaServerPort": "منفذ استقبال SRTLA",
+    "srtStreamId": "معرف بث SRT (اختياري)",
+    "srtLatency": "زمن استجابة SRT (مللي ثانية)",
+    "startStreaming": "بدء البث",
+    "stopStreaming": "إيقاف البث",
+    "changeBitrateNotice": "يمكنك تغيير معدل البت حتى أثناء البث.",
+    "audioSettingsMessage": "ستظهر إعدادات الصوت بمجرد تحديد خيار صالح في قسم الترميز"
+  },
+  "network": {
+    "hotspot": {
+      "name": "الاسم",
+      "channel": "القناة",
+      "password": "كلمة المرور"
+    },
+    "wifi": {
+      "strength": "قوة الإشارة",
+      "ssid": "SSID",
+      "security": "الأمان",
+      "band": "النطاق"
+    },
+    "modem": {
+      "signal": "الإشارة",
+      "status": "الحالة",
+      "network": "الشبكة",
+      "save": "حفظ",
+      "autoapn": "APN تلقائي",
+      "apn": "APN",
+      "username": "اسم المستخدم",
+      "password": "كلمة المرور",
+      "enableRoaming": "السماح بالتجوال",
+      "networkType": "نوع الشبكة",
+      "automaticRoamingNetwork": "اختيار تلقائي",
+      "roamingNetwork": "شبكة التجوال",
+      "scan": "فحص",
+      "scanning": "جاري الفحص",
+      "connectionStatus": {
+        "failed": "فشل",
+        "registered": "مسجل",
+        "enabled": "مفعّل",
+        "connected": "متصل",
+        "disconnected": "غير متصل",
+        "connecting": "جاري الاتصال",
+        "scanning": "جارٍ المسح"
+      }
+    },
+    "dialog": {
+      "close": "إغلاق",
+      "turnOff": "إيقاف",
+      "turnOn": "تشغيل",
+      "hotspotDetails": "تفاصيل نقطة الاتصال",
+      "turnHotspotOff": "إيقاف وضع نقطة الاتصال",
+      "turnHotspotOn": "تشغيل وضع نقطة الاتصال",
+      "turnHotspotOffDescription": "سيؤدي هذا إلى قطع اتصال أي عملاء متصلين على الفور وإيقاف تشغيل نقطة الاتصال.",
+      "turnHotspotOnDescription": "هل أنت متأكد من أنك تريد تشغيل وضع نقطة الاتصال؟ سيسمح ذلك بمشاركة الإنترنت الخاص بك ولكن سيقطع اتصال جميع اتصالات WiFi."
+    }
+  },
+  "hotspotConfigurator": {
+    "dialog": {
+      "save": "حفظ",
+      "configHotspot": "إعداد نقطة الاتصال",
+      "configureHotspot": "قم بتكوين نقطة الاتصال الخاصة بك"
+    },
+    "hotspot": {
+      "name": "الاسم",
+      "password": "كلمة المرور",
+      "channel": "القناة",
+      "placeholderName": "BELABOX",
+      "placeholderPassword": "********",
+      "selectChannel": "اختر قناة"
+    }
+  },
+  "wifiSelector": {
+    "dialog": {
+      "close": "إغلاق",
+      "searchWifi": "البحث عن شبكات WiFi",
+      "availableNetworks": "الشبكات المتاحة لـ {network}",
+      "connecting": "جاري الاتصال",
+      "forgetNetwork": "نسيان شبكة WiFi",
+      "disconnectFrom": "قطع الاتصال من {ssid}",
+      "confirmForget": "هل أنت متأكد من نسيان {ssid} على شبكة {network}؟",
+      "connectTo": "الاتصال بـ {ssid}",
+      "introducePassword": "الرجاء إدخال كلمة مرور الشبكة"
+    },
+    "button": {
+      "disconnect": "قطع الاتصال",
+      "connect": "اتصال",
+      "forget": "نسيان",
+      "scanning": "جاري المسح",
+      "scan": "مسح"
+    },
+    "hotspot": {
+      "placeholderPassword": "********"
+    }
+  },
+  "networking": {
+    "modem": {
+      "networkName": "اسم الشبكة"
+    },
+    "card": {
+      "networkInfoTitle": "معلومات الشبكة",
+      "networkInfoDescription": "{total} شبكات، {available} متاحة، {used} مستخدمة، {bandwidth} كيلوبت/ثانية",
+      "identifier": "المعرّف"
+    },
+    "toggle": {
+      "disableNetwork": "تعطيل الشبكة",
+      "enableNetwork": "تمكين الشبكة"
+    }
+  },
+  "wifiStatus": {
+    "disconnected": "غير متصل",
+    "connected": "متصل",
+    "hotspot": "نقطة اتصال"
+  },
+  "navigation": {
+    "general": "عام",
+    "network": "الشبكة",
+    "streaming": "البث",
+    "advanced": "متقدم"
+  },
+  "advanced": {
+    "systemSettings": "إعدادات النظام",
+    "developerOptions": "خيارات المطور",
+    "lanPassword": "كلمة مرور واجهة الويب المحلية (belaUI)",
+    "lanPasswordTooltip": "قم بتعيين كلمة مرور لحماية الوصول إلى واجهة belaUI على الويب.",
+    "minLength": "الحد الأدنى للطول: 8 أحرف",
+    "newPassword": "كلمة المرور الجديدة",
+    "save": "حفظ",
+    "cloudRemoteKey": "مفتاح التحكم عن بعد لسحابة BELABOX",
+    "cloudRemoteKeyTooltip": "أدخل مفتاح التحكم عن بعد للوصول إلى سحابة BELABOX.",
+    "reboot": "إعادة التشغيل",
+    "rebootTooltip": "أعد تشغيل الجهاز لتطبيق التغييرات.",
+    "powerOff": "إيقاف التشغيل",
+    "powerOffTooltip": "أوقف تشغيل الجهاز بأمان.",
+    "confirmReboot": "هل تريد إعادة تشغيل الجهاز؟",
+    "confirmPowerOff": "هل تريد إيقاف تشغيل هذا الجهاز؟",
+    "sshPassword": "كلمة مرور SSH (اسم المستخدم: {sshUser})",
+    "sshPasswordTooltip": "استخدم كلمة المرور هذه لتسجيل الدخول عبر SSH.",
+    "passwordCopied": "تم نسخ كلمة المرور",
+    "passwordCopiedDesc": "تم نسخ كلمة مرور SSH إلى الحافظة.",
+    "reset": "إعادة تعيين",
+    "resetTooltip": "إعادة تعيين كلمة مرور SSH إلى كلمة مرور جديدة.",
+    "startSSH": "بدء خادم SSH",
+    "stopSSH": "إيقاف خادم SSH",
+    "sshToggleTooltip": "بدء أو إيقاف خادم SSH.",
+    "belaboxLog": "سجل BELABOX",
+    "systemLog": "سجل النظام",
+    "download": "تنزيل",
+    "belaboxLogTooltip": "تنزيل السجلات لاستكشاف الأخطاء وإصلاحها.",
+    "systemLogTooltip": "تنزيل سجلات النظام للتصحيح.",
+    "confirmBelaboxLog": "هل أنت متأكد من أنك تريد تنزيل سجل BELABOX؟ قد يحتوي على معلومات حساسة مثل كلمات المرور.",
+    "confirmSystemLog": "هل أنت متأكد من أنك تريد تنزيل سجل النظام؟ قد يحتوي على معلومات حساسة مثل كلمات المرور."
+  }
+}

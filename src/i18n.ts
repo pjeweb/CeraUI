@@ -1,8 +1,11 @@
+import ar from './locale/ar.json';
 import de from './locale/de.json';
 import en from './locale/en.json';
 import es from './locale/es.json';
 import fr from './locale/fr.json';
 import hi from './locale/hi.json';
+import ja from './locale/ja.json';
+import ko from './locale/ko.json';
 import ptBr from './locale/pt-BR.json';
 import zh from './locale/zh.json';
 
@@ -17,6 +20,9 @@ addMessages('fr', fr);
 addMessages('de', de);
 addMessages('zh', zh);
 addMessages('hi', hi);
+addMessages('ar', ar);
+addMessages('ja', ja);
+addMessages('ko', ko);
 
 export const existingLocales: DefinedLocales = [
   { name: 'English', file: './locale/en.json', code: 'en' },
@@ -25,6 +31,9 @@ export const existingLocales: DefinedLocales = [
   { name: 'Français', file: './locale/fr.json', code: 'fr' },
   { name: 'Deutsch', file: './locale/de.json', code: 'de' },
   { name: '中文', file: './locale/zh.json', code: 'zh' },
+  { name: 'العربية', file: './locale/ar.json', code: 'ar' },
+  { name: '日本語', file: './locale/ja.json', code: 'ja' },
+  { name: '한국어', file: './locale/ko.json', code: 'ko' },
   { name: 'हिन्दी', file: './locale/hi.json', code: 'hi' },
 ];
 export async function setupLocale() {
