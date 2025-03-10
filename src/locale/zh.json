@@ -46,8 +46,8 @@
   "settings": {
     "encoderSettings": "编码器设置",
     "inputMode": "输入模式",
-    "selectOutputFormat": "选择输出格式",
-    "encodingFormat": "编码格式",
+    "selectInputMode": "选择输入模式",
+    "selectEncodingOutputFormat": "选择输出编解码器",
     "selectEncodingFormat": "选择编码输出格式",
     "encodingResolution": "编码分辨率",
     "selectEncodingResolution": "选择编码分辨率",
@@ -93,13 +93,24 @@
       "network": "网络",
       "save": "保存",
       "autoapn": "自动 APN",
+      "apn": "APN",
+      "username": "用户名",
+      "password": "密码",
+      "enableRoaming": "允许漫游",
+      "networkType": "网络类型",
+      "automaticRoamingNetwork": "自动选择",
+      "roamingNetwork": "漫游网络",
+      "scan": "扫描",
+      "scanning": "扫描中",
       "connectionStatus": {
         "failed": "失败",
         "registered": "已注册",
         "enabled": "已启用",
         "connected": "已连接",
         "disconnected": "已断开",
-        "connecting": "连接中"
+        "connecting": "连接中",
+        "scanning": "扫描中"
+
       }
     },
     "dialog": {

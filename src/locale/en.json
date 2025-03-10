@@ -45,10 +45,10 @@
   },
   "settings": {
     "encoderSettings": "Encoder Settings",
-    "inputMode": "Input mode",
-    "selectOutputFormat": "Select an output format",
+    "inputMode": "Input Mode",
+    "selectInputMode": "Select the input mode",
+    "selectEncodingOutputFormat": "Select output codec",
     "encodingFormat": "Encoding format",
-    "selectEncodingFormat": "Select encoding output format",
     "encodingResolution": "Encoding Resolution",
     "selectEncodingResolution": "Select encoding resolution",
     "framerate": "Framerate (FPS)",
@@ -93,13 +93,24 @@
       "network": "Network",
       "save": "Save",
       "autoapn": "Automatic APN",
+      "apn": "APN",
+      "username": "Username",
+      "password": "Password",
+      "enableRoaming": "Allow Roaming",
+      "networkType": "Network Type",
+      "automaticRoamingNetwork": "Automatic Selection",
+      "roamingNetwork": "Roaming Network",
+      "scan": "Scan",
+      "scanning": "Scanning",
       "connectionStatus": {
-        "failed": "failed",
+        "failed": "Failed",
         "registered": "Registered",
         "enabled": "Enabled",
         "connected": "Connected",
         "disconnected": "Disconnected",
-        "connecting": "Connecting"
+        "connecting": "Connecting",
+        "scanning": "Scanning"
+
       }
     },
     "dialog": {

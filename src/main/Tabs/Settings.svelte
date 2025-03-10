@@ -283,7 +283,7 @@ const startStreamingWithCurrentConfig = () => {
                 selectedInputMode = value;
               }}>
               <Select.Trigger>
-                <Select.Value placeholder={$_('settings.selectOutputFormat')}></Select.Value>
+                <Select.Value placeholder={$_('settings.selectInputMode')}></Select.Value>
               </Select.Trigger>
               <Select.Content>
                 <Select.Group>

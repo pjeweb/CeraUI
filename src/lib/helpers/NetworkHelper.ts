@@ -166,6 +166,10 @@ export const changeModemSettings = ({
   );
 };
 
+export const scanModemNetworks = (deviceId: number) => {
+  socket.send(JSON.stringify({ modems: { scan: { device: deviceId } } }));
+};
+
 export const scanWifi = (deviceId: number | string, notification = true) => {
   if (notification) {
     toast.info('Scanning for WiFi networks', {
