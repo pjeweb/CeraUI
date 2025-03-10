@@ -46,8 +46,8 @@
   "settings": {
     "encoderSettings": "एनकोडर सेटिंग्स",
     "inputMode": "इनपुट मोड",
-    "selectOutputFormat": "आउटपुट फॉर्मेट चुनें",
-    "encodingFormat": "एनकोडिंग फॉर्मेट",
+    "selectInputMode": "इनपुट मोड चुनें",
+    "selectEncodingOutputFormat": "आउटपुट कोडेक चुनें",
     "selectEncodingFormat": "एनकोडिंग आउटपुट फॉर्मेट चुनें",
     "encodingResolution": "एनकोडिंग रिज़ॉल्यूशन",
     "selectEncodingResolution": "एनकोडिंग रिज़ॉल्यूशन चुनें",
@@ -93,13 +93,23 @@
       "network": "नेटवर्क",
       "save": "सहेजें",
       "autoapn": "स्वचालित APN",
+      "apn": "APN",
+      "username": "उपयोगकर्ता नाम",
+      "password": "पासवर्ड",
+      "enableRoaming": "रोमिंग की अनुमति दें",
+      "networkType": "नेटवर्क प्रकार",
+      "automaticRoamingNetwork": "स्वचालित चयन",
+      "roamingNetwork": "रोमिंग नेटवर्क",
+      "scan": "स्कैन",
+      "scanning": "स्कैनिंग",
       "connectionStatus": {
         "failed": "विफल",
         "registered": "पंजीकृत",
         "enabled": "सक्षम",
         "connected": "जुड़ा हुआ",
         "disconnected": "डिस्कनेक्ट किया गया",
-        "connecting": "कनेक्ट हो रहा है"
+        "connecting": "कनेक्ट हो रहा है",
+        "scanning": "स्कैनिंग"
       }
     },
     "dialog": {

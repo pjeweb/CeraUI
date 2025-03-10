@@ -45,9 +45,9 @@
   "settings": {
     "encoderSettings": "Configuración del codificador",
     "inputMode": "Modo de entrada",
-    "selectOutputFormat": "Seleccione un formato de salida",
+    "selectInputMode": "Seleccione el modo de Entrada",
+    "selectEncodingOutputFormat": "Seleccione un formato de salida",
     "encodingFormat": "Formato de codificación",
-    "selectEncodingFormat": "Seleccione el formato de salida de codificación",
     "encodingResolution": "Resolución de codificación",
     "selectEncodingResolution": "Seleccione la resolución de codificación",
     "framerate": "Velocidad de fotogramas (FPS)",
@@ -92,13 +92,23 @@
       "network": "Red",
       "save": "Guardar",
       "autoapn": "APN Automático",
+      "apn": "APN",
+      "username": "Nombre de usuario",
+      "password": "Contraseña",
+      "enableRoaming": "Permitir Roaming",
+      "networkType": "Tipo de Red",
+      "automaticRoamingNetwork": "Selección Automatica",
+      "roamingNetwork": "Red de Roaming",
+      "scan": "Buscar",
+      "scanning": "Buscando",
       "connectionStatus": {
         "failed": "Fallida",
         "registered" : "Registrado",
         "connected": "Conectado",
         "enabled": "Habilitada",
         "disconnected": "Desconectado",
-        "connecting": "Conectando"
+        "connecting": "Conectando",
+        "scanning": "Buscando"
       }
     },
     "dialog": {

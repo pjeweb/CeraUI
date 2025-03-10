@@ -46,8 +46,8 @@
   "settings": {
     "encoderSettings": "Encoder-Einstellungen",
     "inputMode": "Eingabemodus",
-    "selectOutputFormat": "Ausgabeformat auswählen",
-    "encodingFormat": "Kodierungsformat",
+    "selectInputMode": "Wähle den Eingabemodus",
+    "selectEncodingOutputFormat": "Wähle den Ausgabe-Codec",
     "selectEncodingFormat": "Kodierungsausgabeformat auswählen",
     "encodingResolution": "Kodierungsauflösung",
     "selectEncodingResolution": "Kodierungsauflösung auswählen",
@@ -93,13 +93,23 @@
       "network": "Netzwerk",
       "save": "Speichern",
       "autoapn": "Automatischer APN",
+      "apn": "APN",
+      "username": "Benutzername",
+      "password": "Passwort",
+      "enableRoaming": "Roaming erlauben",
+      "networkType": "Netzwerktyp",
+      "automaticRoamingNetwork": "Automatische Auswahl",
+      "roamingNetwork": "Roaming-Netzwerk",
+      "scan": "Scannen",
+      "scanning": "Wird gescannt",
       "connectionStatus": {
         "failed": "Fehlgeschlagen",
         "registered": "Registriert",
         "enabled": "Aktiviert",
         "connected": "Verbunden",
         "disconnected": "Getrennt",
-        "connecting": "Verbinde"
+        "connecting": "Verbinde",
+        "scanning": "Wird gescannt"
       }
     },
     "dialog": {

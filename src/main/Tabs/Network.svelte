@@ -132,48 +132,47 @@ StatusMessages.subscribe(status => {
     </div>
   </div>
   <div class="flex-1 space-y-4 p-8 pt-6">
-    <div class="grid gap-4 md:grid-cols-7 lg:grid-cols-7">
-      <div class="col-span-4 grid grid-rows-2 gap-4 md:grid-cols-4 lg:grid-cols-4">
-        {#if currentStatus?.modems && Object.keys(currentStatus.modems).length}
-          {#each Object.entries(currentStatus.modems) as [deviceId, modem]}
-            <Card.Root class="col-span-4 row-span-2 sm:col-span-2">
-              <Card.Header class="flex flex-row items-center justify-between space-y-0 pb-2">
-                <div>
-                  <Card.Title class="text-sm font-medium">Modem: {modem.name.replace('| Unknown', '')}</Card.Title>
-                  <Card.Description>
-                    <div class="grid grid-cols-12 content-center text-muted-foreground">
-                      <span class="col-span-12 flex">
-                        <p class="font-bold">{$_('network.modem.status')}</p>
-                        <span>
-                          {`: ${capitalizeFirstLetter($_('network.modem.connectionStatus.' + modem.status.connection))} `}
-                        </span>
+    <div class="col-span-4 grid grid-rows-2 gap-4 md:grid-cols-4 lg:grid-cols-6">
+      {#if currentStatus?.modems && Object.keys(currentStatus.modems).length}
+        {#each Object.entries(currentStatus.modems) as [deviceId, modem]}
+          <Card.Root class="col-span-4 row-span-2 sm:col-span-2 md:col-span-3 lg:col-span-2">
+            <Card.Header class="flex flex-row items-center justify-between space-y-0 pb-2">
+              <div>
+                <Card.Title class="text-sm font-medium">Modem: {modem.name.replace('| Unknown', '')}</Card.Title>
+                <Card.Description>
+                  <div class="grid grid-cols-12 content-center text-muted-foreground">
+                    <span class="col-span-12 flex">
+                      <p class="font-bold">{$_('network.modem.status')}</p>
+                      <span>
+                        {`: ${capitalizeFirstLetter($_('network.modem.connectionStatus.' + modem.status.connection))} `}
                       </span>
-                      <div class="col-span-12 flex">
+                    </span>
+                    <div class="col-span-12 flex">
+                      <span class="mr-2 flex">
+                        <p class="font-bold">{$_('network.modem.signal')}</p>
+                        <span>{`: ${modem.status?.signal ?? 0}%`}</span>
+                      </span>
+                      {#if modem.status.network_type}
                         <span class="mr-2 flex">
-                          <p class="font-bold">{$_('network.modem.signal')}</p>
-                          <span>{`: ${modem.status?.signal ?? 0}%`}</span>
-                        </span>
-                        {#if modem.status.network_type}
-                          <span class="mr-2 flex">
-                            <p class="font-bold">{$_('network.modem.network')}</p>
-                            <span>
-                              {`: ${modem.status.network_type} `}
-                            </span>
+                          <p class="font-bold">{$_('network.modem.network')}</p>
+                          <span>
+                            {`: ${modem.status.network_type} `}
                           </span>
-                        {/if}
-                      </div>
+                        </span>
+                      {/if}
                     </div>
-                  </Card.Description>
-                </div>
-                <Antenna class="h-4 w-4 text-muted-foreground" />
-              </Card.Header>
-              <Card.Content>
-                <ModemConfigurator {modem} {deviceId}></ModemConfigurator>
-              </Card.Content>
-            </Card.Root>
-          {/each}
-        {/if}
-      </div>
+                  </div>
+                </Card.Description>
+              </div>
+              <Antenna class="h-4 w-4 text-muted-foreground" />
+            </Card.Header>
+            <Card.Content>
+              <ModemConfigurator modemIsScanning={modem.status.connection === 'scanning'} {modem} {deviceId}
+              ></ModemConfigurator>
+            </Card.Content>
+          </Card.Root>
+        {/each}
+      {/if}
     </div>
   </div>
 </div>

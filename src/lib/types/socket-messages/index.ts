@@ -8,7 +8,7 @@ type PyshicalNetworkNames = `${WifiPhysicalNames | EthernetPhysicalNames}${strin
 export type NotificationType = 'success' | 'warning' | 'error' | 'info';
 
 export type ModemNetworkType = '3g' | '4g' | '4g3g' | '5g' | '5g4g' | '5g3g' | '5g4g3g';
-type ConnectionStatus = 'connected' | 'failed' | 'registered' | 'connecting';
+type ConnectionStatus = 'connected' | 'failed' | 'registered' | 'connecting' | 'scanning';
 type ModemNetwork = '4G' | '3G' | '5G' | 'Unknown';
 
 export interface ModemConfig {
@@ -38,7 +38,13 @@ export interface Modem {
     active: ModemNetworkType;
   };
   config?: ModemConfig; // Optional since a modem with no SIM won't have config
-  available_networks: Record<string, unknown>;
+  available_networks: Record<
+    number,
+    {
+      name: string;
+      availability: 'available' | 'unavailable';
+    }
+  >;
   status: ModemStatus;
   no_sim?: boolean; // Optional for modems without a SIM card
 }
