@@ -21,22 +21,26 @@ export const networkRenameWithError = (name: string, error?: string) => {
   }
   return name;
 };
+
 export const networkRename = (name: string) => {
-  const originalName = name;
-  if (name.startsWith('wl')) {
-    name = 'WiFI';
-  } else if (name.startsWith('eth') || name.startsWith('en')) {
-    if (Number.parseInt(name[name.length - 1]) < 2) {
-      name = 'Ethernet';
-    } else {
-      name = 'ETH-Modem';
-    }
-  } else if (name.startsWith('ww')) {
-    name = 'Modem';
+  let numberSuffix = '';
+  const number = name.match(/\d+$/g)?.[0];
+  if (number) {
+    numberSuffix = ` ${Number.parseInt(number) + 1}`;
+    name = name.slice(0, -number.length).trim();
   }
 
-  name += ' ' + (Number.parseInt(originalName[originalName.length - 1]) + name === 'ETH-Modem' ? -1 : +1);
-  return name;
+  if (name.startsWith('wl')) {
+    name = 'WiFi';
+  } else if (name.startsWith('eth') || name.startsWith('en')) {
+    name = 'Ethernet';
+  } else if (name.startsWith('ww')) {
+    name = 'Modem';
+  } else if (name.startsWith('usb')) {
+    name = 'USB';
+  }
+
+  return name + numberSuffix;
 };
 
 export const getModemNetworkName = (name: string) => {
