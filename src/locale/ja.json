@@ -1,0 +1,222 @@
+{
+  "updatingOverlay": {
+    "title": "デバイスのソフトウェアを更新中",
+    "description": "更新処理が完了すると使用できるようになります",
+    "loading": "パッケージを更新中",
+    "downloading": "ダウンロード中:",
+    "unpacking": "解凍中:",
+    "installing": "インストール中:",
+    "progress": "進捗状況:",
+    "successMessage": "更新が完了しました。",
+    "successDescription": "デバイスは再起動中です。数分後に最新の機能で使用できるようになります"
+  },
+  "general": {
+    "status": "ステータス",
+    "streaming": "ストリーミング",
+    "offline": "オフライン",
+    "temperature": "温度",
+    "relayServer": "リレーサーバー",
+    "updates": "アップデート",
+    "none": "なし",
+    "youHaventConfigured": "サーバーが設定されていません",
+    "port": "ポート",
+    "overview": "概要",
+    "latency": "レイテンシ / 遅延",
+    "packages": "パッケージ",
+    "package": "パッケージ",
+    "maxBitrate": "最大ビットレート",
+    "audioDevice": "オーディオデバイス",
+    "audioCodec": "オーディオコーデック",
+    "areYouSure": "本当によろしいですか？",
+    "updateButton": "更新",
+    "updateConfirmation": "ソフトウェアの更新を開始しますか？これには数分かかることがあります。完了するまでストリームを開始することはできません。アップグレードが成功すると、エンコーダは一時的に切断されます。更新中は絶対に電源を切ったり、エンコーダをリセットしたりしないでください。エンコーダがバッテリーで動作している場合は、充電が完了していることを確認してください。",
+    "streamingMessage": "あなたの送信は{usingNetworksCount}のネットワークを使用し、{srtLatency}ミリ秒の遅延があります"
+  },
+  "auth": {
+    "createPassword": "パスワードを作成",
+    "login": "ログイン",
+    "createPasswordAndLogin": "パスワードを作成してログイン",
+    "loginWithPassword": "パスワードでログイン",
+    "usePassword": "デバイスのパスワードを使用して機能にアクセスする",
+    "signIn": "サインイン",
+    "rememberMe": "ログイン情報を保存",
+    "separatorText": "サイト名",
+    "footerText": "サインインして、楽しみをお届けしましょう"
+  },
+  "settings": {
+    "encoderSettings": "エンコーダー設定",
+    "inputMode": "入力モード",
+    "selectInputMode": "入力モードを選択",
+    "selectEncodingOutputFormat": "出力コーデックを選択",
+    "selectEncodingFormat": "エンコーディング出力フォーマットを選択",
+    "encodingResolution": "エンコーディング解像度",
+    "selectEncodingResolution": "エンコーディング解像度を選択",
+    "framerate": "フレームレート (FPS)",
+    "selectFramerate": "フレームレートを選択",
+    "bitrate": "ビットレート (Kbps)",
+    "audioSettings": "オーディオ設定",
+    "audioSource": "オーディオソース",
+    "selectAudioSource": "オーディオソースを選択",
+    "audioCodec": "オーディオコーデック",
+    "selectAudioCodec": "オーディオコーデックを選択",
+    "audioDelay": "オーディオ遅延 (ms)",
+    "noAudioSupport": "現在選択されている設定はオーディオ設定をサポートしていません",
+    "selectValidOption": "エンコーダーセクションで有効なオプションを選択すると、オーディオ設定が表示されます",
+    "manualConfiguration": "手動設定",
+    "receiverServer": "レシーバーサーバー",
+    "relayServer": "リレーサーバー",
+    "relayServerAccount": "リレーサーバーアカウント",
+    "srtlaServerAddress": "SRTLAレシーバーサーバーアドレス",
+    "srtlaServerPort": "SRTLAレシーバーポート",
+    "srtStreamId": "SRTストリームID（オプション）",
+    "srtLatency": "SRTレイテンシ (ms)",
+    "startStreaming": "ストリーミング開始",
+    "stopStreaming": "ストリーミング停止",
+    "changeBitrateNotice": "ストリーミング中でもビットレートを変更できます。",
+    "audioSettingsMessage": "エンコーダーセクションで有効なオプションを選択すると、オーディオ設定が表示されます"
+  },
+  "network": {
+    "hotspot": {
+      "name": "名前",
+      "channel": "チャンネル",
+      "password": "パスワード"
+    },
+    "wifi": {
+      "strength": "信号強度",
+      "ssid": "SSID",
+      "security": "セキュリティ",
+      "band": "バンド"
+    },
+    "modem": {
+      "signal": "信号",
+      "status": "ステータス",
+      "network": "ネットワーク",
+      "save": "保存",
+      "autoapn": "自動APN",
+      "apn": "APN",
+      "username": "ユーザー名",
+      "password": "パスワード",
+      "enableRoaming": "ローミングを許可",
+      "networkType": "ネットワークタイプ",
+      "automaticRoamingNetwork": "自動選択",
+      "roamingNetwork": "ローミングネットワーク",
+      "scan": "スキャン",
+      "scanning": "スキャン中",
+      "connectionStatus": {
+        "failed": "失敗",
+        "registered": "登録済み",
+        "enabled": "有効",
+        "connected": "接続済み",
+        "disconnected": "切断済み",
+        "connecting": "接続中",
+        "scanning": "スキャン中"
+      }
+    },
+    "dialog": {
+      "close": "閉じる",
+      "turnOff": "オフにする",
+      "turnOn": "オンにする",
+      "hotspotDetails": "ホットスポットの詳細",
+      "turnHotspotOff": "ホットスポットモードをオフにする",
+      "turnHotspotOn": "ホットスポットモードをオンにする",
+      "turnHotspotOffDescription": "これにより接続中のクライアントとの接続がすぐに切断され、ホットスポットがオフになります。",
+      "turnHotspotOnDescription": "ホットスポットモードをオンにしますか？インターネット共有が可能になりますが、すべてのWiFi接続が切断されます。"
+    }
+  },
+  "hotspotConfigurator": {
+    "dialog": {
+      "save": "保存",
+      "configHotspot": "ホットスポット設定",
+      "configureHotspot": "ホットスポットを設定する"
+    },
+    "hotspot": {
+      "name": "名前",
+      "password": "パスワード",
+      "channel": "チャンネル",
+      "placeholderName": "BELABOX",
+      "placeholderPassword": "********",
+      "selectChannel": "チャンネルを選択"
+    }
+  },
+  "wifiSelector": {
+    "dialog": {
+      "close": "閉じる",
+      "searchWifi": "WiFiネットワークを検索",
+      "availableNetworks": "{network}で利用可能なネットワーク",
+      "connecting": "接続中",
+      "forgetNetwork": "WiFiネットワークを削除",
+      "disconnectFrom": "{ssid}から切断",
+      "confirmForget": "{network}ネットワークの{ssid}を削除してもよろしいですか？",
+      "connectTo": "{ssid}に接続",
+      "introducePassword": "ネットワークパスワードを入力してください"
+    },
+    "button": {
+      "disconnect": "切断",
+      "connect": "接続",
+      "forget": "削除",
+      "scanning": "スキャン中",
+      "scan": "スキャン"
+    },
+    "hotspot": {
+      "placeholderPassword": "********"
+    }
+  },
+  "networking": {
+    "modem": {
+      "networkName": "ネットワーク名"
+    },
+    "card": {
+      "networkInfoTitle": "ネットワーク情報",
+      "networkInfoDescription": "{total}ネットワーク、{available}利用可能、{used}使用中、{bandwidth}Kbps",
+      "identifier": "識別子"
+    },
+    "toggle": {
+      "disableNetwork": "ネットワークを無効化",
+      "enableNetwork": "ネットワークを有効化"
+    }
+  },
+  "wifiStatus": {
+    "disconnected": "切断済み",
+    "connected": "接続済み",
+    "hotspot": "ホットスポット"
+  },
+  "navigation": {
+    "general": "一般",
+    "network": "ネットワーク",
+    "streaming": "ストリーミング",
+    "advanced": "詳細設定"
+  },
+  "advanced": {
+    "systemSettings": "システム設定",
+    "developerOptions": "開発者オプション",
+    "lanPassword": "LAN Webインターフェース (belaUI) パスワード",
+    "lanPasswordTooltip": "belaUI Webインターフェースへのアクセスを保護するパスワードを設定します。",
+    "minLength": "最小長: 8文字",
+    "newPassword": "新しいパスワード",
+    "save": "保存",
+    "cloudRemoteKey": "BELABOXクラウドリモートキー",
+    "cloudRemoteKeyTooltip": "BELABOXクラウドアクセス用のリモートキーを入力してください。",
+    "reboot": "再起動",
+    "rebootTooltip": "変更を適用するためにデバイスを再起動します。",
+    "powerOff": "電源オフ",
+    "powerOffTooltip": "デバイスを安全にシャットダウンします。",
+    "confirmReboot": "デバイスを再起動しますか？",
+    "confirmPowerOff": "このデバイスの電源を切りますか？",
+    "sshPassword": "SSHパスワード (ユーザー名: {sshUser})",
+    "sshPasswordTooltip": "SSHでログインする際にこのパスワードを使用してください。",
+    "passwordCopied": "パスワードをコピーしました",
+    "passwordCopiedDesc": "SSHパスワードがクリップボードにコピーされました。",
+    "reset": "リセット",
+    "resetTooltip": "SSHパスワードを新しいものにリセットします。",
+    "startSSH": "SSHサーバーを開始",
+    "stopSSH": "SSHサーバーを停止",
+    "sshToggleTooltip": "SSHサーバーを開始または停止します。",
+    "belaboxLog": "BELABOXログ",
+    "systemLog": "システムログ",
+    "download": "ダウンロード",
+    "belaboxLogTooltip": "トラブルシューティング用にログをダウンロードします。",
+    "systemLogTooltip": "デバッグ用にシステムログをダウンロードします。",
+    "confirmBelaboxLog": "BELABOXログをダウンロードしますか？パスワードなどの機密情報が含まれている可能性があります。",
+    "confirmSystemLog": "システムログをダウンロードしますか？パスワードなどの機密情報が含まれている可能性があります。"
+  }
+}

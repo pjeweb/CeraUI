@@ -1,0 +1,222 @@
+{
+  "updatingOverlay": {
+    "title": "기기 소프트웨어 업데이트 중",
+    "description": "업데이트 과정이 완료되면 사용할 수 있습니다",
+    "loading": "패키지 업데이트 중",
+    "downloading": "다운로드 중:",
+    "unpacking": "압축 해제 중:",
+    "installing": "설치 중:",
+    "progress": "진행 상황:",
+    "successMessage": "업데이트가 성공적으로 완료되었습니다.",
+    "successDescription": "기기가 재시작 중입니다. 몇 분 내에 최신 기능으로 사용할 수 있습니다"
+  },
+  "general": {
+    "status": "상태",
+    "streaming": "스트리밍",
+    "offline": "오프라인",
+    "temperature": "온도",
+    "relayServer": "릴레이 서버",
+    "updates": "업데이트",
+    "none": "없음",
+    "youHaventConfigured": "구성된 서버가 없습니다",
+    "port": "포트",
+    "overview": "개요",
+    "latency": "지연 시간",
+    "packages": "패키지",
+    "package": "패키지",
+    "maxBitrate": "최대 비트레이트",
+    "audioDevice": "오디오 장치",
+    "audioCodec": "오디오 코덱",
+    "areYouSure": "정말로 확실합니까?",
+    "updateButton": "업데이트",
+    "updateConfirmation": "소프트웨어 업데이트를 시작하시겠습니까? 이 작업은 몇 분이 소요될 수 있습니다. 업데이트가 완료될 때까지 스트림을 시작할 수 없습니다. 업그레이드가 성공적으로 완료되면 인코더는 잠시 연결이 끊어집니다. 업데이트 중에는 절대로 전원을 제거하거나 인코더를 재설정하지 마십시오. 인코더가 배터리로 전원을 공급받는 경우 완전히 충전되어 있는지 확인하십시오.",
+    "streamingMessage": "귀하의 전송은 {usingNetworksCount}개의 네트워크를 사용하고 있으며 {srtLatency}ms의 지연 시간이 있습니다"
+  },
+  "auth": {
+    "createPassword": "비밀번호 생성",
+    "login": "로그인",
+    "createPasswordAndLogin": "비밀번호 생성 및 로그인",
+    "loginWithPassword": "비밀번호로 로그인",
+    "usePassword": "기기 비밀번호를 사용하여 기능에 접근",
+    "signIn": "로그인",
+    "rememberMe": "로그인 정보 저장",
+    "separatorText": "사이트 이름",
+    "footerText": "로그인하고 즐거움을 가져오세요"
+  },
+  "settings": {
+    "encoderSettings": "인코더 설정",
+    "inputMode": "입력 모드",
+    "selectInputMode": "입력 모드를 선택",
+    "selectEncodingOutputFormat": "출력 코덱을 선택",
+    "selectEncodingFormat": "인코딩 출력 형식 선택",
+    "encodingResolution": "인코딩 해상도",
+    "selectEncodingResolution": "인코딩 해상도 선택",
+    "framerate": "프레임 레이트(FPS)",
+    "selectFramerate": "프레임 레이트 선택",
+    "bitrate": "비트레이트(Kbps)",
+    "audioSettings": "오디오 설정",
+    "audioSource": "오디오 소스",
+    "selectAudioSource": "오디오 소스 선택",
+    "audioCodec": "오디오 코덱",
+    "selectAudioCodec": "오디오 코덱 선택",
+    "audioDelay": "오디오 지연(ms)",
+    "noAudioSupport": "현재 선택한 구성은's 모든 종류의 오디오 설정을 지원하지 않습니다",
+    "selectValidOption": "인코더 섹션에서 유효한 옵션을 선택하면 오디오 설정이 표시됩니다",
+    "manualConfiguration": "수동 구성",
+    "receiverServer": "수신기 서버",
+    "relayServer": "릴레이 서버",
+    "relayServerAccount": "릴레이 서버 계정",
+    "srtlaServerAddress": "SRTLA 수신기 서버 주소",
+    "srtlaServerPort": "SRTLA 수신기 포트",
+    "srtStreamId": "SRT 스트림 ID(선택사항)",
+    "srtLatency": "SRT 지연 시간(ms)",
+    "startStreaming": "스트리밍 시작",
+    "stopStreaming": "스트리밍 중지",
+    "changeBitrateNotice": "스트리밍 중에도 비트레이트를 변경할 수 있습니다.",
+    "audioSettingsMessage": "인코더 섹션에서 유효한 옵션을 선택하면 오디오 설정이 표시됩니다"
+  },
+  "network": {
+    "hotspot": {
+      "name": "이름",
+      "channel": "채널",
+      "password": "비밀번호"
+    },
+    "wifi": {
+      "strength": "신호 강도",
+      "ssid": "SSID",
+      "security": "보안",
+      "band": "대역"
+    },
+    "modem": {
+      "signal": "신호",
+      "status": "상태",
+      "network": "네트워크",
+      "save": "저장",
+      "autoapn": "자동 APN",
+      "apn": "APN",
+      "username": "사용자 이름",
+      "password": "비밀번호",
+      "enableRoaming": "로밍 허용",
+      "networkType": "네트워크 유형",
+      "automaticRoamingNetwork": "자동 선택",
+      "roamingNetwork": "로밍 네트워크",
+      "scan": "스캔",
+      "scanning": "스캔 중",
+      "connectionStatus": {
+        "failed": "실패",
+        "registered": "등록됨",
+        "enabled": "활성화됨",
+        "connected": "연결됨",
+        "disconnected": "연결 해제됨",
+        "connecting": "연결 중",
+        "scanning": "스캔 중"
+      }
+    },
+    "dialog": {
+      "close": "닫기",
+      "turnOff": "끄기",
+      "turnOn": "켜기",
+      "hotspotDetails": "핫스팟 세부 정보",
+      "turnHotspotOff": "핫스팟 모드 끄기",
+      "turnHotspotOn": "핫스팟 모드 켜기",
+      "turnHotspotOffDescription": "이렇게 하면 연결된 모든 클라이언트의 연결이 즉시 끊기고 핫스팟이 꺼집니다.",
+      "turnHotspotOnDescription": "핫스팟 모드를 켜시겠습니까? 인터넷 공유가 가능해지지만 모든 WiFi 연결이 끊어집니다."
+    }
+  },
+  "hotspotConfigurator": {
+    "dialog": {
+      "save": "저장",
+      "configHotspot": "핫스팟 구성",
+      "configureHotspot": "핫스팟 구성하기"
+    },
+    "hotspot": {
+      "name": "이름",
+      "password": "비밀번호",
+      "channel": "채널",
+      "placeholderName": "BELABOX",
+      "placeholderPassword": "********",
+      "selectChannel": "채널 선택"
+    }
+  },
+  "wifiSelector": {
+    "dialog": {
+      "close": "닫기",
+      "searchWifi": "WiFi 네트워크 검색",
+      "availableNetworks": "{network}에 사용 가능한 네트워크",
+      "connecting": "연결 중",
+      "forgetNetwork": "WiFi 네트워크 삭제",
+      "disconnectFrom": "{ssid}에서 연결 해제",
+      "confirmForget": "{network} 네트워크에서 {ssid}를 삭제하시겠습니까?",
+      "connectTo": "{ssid}에 연결",
+      "introducePassword": "네트워크 비밀번호를 입력하세요"
+    },
+    "button": {
+      "disconnect": "연결 해제",
+      "connect": "연결",
+      "forget": "삭제",
+      "scanning": "스캔 중",
+      "scan": "스캔"
+    },
+    "hotspot": {
+      "placeholderPassword": "********"
+    }
+  },
+  "networking": {
+    "modem": {
+      "networkName": "네트워크 이름"
+    },
+    "card": {
+      "networkInfoTitle": "네트워크 정보",
+      "networkInfoDescription": "{total} 네트워크, {available} 사용 가능, {used} 사용 중, {bandwidth} Kbps",
+      "identifier": "식별자"
+    },
+    "toggle": {
+      "disableNetwork": "네트워크 비활성화",
+      "enableNetwork": "네트워크 활성화"
+    }
+  },
+  "wifiStatus": {
+    "disconnected": "연결 해제됨",
+    "connected": "연결됨",
+    "hotspot": "핫스팟"
+  },
+  "navigation": {
+    "general": "일반",
+    "network": "네트워크",
+    "streaming": "스트리밍",
+    "advanced": "고급"
+  },
+  "advanced": {
+    "systemSettings": "시스템 설정",
+    "developerOptions": "개발자 옵션",
+    "lanPassword": "LAN 웹 인터페이스(belaUI) 비밀번호",
+    "lanPasswordTooltip": "belaUI 웹 인터페이스 접근을 보호하기 위한 비밀번호를 설정합니다.",
+    "minLength": "최소 길이: 8자",
+    "newPassword": "새 비밀번호",
+    "save": "저장",
+    "cloudRemoteKey": "BELABOX 클라우드 원격 키",
+    "cloudRemoteKeyTooltip": "BELABOX 클라우드 접근을 위한 원격 키를 입력하세요.",
+    "reboot": "재시작",
+    "rebootTooltip": "변경 사항을 적용하기 위해 기기를 재시작합니다.",
+    "powerOff": "전원 끄기",
+    "powerOffTooltip": "기기를 안전하게 종료합니다.",
+    "confirmReboot": "기기를 재시작하시겠습니까?",
+    "confirmPowerOff": "이 기기의 전원을 끄시겠습니까?",
+    "sshPassword": "SSH 비밀번호(사용자 이름: {sshUser})",
+    "sshPasswordTooltip": "SSH를 통해 로그인할 때 이 비밀번호를 사용하세요.",
+    "passwordCopied": "비밀번호 복사됨",
+    "passwordCopiedDesc": "SSH 비밀번호가 클립보드에 복사되었습니다.",
+    "reset": "재설정",
+    "resetTooltip": "SSH 비밀번호를 새 비밀번호로 재설정합니다.",
+    "startSSH": "SSH 서버 시작",
+    "stopSSH": "SSH 서버 중지",
+    "sshToggleTooltip": "SSH 서버를 시작하거나 중지합니다.",
+    "belaboxLog": "BELABOX 로그",
+    "systemLog": "시스템 로그",
+    "download": "다운로드",
+    "belaboxLogTooltip": "문제 해결을 위해 로그를 다운로드합니다.",
+    "systemLogTooltip": "디버깅을 위해 시스템 로그를 다운로드합니다.",
+    "confirmBelaboxLog": "BELABOX 로그를 다운로드하시겠습니까? 비밀번호와 같은 민감한 정보가 포함될 수 있습니다.",
+    "confirmSystemLog": "시스템 로그를 다운로드하시겠습니까? 비밀번호와 같은 민감한 정보가 포함될 수 있습니다."
+  }
+}
